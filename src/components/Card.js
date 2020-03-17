@@ -21,6 +21,10 @@ export default function Card ({track}) {
         <p className="card-text m-0">{track.user.username}</p>
       </div>
     </div>
-
+    {/* <div className="card-footer text-muted">
+      <span className="badge badge-dark"><i className="fas fa-share-alt"></i> {track.reposts_count}</span>
+      <span className="badge badge-dark"><i className="fas fa-download"></i> {track.download_count}</span>
+      <span className="badge badge-dark"><i className="fas fa-thumbs-up"></i> {track.likes_count}</span>
+    </div> */}
   </div>;
 }

@@ -3,4 +3,17 @@ body, .navbar {
   color: #ffffff !important;
 }
 
-.navbar {border-bottom: 1px solid #454547;}
+.navbar {border-bottom: 1px solid #38383a; padding: 10px 0;}
+
+.navbar-brand {
+  color: #E91E63 !important;
+  font-family: 'Sriracha';
+}
+
+footer {
+  width: 100%;
+  border-top: 1px solid #38383a;
+  font-size: 12px;
+  text-align: center;
+  text-transform: uppercase;
+}
