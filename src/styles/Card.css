@@ -1,0 +1,29 @@
+.card { background-color: rgb(21, 21, 22); box-shadow: 0 0 10px #1f1f20; cursor: pointer;}
+
+.card .img-header {
+  max-height: 130px;
+  width: 100%;
+  object-fit: cover;
+}
+
+.card-body {
+  width: 100%;
+  padding: .5em;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.card-body h5 {font-size: 13px; font-size: 13px; color: #E91E63; font-weight: 700;}
+.card-body p {font-size: 12px;}
+
+.card-body img {border-radius: 50%; max-width: 40px; max-height: 40px; object-fit: cover;}
+
+.card-footer {
+  padding: .5em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-footer .badge {background-color: #1c1c1f !important;}
