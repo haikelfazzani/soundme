@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 export default function Navbar ({ sender }) {
 
-  const [query, setQuery] = useState(null);
+  const [query, setQuery] = useState('');
 
   const onSearch = e => {
     e.preventDefault();
