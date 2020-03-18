@@ -11,7 +11,7 @@ export default function Navbar ({ sender }) {
 
   return <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
     <div className="container">
-      <a className="navbar-brand" href="#">Soundme</a>
+      <a className="navbar-brand" href="#"><i className="fas fa-meteor"></i> Soundme</a>
       <button className="navbar-toggler" type="button" data-toggle="collapse">
         <span className="navbar-toggler-icon"></span>
       </button>

@@ -3,7 +3,8 @@ import GlobalContext from './GlobalContext';
 
 /** init values global state */
 let initState = {
-  currentTrackPlay: {}
+  currentTrackPlay: {},
+  isPlaying: false
 };
 
 export default function GlobalProvider ({ children }) {

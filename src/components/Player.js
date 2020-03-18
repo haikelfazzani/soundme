@@ -2,6 +2,8 @@ import React, { useEffect, useContext, useState } from 'react';
 import GlobalContext from '../providers/GlobalContext';
 import '../styles/Player.css';
 
+import placeImg from '../img/1.png';
+
 export default function Player () {
 
   const { state } = useContext(GlobalContext);
@@ -25,9 +27,13 @@ export default function Player () {
   return (<div className="player">
 
     <div className="container">
-      <p className="m-0">{state.currentTrackPlay.title}</p>
-      <button onClick={onPlay}><i className="fas fa-play"></i> Play</button>
-      <button onClick={onPause}><i className="fas fa-pause"></i> Pause</button>
+      {Object.keys(state.currentTrackPlay).length > 1 
+      && <img src={state.currentTrackPlay.user.avatar_url || placeImg} className="mr-2" alt="..." />}
+      <div>
+        <p className="m-0">{state.currentTrackPlay.title}</p>
+        <button onClick={onPlay}><i className="fas fa-play"></i> Play</button>
+        <button onClick={onPause}><i className="fas fa-pause"></i> Pause</button>
+      </div>
     </div>
 
   </div>);

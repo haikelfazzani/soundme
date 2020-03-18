@@ -1,6 +1,6 @@
 .player {
   width: 100vw;
-  height: 120px;
+  height: 70px;
   background-color: rgba(24, 24, 26, 0.829);
   position: fixed;
   bottom: 0;
@@ -13,4 +13,17 @@
   font-size: 14px;
   font-weight: 600;
   text-transform: uppercase;
+  background-color: transparent;
+  border: 0;
+  color: #ffffff;
+  padding: 0;
+  margin-right: 10px;
 }
+
+.player .container {
+  height: 100%;
+  display: flex;  
+  align-items: center;
+}
+
+.player img {border-radius: 50%; max-width: 50px; max-height: 50px;}

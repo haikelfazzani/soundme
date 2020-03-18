@@ -8,21 +8,16 @@ import Player from '../components/Player';
 
 export default function Home () {
 
-  const [playr, setPlayr] = useState();
   const [tracks, setTracks] = useState([]);
   const [query, setQuery] = useState(null);
 
   useEffect(() => {
-
     TrackService.getTracks('rock')
       .then((result) => {
         setTracks(result);
       })
-      .catch(e => {
-        console.log(e);
-      });
+      .catch(e => { });
   }, []);
-
 
   const getSearchQuery = value => {
     setQuery(value);
@@ -30,28 +25,25 @@ export default function Home () {
       .then((result) => {
         setTracks(result);
       })
-      .catch(e => {
-        console.log(e);
-      });
+      .catch(e => { });
   }
 
-  return (
-    <>
-      <Navbar sender={getSearchQuery} />
+  return (<>
+    <Navbar sender={getSearchQuery} />
 
-      <div className="container py-5">
+    <div className="container py-5">
 
-        {query && <h4><i className="fas fa-search mb-3"></i> Search results: {query}</h4>}
+      {query && <h4><i className="fas fa-search mb-3"></i> Search results: {query}</h4>}
 
-        <div className="row">
-          {tracks && tracks.length > 0
-            ? tracks.map(track => <div className="col-md-3 mb-3" key={track.id}>
-              <Card track={track} />
-            </div>)
-            : <Spinner />}
-        </div>
+      <div className="row">
+        {tracks && tracks.length > 0
+          ? tracks.map((track, i) => <div className="col-md-3 mb-3" key={track.id}>
+            <Card track={track} />
+          </div>)
+          : <Spinner />}
       </div>
+    </div>
 
-      <Player />
-    </>);
+    <Player />
+  </>);
 }
