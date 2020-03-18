@@ -1,0 +1,16 @@
+.player {
+  width: 100vw;
+  height: 120px;
+  background-color: rgba(24, 24, 26, 0.829);
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  align-content: center;
+}
+
+.player button {
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+}

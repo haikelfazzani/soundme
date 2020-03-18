@@ -4,6 +4,7 @@ import TrackService from '../services/TrackService';
 import Card from '../components/Card';
 import Navbar from '../components/Navbar';
 import Spinner from '../components/Spinner';
+import Player from '../components/Player';
 
 export default function Home () {
 
@@ -50,5 +51,7 @@ export default function Home () {
             : <Spinner />}
         </div>
       </div>
+
+      <Player />
     </>);
 }

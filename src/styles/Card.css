@@ -26,4 +26,19 @@
   align-items: center;
 }
 
-.card-footer .badge {background-color: #1c1c1f !important;}
+.card-footer .badge {background-color: #1c1c1f !important; }
+
+.img-flip {position: relative; }
+
+.img-flip > div {font-size: 50px; height: 100%;
+  width: 100%;
+  position: absolute;top: 0; left: 0; display: none; }
+
+.img-flip:hover> div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+background-color: rgba(30, 29, 31, 0.582);
+z-index: 999;
+
+}

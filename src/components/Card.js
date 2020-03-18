@@ -1,19 +1,23 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import '../styles/Card.css';
 import placeImg from '../img/1.png';
+import GlobalContext from '../providers/GlobalContext';
 
-export default function Card ({track}) {
+export default function Card ({ track }) {
 
-  const playTrack = (trackId) => {
-    window.SC.stream('/tracks/' + trackId)
-      .then(function (player) {
-        player.play();
-      });
+  const { state, setState } = useContext(GlobalContext);
+
+  const playTrack = (track) => {
+    setState({ ...state, currentTrackPlay: track });
   }
 
-  return <div className="card h-100" onClick={() => { playTrack(track.id) }}>
+  return <div className="card h-100">
 
-    <img src={track.artwork_url || placeImg} className="img-header" alt="..." />
+    <div onClick={() => { playTrack(track) }} className="img-flip">
+      <div className="fadeIn"><i className="fas fa-play"></i></div>
+      <img src={track.artwork_url || placeImg} className="img-header" alt="..." />
+    </div>
+
     <div className="card-body">
       <img src={track.user.avatar_url} className="mr-2" alt="..." />
       <div>
