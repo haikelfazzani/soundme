@@ -2,6 +2,8 @@
 🎧 listen to your favorite music from SoundCloud
 
 ### Capture
+![](https://i.ibb.co/vwTxsfg/soundme.png)
+
 ![](https://i.ibb.co/VVX7qZ4/soundme.gif)
 
 ### Techs
