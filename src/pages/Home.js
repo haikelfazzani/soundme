@@ -9,17 +9,20 @@ import Player from '../components/Player';
 import searchImg from '../img/search.svg'
 import GlobalContext from '../providers/GlobalContext';
 
+const genres = ['Rock', 'Metal', 'Blues', 'Jazz', 'HipHop', 'Pop', 'Reggae',
+  'Dubstep', 'EDM', 'Electronic', 'Deep', 'House', 'Trance', 'Piano'
+];
+
 export default function Home () {
 
-  const { state } = useContext(GlobalContext);
+  const { state, setState } = useContext(GlobalContext);
   const [tracks, setTracks] = useState([]);
   const [query, setQuery] = useState(null);
+  const [activeGenre, setActiveGenre] = useState(state.activeGenre);
 
   useEffect(() => {
-    TrackService.getTracks('rock')
-      .then((result) => {
-        setTracks(result);
-      })
+    TrackService.getTracks(activeGenre)
+      .then((result) => { setTracks(result); })
       .catch(e => { });
   }, []);
 
@@ -32,14 +35,28 @@ export default function Home () {
       .catch(e => { });
   }
 
+  const onGenreSelect = (genre) => {
+    TrackService.getTracks(genre.toLowerCase())
+      .then((result) => {
+        setTracks(result);
+        setActiveGenre(genre);
+        setState({ ...state, activeGenre: genre });
+      })
+      .catch(e => { });
+  }
+
   return (<>
     <Navbar sender={getSearchQuery} />
+
+    <ul className="list-genres overflow-auto">
+      {genres.map(g => <li className={"list-group-item cp fs-14 " + (activeGenre === g ? "active" : "")}
+        key={g} onClick={() => { onGenreSelect(g) }}>{g}</li>)}
+    </ul>
 
     <div className="container py-5">
 
       {query && <h4>
-        <i className="fas fa-search mb-3"></i> Search results:
-        {tracks && tracks.length > 0 ? query : 'not found..'}
+        <i className="fas fa-search mb-3"></i> Search results: {tracks && tracks.length > 0 ? query : 'not found..'}
       </h4>}
 
       <div className="row">

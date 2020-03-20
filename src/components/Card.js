@@ -8,8 +8,6 @@ export default function Card ({ track, active = false }) {
   const { state, setState } = useContext(GlobalContext);
 
   const playTrack = (track) => {
-    console.log(track);
-    
     setState({
       ...state,
       currentTrackPlay: track,
@@ -32,9 +30,7 @@ export default function Card ({ track, active = false }) {
 
     <div onClick={() => { playTrack(track); }} className="img-flip">
       <div className="fadeIn">
-        {active
-          ? <i className="fas fa-play"></i>
-          : <i className="fas fa-music"></i>}
+        {active ? <i className="fas fa-play"></i> : <i className="fas fa-music"></i>}
       </div>
       <img src={track.artwork_url || placeImg} className="img-header" alt="..." />
     </div>

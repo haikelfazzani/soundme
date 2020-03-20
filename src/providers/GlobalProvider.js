@@ -5,10 +5,11 @@ import GlobalContext from './GlobalContext';
 let initState = {
   currentTrackPlay: {},
   isPlaying: false,
-  favoriteTracks: []
+  favoriteTracks: [],
+  activeGenre: 'Rock'
 };
 
-if(localStorage.getItem('soundme')) {
+if (localStorage.getItem('soundme')) {
   initState = JSON.parse(localStorage.getItem('soundme'));
 }
 

@@ -9,7 +9,7 @@ export default function Navbar ({ sender }) {
     sender(query);
   }
 
-  return <nav className="navbar navbar-expand-lg navbar-dark bg-dark mb-3">
+  return <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
     <div className="container">
       <a className="navbar-brand" href="#"><i className="fas fa-meteor"></i> Soundme</a>
       <button className="navbar-toggler" type="button" data-toggle="collapse">
