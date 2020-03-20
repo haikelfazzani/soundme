@@ -1,5 +1,5 @@
 ### Soundme  
-listen to your favorite music from SoundCloud
+🎧 listen to your favorite music from SoundCloud
 
 ### Capture
 ![](https://i.ibb.co/vwTxsfg/soundme.png)
@@ -12,6 +12,9 @@ listen to your favorite music from SoundCloud
 - Audio API
 - Bootstrap
 - FontAwesome
+
+### Author  
+Haikel Fazzani
 
 ### License
 MIT
