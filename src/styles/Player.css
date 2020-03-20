@@ -1,7 +1,7 @@
 .player {
   width: 350px;
   padding: 15px 0px;
-  background-color: #38383a;
+  background: linear-gradient(to right bottom, rgba(32, 60, 74, 0.932), rgba(52, 60, 64, 0.952) 50%, rgba(1, 52, 78, 0.945) 100%);
   color: #ffffff;
   position: fixed;
   bottom: 10px;
@@ -67,7 +67,10 @@
 }
 
 .player .badge-primary,
-.player button,
+.player button {
+  background: linear-gradient(to right bottom, rgb(32, 60, 74), rgb(52, 60, 64) 50%, rgb(1, 52, 78) 100%);
+}
+
 .seek {
   background-color: #3a97f5;
 }
@@ -81,7 +84,7 @@
 .list-traks-fav {    max-height:290px;overflow: auto;}
 .list-traks-fav .list-group-item {
   font-size: 12px;
-  background-color: #191a1b;
+  background-color: inherit;
   padding: 0 !important;
   padding-right: 10px !important;
   display: flex;

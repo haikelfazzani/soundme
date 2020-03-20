@@ -2,6 +2,7 @@ body { overflow-x: hidden; }
 
 .navbar {
   background-color: #38383a !important;
+  background: linear-gradient(to right bottom, rgb(32, 60, 74), rgb(52, 60, 64) 50%, rgb(1, 52, 78) 100%);
   border-bottom: 4px solid #16a2ea ;
   padding: 10px 0;
 }
@@ -25,6 +26,7 @@ body { overflow-x: hidden; }
 footer {
   width: 100%;
   background-color: #38383a !important;
+  background: linear-gradient(to right bottom, rgb(32, 60, 74), rgb(52, 60, 64) 50%, rgb(1, 52, 78) 100%);
   border-top: 1px solid #38383a;
   font-size: 12px;
   text-align: center;
