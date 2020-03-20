@@ -6,6 +6,8 @@ import Navbar from '../components/Navbar';
 import Spinner from '../components/Spinner';
 import Player from '../components/Player';
 
+import searchImg from '../img/search.svg'
+
 export default function Home () {
 
   const [tracks, setTracks] = useState([]);
@@ -23,7 +25,7 @@ export default function Home () {
     setQuery(value);
     TrackService.searchQuery(value)
       .then((result) => {
-        setTracks(result);
+        if (result && result.length > 0) { setTracks(result); }
       })
       .catch(e => { });
   }
@@ -40,7 +42,10 @@ export default function Home () {
           ? tracks.map((track, i) => <div className="col-md-3 mb-3" key={track.id}>
             <Card track={track} />
           </div>)
-          : <Spinner />}
+          : <>
+            <img src={searchImg} alt=".." className="img-fluid w-50 mx-auto py-5" />
+            <Spinner />
+          </>}
       </div>
     </div>
 

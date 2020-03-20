@@ -7,24 +7,21 @@ export default class TrackService {
     return api.data.api;
   }
 
-  static async getTracks (genre) {
-    const api_data = await this.getKey();
-    const resp = await axios.get(`https://api.soundcloud.com/tracks?genres=${genre}&client_id=${api_data}`);
-    await this.initSc();
-    return resp.data;
-  }
-
   static async initSc () {
     const api_data = await this.getKey();
     window.SC.initialize({ client_id: api_data });
   }
 
+  static async getTracks (genre) {
+    await this.initSc();
+    const tracks = await window.SC.get('/tracks', { genres: genre || 'rock', limit: 98 });
+    return tracks;
+  }
+
   static async searchQuery (query) {
     await this.initSc();
     query = encodeURIComponent(query);
-    const tracks = await window.SC.get('/tracks', { q: query });
-    console.log(tracks);
-    
+    const tracks = await window.SC.get('/tracks', { q: query, limit: 98 });
     return tracks;
   }
 }
