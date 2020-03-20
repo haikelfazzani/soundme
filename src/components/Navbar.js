@@ -9,7 +9,7 @@ export default function Navbar ({ sender }) {
     sender(query);
   }
 
-  return <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+  return <nav className="navbar navbar-expand-lg navbar-dark bg-dark mb-3">
     <div className="container">
       <a className="navbar-brand" href="#"><i className="fas fa-meteor"></i> Soundme</a>
       <button className="navbar-toggler" type="button" data-toggle="collapse">
@@ -24,10 +24,11 @@ export default function Navbar ({ sender }) {
           <input className="form-control mr-sm-2" type="search"
             placeholder="Search" aria-label="Search"
             onChange={(e) => { setQuery(e.target.value) }} value={query} />
-          <button className="btn btn-outline-dark my-2 my-sm-0" type="submit">
+          <button className="btn btn-outline-light my-2 my-sm-0" type="submit">
             <i className="fas fa-search"></i>
           </button>
         </form>
+
       </div>
     </div>
   </nav>;

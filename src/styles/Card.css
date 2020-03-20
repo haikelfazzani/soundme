@@ -1,9 +1,20 @@
-.card { background-color: rgb(21, 21, 22); box-shadow: 0 0 10px #1f1f20; cursor: pointer;}
+.card {
+  border: 0;
+  box-shadow: 0 0 10px #c0c0c0;
+  cursor: pointer;
+}
+
+.card:hover {
+  box-shadow: 0 0 15px #7c7c7c;
+}
 
 .card .img-header {
   max-height: 130px;
   width: 100%;
   object-fit: cover;
+  animation-name: imgScale;
+  animation-duration: 1s;
+  animation-fill-mode: both;
 }
 
 .card-body {
@@ -14,10 +25,23 @@
   align-items: center;
 }
 
-.card-body h5 {font-size: 13px; font-size: 13px; color: #E91E63; font-weight: 700;}
-.card-body p {font-size: 12px;}
+.card-body h5 {
+  font-size: 13px;
+  font-size: 13px;
+  color: #16a2ea;
+  font-weight: 700;
+}
 
-.card-body img {border-radius: 50%; max-width: 40px; max-height: 40px; object-fit: cover;}
+.card-body p {
+  font-size: 12px;
+}
+
+.card-body img {
+  border-radius: 50%;
+  max-width: 40px;
+  max-height: 40px;
+  object-fit: cover;  
+}
 
 .card-footer {
   padding: .5em;
@@ -26,19 +50,35 @@
   align-items: center;
 }
 
-.card-footer .badge {background-color: #1c1c1f !important; }
 
-.img-flip {position: relative; }
+.img-flip {
+  position: relative;
+}
 
-.img-flip > div {font-size: 50px; height: 100%;
+.img-flip>div {
+  font-size: 50px;
+  height: 100%;
   width: 100%;
-  position: absolute;top: 0; left: 0; display: none; }
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: none;
+}
 
-.img-flip:hover> div {
+.img-flip:hover>div {
   display: flex;
   justify-content: center;
   align-items: center;
-background-color: rgba(30, 29, 31, 0.582);
-z-index: 999;
+  background-color: rgba(255, 255, 255, 0.582);
+  z-index: 999;
+}
 
+@keyframes imgScale {
+  0% {
+    transform: scale(0,0);
+  }
+
+  100% {
+    transform: scale(1,1);
+  }
 }

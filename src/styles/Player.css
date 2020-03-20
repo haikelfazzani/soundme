@@ -1,12 +1,26 @@
 .player {
-  width: 25%;
+  width: 350px;
   padding: 15px 0px;
-  background-color: rgb(0, 124, 249);
+  background-color: #38383a;
+  color: #ffffff;
   position: fixed;
-  bottom: 20px;
-  right: 20px;
+  bottom: 10px;
+  right: 10px;
+  display: flex;
+  flex-direction: column;
   z-index: 9999;
 }
+
+.btn-hide-player {
+  position: absolute;
+  left: 2px;
+  top: 2px;
+  background-color: inherit !important;
+  border: 0;
+  color: #6b6b6b !important;
+}
+
+.btn-hide-player:hover {color: #ffffff !important;}
 
 .player button {
   font-size: 14px;
@@ -18,28 +32,69 @@
   margin-right: 10px;
 }
 
-.player button:hover {background-color: #1485f7;}
+.player button:hover {
+  background-color: #38383a;
+}
 
 .player img {
-  border-radius: 50%; 
-  width: 70px !important; 
-  height: 70px !important; 
+  border-radius: 50%;
+  width: 80px !important;
+  height: 80px !important;
   object-fit: cover;
   border: 2px solid #f1f1f1;
 }
 
 .player .controls {
-display: flex;
-justify-content: space-between;
-align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.player p {font-size: 13px !important;}
+.player p {
+  font-size: 13px !important;
+}
 
-.seek {width: 100%; height: 5px;}
+.seek {
+  width: 100%;
+  height: 5px;
+}
 
-.seek > div {height: 100%; width: 0; background-color: orange;}
+.seek>div {
+  height: 100%;
+  width: 0;
+  background-color: orange;
+  border-right: 4px solid #ececec;
+}
 
-.player .badge-primary , .player button, .seek{background-color: #3a97f5;}
+.player .badge-primary,
+.player button,
+.seek {
+  background-color: #3a97f5;
+}
 
-.player .badge-primary{ font-size: 16px; font-weight: 100;}
+.player .badge-primary {
+  font-size: 16px;
+  font-weight: 100;
+}
+
+/* list favorite tracks */
+.list-traks-fav {    max-height:290px;overflow: auto;}
+.list-traks-fav .list-group-item {
+  font-size: 12px;
+  background-color: #191a1b;
+  padding: 0 !important;
+  padding-right: 10px !important;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;  
+  cursor: pointer;
+  transition: background-color .25s;
+}
+
+.list-traks-fav .list-group-item:hover {background-color: #131316;}
+
+.list-traks-fav img {max-width: 40px; max-height: 40px; border-radius: 0% !important; border: 0; object-fit: cover;}
+
+.list-traks-fav h5 { font-size: 14px;color: #ececec;}
+
+.active-track {background-color: #272727 !important;}
