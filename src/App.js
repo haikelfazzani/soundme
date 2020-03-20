@@ -5,6 +5,7 @@ import Home from './pages/Home';
 
 import './App.css';
 import './styles/Queries.css';
+import './styles/Animation.css';
 
 export default function App () {
 
