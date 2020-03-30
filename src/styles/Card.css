@@ -1,8 +1,8 @@
 .card {
-  border: 1px solid #e9e9e9 !important;
   padding: 5px;
   border-radius: 0;  
   cursor: pointer;
+  border: 1px solid #e4e4e4;
   transition: box-shadow .2s ease-in-out;
 }
 
@@ -10,6 +10,7 @@
   /* box-shadow: 0 0 15px #7c7c7c; */
   box-shadow: 0 0 10px #c0c0c0;
 }
+
 
 .card .img-header {
   max-height: 100px;
@@ -72,9 +73,15 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgba(255, 255, 255, 0.582);
+  color: #ffffff;
+  background-color: rgba(0, 0, 0, 0.767);
   z-index: 999;
 }
+
+
+.active-card {background-color: #243a45; color: #eeeeee;}
+.active-card h5 {color: #ffffff !important;}
+.active-card img {border: 2px solid #ffffff;}
 
 @keyframes imgScale {
   0% {

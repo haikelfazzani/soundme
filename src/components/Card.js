@@ -21,7 +21,7 @@ export default function Card ({ track, active = false }) {
     }
   }
 
-  return <div className={active ? "card h-100" : "card h-100 border-primary"}>
+  return <div className={active ? "card h-100" : "card h-100 active-card"}>
 
     <div onClick={() => { playTrack(track); }} className="img-flip">
       <div className="fadeIn">
