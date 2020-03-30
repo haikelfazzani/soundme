@@ -9,11 +9,11 @@ import './styles/Animation.css';
 
 export default function App () {
 
-  return (<Router>
-
-    <Route exact path="/" component={Home} />
-    <Redirect path="*" to="/" />
-
+  return (<>
+    <Router>
+      <Route exact path="/" component={Home} />
+      <Redirect path="*" to="/" />
+    </Router>
     <Footer />
-  </Router>);
+  </>);
 }

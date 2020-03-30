@@ -1,10 +1,10 @@
 import React, { useEffect, useState, useContext } from 'react';
-import TrackService from '../services/TrackService';
+import ScService from '../services/ScService';
 
 import Card from '../components/Card';
 import Navbar from '../components/Navbar';
 import Spinner from '../components/Spinner';
-import Player from '../components/Player';
+import Player from '../containers/Player';
 
 import searchImg from '../img/search.svg'
 import GlobalContext from '../providers/GlobalContext';
@@ -23,14 +23,14 @@ export default function Home () {
   const [activeGenre, setActiveGenre] = useState(state.activeGenre);
 
   useEffect(() => {
-    TrackService.getTracks(activeGenre)
+    ScService.getTracks(activeGenre)
       .then((result) => { setTracks(result); })
       .catch(e => { });
   }, []);
 
   const getSearchQuery = value => {
     setQuery(value);
-    TrackService.searchQuery(value)
+    ScService.searchQuery(value)
       .then((result) => {
         if (result && result.length > 0) { setTracks(result); }
       })
@@ -38,7 +38,7 @@ export default function Home () {
   }
 
   const onGenreSelect = (genre) => {
-    TrackService.getTracks(genre.toLowerCase())
+    ScService.getTracks(genre.toLowerCase())
       .then((result) => {
         setTracks(result);
         setActiveGenre(genre);
@@ -51,12 +51,12 @@ export default function Home () {
     <Navbar sender={getSearchQuery} />
 
     <div className="list-genres">
-    <div className="container">
-    <ul className="overflow-auto">
-      {genres.map(g => <li className={"list-group-item cp fs-12 text-uppercase " + (activeGenre === g ? "active" : "")}
-        key={g} onClick={() => { onGenreSelect(g) }}>{g}</li>)}
-    </ul>
-    </div>
+      <div className="container">
+        <ul className="overflow-auto">
+          {genres.map(g => <li className={"list-group-item cp fs-12 text-uppercase " + (activeGenre === g ? "active" : "")}
+            key={g} onClick={() => { onGenreSelect(g) }}>{g}</li>)}
+        </ul>
+      </div>
     </div>
 
     <div className="container py-5">

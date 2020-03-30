@@ -14,6 +14,8 @@ body {
   font-family: 'Sriracha';
 }
 
+.navbar input {min-width: 300px;}
+
 .spinner-container {
   height: 100vh;
   width: 100vw;

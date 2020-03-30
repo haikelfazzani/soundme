@@ -3,6 +3,8 @@ import '../styles/Card.css';
 import placeImg from '../img/1.png';
 import GlobalContext from '../providers/GlobalContext';
 
+import loadingImg from '../img/loading.gif';
+
 export default function Card ({ track, active = false }) {
 
   const { state, setState } = useContext(GlobalContext);
@@ -23,7 +25,8 @@ export default function Card ({ track, active = false }) {
 
     <div onClick={() => { playTrack(track); }} className="img-flip">
       <div className="fadeIn">
-        {active ? <i className="fas fa-play"></i> : <i className="fas fa-music"></i>}
+        {active ? <i className="fas fa-play"></i> 
+        : <img src={loadingImg} alt="loading" />}
       </div>
 
       <img
