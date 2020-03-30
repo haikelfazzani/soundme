@@ -92,6 +92,8 @@ footer {
   color: #E91E63 !important;
 }
 
+.border-primary {border: 1px solid #007bff !important;}
+
 .w-90 {
   width: 90% !important;
 }

@@ -190,10 +190,7 @@ function Player () {
 
             <div className="d-flex align-items-center w-75" onClick={() => { onClickTrackList(track, i); }}>
               <img src={track && track.artwork_url ? track.artwork_url : placeImg} alt="..." className="m-3" />
-              <div>
                 <h5 className="m-0 text-wrap">{track.title}</h5>
-                <p className="card-text text-muted text-wrap m-0">{track.user.username}</p>
-              </div>
             </div>
 
             <div className="w-25 d-flex justify-content-end">
