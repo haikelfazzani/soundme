@@ -53,10 +53,7 @@ function Player () {
   }, [state.currentTrackPlay.id]);
 
   useEffect(() => {
-
     if (settings.isEnded && !settings.loop) {
-      console.log(state.currentTrackIndex + 1);
-
       if (state.currentTrackIndex < state.favoriteTracks.length - 1) {
         setState({
           ...state,
@@ -76,6 +73,14 @@ function Player () {
   }, [settings.isEnded]);
 
   const onShowPlayer = () => { setShowPlayer(!showPlayer); };
+
+  const onSeek = (e) => {
+    var rect = e.target.getBoundingClientRect();
+    var cursorPosition = e.clientX - rect.left;
+    var widthInPerc = ((cursorPosition * 100) / 340);
+
+    scPlayer.currentTime = ((trackDuration * widthInPerc) / 100);
+  }
 
   return <>
     <div className="player pulseUpOut pb-0" style={{ display: !showPlayer ? 'flex' : 'none' }}>
@@ -110,7 +115,7 @@ function Player () {
         trackDuration={trackDuration}
       />}
 
-      <div className="wave_url">
+      <div className="wave_url" onMouseDown={onSeek}>
         <img
           src={state.currentTrackPlay.waveform_url || placeImgWave}
           alt={state.currentTrackPlay.title || '...'}

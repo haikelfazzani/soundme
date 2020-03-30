@@ -2,6 +2,8 @@ body {
   overflow-x: hidden;
 }
 
+a {text-decoration: none !important;}
+
 .navbar {
   background-color: #38383a !important;
   background: linear-gradient(to right bottom, rgb(32, 60, 74), rgb(52, 60, 64) 50%, rgb(1, 52, 78) 100%);
@@ -79,11 +81,11 @@ footer {
 }
 
 ::-webkit-scrollbar-track {
-  background: #38383a;
+  background: #121e25;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #686868;
+  background: #1b2e38ee;
 }
 
 ::-webkit-scrollbar-thumb:hover {

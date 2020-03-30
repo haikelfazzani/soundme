@@ -6,7 +6,7 @@
   right: 10px;
   display: flex;
   flex-direction: column;
-  background-color: #1b2e38ee ;
+  background-color: #1b2e38f3 ;
   border:10px solid #121e25;
   z-index: 9999;
 }
@@ -25,8 +25,8 @@
 }
 
 .player img {
-  max-width: 90px;
-  max-height: 90px;
+  max-width: 85px;
+  max-height: 85px;
   object-fit: cover;
 }
 
@@ -77,30 +77,31 @@
 
 /* list favorite tracks */
 .list-traks-fav {
-  max-height: 290px;
+  max-height: 260px;
+  border-top:4px solid #121e25;
   overflow: auto;
 }
 
 .list-traks-fav .list-group-item {
-  font-size: 12px;
+  font-size: 12px !important;
   background-color: inherit;
-  padding: 0 !important;
-  padding-right: 10px !important;
+  padding: 0 10px 0 0 !important;
   border-bottom:1px solid #121e25;
   display: flex;
   justify-content: space-between;
   align-items: center;
   cursor: pointer;
-  transition: background-color .25s;
 }
 
 .list-traks-fav .list-group-item:hover {
   background-color: rgba(0, 52, 80, 0.514);
 }
 
+.list-traks-fav .list-group-item h6 {font-size: 12px !important; font-weight: 100;}
+
 .list-traks-fav img {
-  max-width: 40px !important;
-  max-height: 40px !important;
+  max-width: 50px !important;
+  max-height: 50px !important;
   border-radius: 0% !important;
   border: 0;
   object-fit: cover;

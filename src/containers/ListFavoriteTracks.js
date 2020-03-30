@@ -28,8 +28,11 @@ function ListFavoriteTracks () {
           : "list-group-item active-track pr-2"}>
 
         <div className="d-flex align-items-center w-75" onClick={() => { onClickTrackList(track, i); }}>
-          <img src={track && track.artwork_url ? track.artwork_url : placeImg} alt="..." className="m-3" />
-          <h5 className="m-0 text-wrap">{track.title}</h5>
+          <img src={track && track.artwork_url ? track.artwork_url : placeImg} alt="..." className="mr-2" />
+          <div>
+          <h6 className="m-0 text-wrap">{track.title}</h6>
+          <p className="m-0 text-wrap text-muted">@{track.user.username}</p>
+          </div>
         </div>
 
         <div className="w-25 d-flex justify-content-end">
@@ -40,7 +43,8 @@ function ListFavoriteTracks () {
         </div>
 
       </li>)}
-    </ul>);
+    </ul>
+  );
 }
 
 export default React.memo(ListFavoriteTracks);

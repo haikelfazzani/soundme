@@ -21,12 +21,12 @@ export default function Card ({ track, active = false }) {
     }
   }
 
-  return <div className={active ?"card h-100":"card h-100 border-primary"}>
+  return <div className={active ? "card h-100" : "card h-100 border-primary"}>
 
     <div onClick={() => { playTrack(track); }} className="img-flip">
       <div className="fadeIn">
-        {active ? <i className="fas fa-play"></i> 
-        : <img src={loadingImg} alt="loading" />}
+        {active ? <i className="fas fa-play"></i>
+          : <img src={loadingImg} alt="loading" />}
       </div>
 
       <img
@@ -40,7 +40,9 @@ export default function Card ({ track, active = false }) {
 
     <div className="card-body d-flex justify-content-between">
       <div className="w-90 d-flex">
-        <img src={track.user.avatar_url} className="mr-2" alt="..." />
+        <a href={state.currentTrackPlay.permalink_url} target="_blank" rel="noopener noreferrer">
+          <img src={track.user.avatar_url} className="mr-2" alt="..." />
+        </a>
         <div>
           <h5 className="card-title m-0">{track.title}</h5>
           <p className="card-text m-0">@{track.user.username}</p>
