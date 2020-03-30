@@ -4,7 +4,8 @@ import '../styles/Player.css';
 
 import placeImg from '../img/1.png';
 
-let scPlayer = new window.SoundCloudAudio('08f79801a998c381762ec5b15e4914d5');
+const API_KEY = '/stream?client_id=08f79801a998c381762ec5b15e4914d5';
+let scPlayer = new window.Audio();
 
 function timeFormat (time) {
   let hrs = ~~(time / 3600);
@@ -21,52 +22,73 @@ function timeFormat (time) {
   return ret;
 }
 
-export default function Player () {
+function Player () {
 
   const { state, setState } = useContext(GlobalContext);
-  const [player, setPlayer] = useState();
+
   const [trackDuration, setTrackDuration] = useState(0);
   const [timeupdate, setTimeUpdate] = useState(0);
-  const [settings, setSettings] = useState({
-    isPlaying: false,
-    isMuted: 1,
-    showPlayer: false,
-    currTrackId: 0,
-  });
+  const [showPlayer, setShowPlayer] = useState(false);
+
+  const [settings, setSettings] = useState({ isPlaying: false, loop: false, isEnded: false });
 
   useEffect(() => {
-    if (state.currentTrackPlay && Object.keys(state.currentTrackPlay).length > 0) {
-      window.SC.stream('/tracks/' + state.currentTrackPlay.id)
-        .then(function (playr) {
-          setPlayer(playr);
-          setSettings({
-            ...settings,
-            isPlaying: true,
-            showPlayer: true,
-            currTrackId: state.currentTrackPlay.id
-          });
-          setTrackDuration(parseInt((state.currentTrackPlay.duration - 50) / 1000));
-        });
+    scPlayer.src = state.currentTrackPlay.uri + API_KEY;
 
-
-      scPlayer.play({
-        streamUrl: `https://api.soundcloud.com/tracks/${state.currentTrackPlay.id}/stream`
-      });
-
-      scPlayer.on('timeupdate', function () {
-        setTimeUpdate(parseInt(scPlayer.audio.currentTime));
-      });
+    function playTrack () {
+      if (scPlayer.readyState >= 1) {
+        scPlayer.play();
+        setTrackDuration(scPlayer.duration);
+      }
     }
 
+    function updateTime () {
+      setTimeUpdate(scPlayer.currentTime);
+
+      if (scPlayer.currentTime >= scPlayer.duration) {
+        setSettings({ ...settings, isEnded: true });
+      }
+    }
+
+    if (state.currentTrackPlay.id) {
+      scPlayer.addEventListener('loadedmetadata', playTrack, false);
+      scPlayer.addEventListener('timeupdate', updateTime, false);
+    }
+
+    return () => {
+      scPlayer.removeEventListener('loadedmetadata', playTrack);
+      scPlayer.removeEventListener('timeupdate', updateTime);
+    }
   }, [state.currentTrackPlay.id]);
+
+  useEffect(() => {
+
+    if (settings.isEnded && !settings.loop) {
+      console.log(state.currentTrackIndex + 1);
+
+      if (state.currentTrackIndex < state.favoriteTracks.length - 1) {
+        setState({
+          ...state,
+          currentTrackPlay: state.favoriteTracks[state.currentTrackIndex + 1],
+          currentTrackIndex: state.currentTrackIndex + 1
+        });
+      }
+      else {
+        setState({
+          ...state,
+          currentTrackPlay: state.favoriteTracks[0],
+          currentTrackIndex: 0
+        });
+      }
+      setSettings({ ...settings, isEnded: false });
+    }
+  }, [settings.isEnded]);
 
   const onControls = (control) => {
     switch (control) {
       case 'play':
         setSettings({ ...settings, isPlaying: true });
-        scPlayer.play({
-          streamUrl: `https://api.soundcloud.com/tracks/${state.currentTrackPlay.id}/stream`
-        });
+        scPlayer.play();
         break;
 
       case 'pause':
@@ -76,13 +98,17 @@ export default function Player () {
 
       case 'stop':
         setSettings({ ...settings, isPlaying: false });
-        scPlayer.stop();
-        //scPlayer.setTime(10)
+        scPlayer.pause();
+        scPlayer.currentTime = 0
         break;
 
       case 'muted':
-        scPlayer.setVolume(settings.isMuted === 1 ? 0 : 1);
-        setSettings({ ...settings, isMuted: settings.isMuted === 1 ? 0 : 1 });
+        scPlayer.muted = !scPlayer.muted;
+        break;
+
+      case 'loop':
+        setSettings({ ...settings, loop: !settings.loop });
+        scPlayer.loop = !settings.loop;
         break;
 
       default:
@@ -90,67 +116,79 @@ export default function Player () {
     }
   }
 
-  const onClickTrackList = (track) => {
-    setState({ ...state, currentTrackPlay: track });
-    scPlayer.play({ streamUrl: `https://api.soundcloud.com/tracks/${track.id}/stream` });
-  }
-
-  const rmFavoriteTrack = (trackId) => {
-    let tracks = state.favoriteTracks;
-
+  const onClickTrackList = (track, trackIndex) => {
     setState({
       ...state,
-      favoriteTracks: [...tracks.filter(t => t.id !== trackId)]
+      currentTrackPlay: track,
+      currentTrackIndex: trackIndex
     });
   }
 
-  const onHidePlayer = () => { setSettings({ ...settings, showPlayer: !settings.showPlayer }); }
+  const rmFavoriteTrack = (trackId) => {
+    let newList = state.favoriteTracks.filter(t => t.id !== trackId);
+    setState({ ...state, favoriteTracks: newList });
+  }
+
+  const onShowPlayer = () => { setShowPlayer(!showPlayer) }
 
   return <>
-    <div className="player pulseUpOut pb-0" style={{ display: settings.showPlayer ? 'flex' : 'none' }}>
+    <div className="player pulseUpOut pb-0" style={{ display: !showPlayer ? 'flex' : 'none' }}>
 
-      <button className="btn-hide-player" onClick={onHidePlayer} data-toggle="tooltip" data-placement="top" title="Close player">
+      <button className="btn-hide-player" onClick={onShowPlayer} data-toggle="tooltip" data-placement="top" title="Close player">
         <i className="fas fa-minus"></i>
-        </button>
+      </button>
 
-      <div className="container w-100 d-flex justify-content-between mb-2">
-        <img src={state.currentTrackPlay && state.currentTrackPlay.artwork_url
-          ? state.currentTrackPlay.artwork_url : placeImg} className="w-25 mr-2" alt="..."
+      <div className="w-100 d-flex">
+        <img src={state.currentTrackPlay
+          && state.currentTrackPlay.artwork_url
+          ? state.currentTrackPlay.artwork_url : placeImg}
+          className="mr-2"
+          alt={state.currentTrackPlay.title || '...'}
         />
 
-        <div className="w-75 d-flex flex-column">
-          <h5 className="m-0 fs-14">{state.currentTrackPlay.title || '...'}</h5>
-          <p className="m-0 text-muted fs-12">{state.currentTrackPlay.user ? state.currentTrackPlay.user.username : '...'}</p>
-
-          <div className="controls mb-2 mt-2">
-            <button onClick={() => { onControls(!settings.isPlaying ? 'play' : 'pause'); }}>
-              <i className={!settings.isPlaying ? "fas fa-play" : "fas fa-pause"}></i>
-            </button>
-
-            <button onClick={() => { onControls('stop'); }}><i className="fas fa-stop"></i></button>
-            <button onClick={() => { onControls('muted'); }}>
-              <i className={settings.isMuted === 0 ? "fas fa-volume-mute" : "fas fa-volume-up"}></i>
-            </button>
-
-            <span className="badge badge-primary">
-              {timeFormat(timeupdate) + '/' + timeFormat(trackDuration)}
-            </span>
-          </div>
-
+        <div className="py-2">
+          <h5 className="m-0 fs-14 w-75">{state.currentTrackPlay.title || '...'}</h5>
+          <p className="m-0 text-muted fs-12">
+            {state.currentTrackPlay.user
+              ? '@' + state.currentTrackPlay.user.username
+              : '...'}
+          </p>
         </div>
       </div>
 
+      <ul className="controls">
+        <li onClick={() => { onControls(!settings.isPlaying ? 'play' : 'pause'); }}>
+          <i className={!settings.isPlaying ? "fas fa-play" : "fas fa-pause"}></i>
+        </li>
+
+        <li onClick={() => { onControls('stop'); }}><i className="fas fa-stop"></i></li>
+
+        <li onClick={() => { onControls('loop'); }}>
+          {settings.loop ? <i className="fas fa-long-arrow-alt-right"></i> : <i className="fas fa-undo-alt"></i>}
+        </li>
+
+        <li onClick={() => { onControls('muted'); }}>
+          <i className={settings.isMuted === 0 ? "fas fa-volume-mute" : "fas fa-volume-up"}></i>
+        </li>
+
+        <li>
+          {timeFormat(timeupdate) + '/' + timeFormat(trackDuration)}
+        </li>
+      </ul>
+
       <div className="seek">
-        <div style={{ width: (parseInt((timeupdate * 100) / trackDuration) || 0) + '%' }}></div>
+        <div style={{ width: ((timeupdate * 100 / trackDuration) || 0) + '%' }}></div>
       </div>
 
 
       {state.favoriteTracks.length > 0
         && <ul className="list-group list-group-flush list-traks-fav">
-          {state.favoriteTracks.map(track => <li key={track.id} className={
-            settings.currTrackId !== track.id ? "list-group-item pr-2" : "list-group-item active-track pr-2"}>
+          {state.favoriteTracks.map((track, i) => <li key={track.id} className={
+            state.currentTrackPlay.id !== track.id
+              ? "list-group-item pr-2"
+              : "list-group-item active-track pr-2"}>
 
-            <div className="d-flex align-items-center w-75" onClick={() => { onClickTrackList(track); }}>
+            <div className="d-flex align-items-center w-75" onClick={() => { onClickTrackList(track, i); }}>
               <img src={track && track.artwork_url ? track.artwork_url : placeImg} alt="..." className="m-3" />
               <div>
                 <h5 className="m-0 text-wrap">{track.title}</h5>
@@ -169,9 +207,11 @@ export default function Player () {
     </div>
 
     <div className="headphones"
-      style={{ display: !settings.showPlayer ? 'flex' : 'none' }}
-      onClick={onHidePlayer} data-toggle="tooltip" data-placement="top" title="Open player">
+      style={{ display: showPlayer ? 'flex' : 'none' }}
+      onClick={onShowPlayer} data-toggle="tooltip" data-placement="top" title="Open player">
       <i className="fas fa-play-circle"></i>
     </div>
   </>;
 }
+
+export default React.memo(Player);

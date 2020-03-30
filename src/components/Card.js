@@ -8,21 +8,14 @@ export default function Card ({ track, active = false }) {
   const { state, setState } = useContext(GlobalContext);
 
   const playTrack = (track) => {
-    setState({
-      ...state,
-      currentTrackPlay: track,
-      isPlaying: true
-    });
+    setState({ ...state, currentTrackPlay: track });
   }
 
   const addToFavorite = (track) => {
     let tracks = state.favoriteTracks;
 
     if (!tracks.some(t => t.id === track.id)) {
-      setState({
-        ...state,
-        favoriteTracks: [track, ...state.favoriteTracks]
-      });
+      setState({ ...state, favoriteTracks: [track, ...state.favoriteTracks] });
     }
   }
 
@@ -32,7 +25,14 @@ export default function Card ({ track, active = false }) {
       <div className="fadeIn">
         {active ? <i className="fas fa-play"></i> : <i className="fas fa-music"></i>}
       </div>
-      <img src={track.artwork_url || placeImg} className="img-header" alt="..." />
+
+      <img
+        src={track.artwork_url
+          ? track.artwork_url.replace('large.jpg', 't300x300.jpg')
+          : placeImg}
+        className="img-header"
+        alt="..."
+      />
     </div>
 
     <div className="card-body d-flex justify-content-between">
@@ -40,7 +40,7 @@ export default function Card ({ track, active = false }) {
         <img src={track.user.avatar_url} className="mr-2" alt="..." />
         <div>
           <h5 className="card-title m-0">{track.title}</h5>
-          <p className="card-text m-0">{track.user.username}</p>
+          <p className="card-text m-0">@{track.user.username}</p>
         </div>
       </div>
       <span onClick={() => { addToFavorite(track) }} className="w-10 d-flex justify-content-end">

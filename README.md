@@ -1,6 +1,12 @@
 ### Soundme  
 🎧 listen to your favorite music from SoundCloud
 
+### Todo
+- [ ] loop single
+- [ ] loop list
+- [ ] set time (seek)
+- [ ] volume range
+
 ### Capture
 ![](https://i.ibb.co/WyPkFfw/soundme.png)
 

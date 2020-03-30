@@ -4,9 +4,9 @@ import GlobalContext from './GlobalContext';
 /** init values global state */
 let initState = {
   currentTrackPlay: {},
-  isPlaying: false,
   favoriteTracks: [],
-  activeGenre: 'Rock'
+  activeGenre: 'Rock',
+  currentTrackIndex: 0
 };
 
 if (localStorage.getItem('soundme')) {

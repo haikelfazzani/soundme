@@ -1,0 +1,32 @@
+.list-genres {
+  width: 100%;
+  background-color: white;
+  box-shadow: 0 0 10px #c0c0c0;
+  overflow: auto;
+}
+
+.list-genres ul {
+  width: 100%;
+  padding: 0;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  overflow: auto;
+}
+
+.list-genres li:first-child { border-left: 1px solid #dfdfdf !important;}
+
+.list-genres .list-group-item.active,
+.list-genres li {
+  width: 100%;
+  text-align: center;
+  border-right: 1px solid #dfdfdf !important;
+  border: transparent;
+  border-radius: 0;
+  font-weight: 600;
+}
+
+.list-genres li:hover {
+  background-color: #f0f0f0;
+}
