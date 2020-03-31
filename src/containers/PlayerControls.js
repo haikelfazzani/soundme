@@ -50,9 +50,9 @@ export default function PlayerControls ({ scPlayer, settings, setSettings, timeu
         {settings.loop
           ? <i className="fas fa-long-arrow-alt-right"></i>
           : <i className="fas fa-undo-alt"></i>}
-      </li>
+      </li>     
 
-      <li className="fs-12"> {timeFormat(timeupdate) + '/' + timeFormat(trackDuration)}</li>
+      <li className="fs-12"> {timeFormat(timeupdate) + ' / ' + timeFormat(trackDuration)}</li> 
 
       <li>
         <input type="range"
@@ -62,9 +62,10 @@ export default function PlayerControls ({ scPlayer, settings, setSettings, timeu
           max="100"
           onChange={onVolume}
           value={volume}
-          style={{ 'height': '0.7rem' }}
+          style={{ 'height': '0.7rem', maxWidth:'80px' }}
         />
       </li>      
+          
     </ul>
   );
 }

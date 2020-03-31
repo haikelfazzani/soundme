@@ -36,10 +36,8 @@ function ListFavoriteTracks () {
         </div>
 
         <div className="w-25 d-flex justify-content-end">
-          <span className="badge badge-dark fs-12 mr-2">{timeFormat(track.duration / 1000)}</span>
-          <span className="badge badge-danger fs-12" onClick={() => { rmFavoriteTrack(track.id) }}>
-            <i className="fas fa-trash"></i>
-          </span>
+          <span className="fs-12 mr-2">{timeFormat(track.duration / 1000)}</span>
+          <span className="badge badge-danger fs-12" onClick={() => { rmFavoriteTrack(track.id) }}>X</span>
         </div>
 
       </li>)}

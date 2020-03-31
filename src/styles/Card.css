@@ -2,7 +2,6 @@
   font-size: 12px;
   padding: 7px;
   border-radius: 0;  
-  cursor: pointer;
   border: 1px solid #e4e4e4;
   transition: box-shadow .2s ease-in-out;
 }

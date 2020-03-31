@@ -2,8 +2,7 @@ import React, { useContext } from 'react';
 import '../styles/Card.css';
 import placeImg from '../img/1.png';
 import GlobalContext from '../providers/GlobalContext';
-
-import loadingImg from '../img/loading.gif';
+import { Link } from 'react-router-dom';
 
 export default function Card ({ track, active = false }) {
 
@@ -45,7 +44,11 @@ export default function Card ({ track, active = false }) {
         <h5 className="card-title m-0 text-truncate">{track.title}</h5>
 
         <div className="w-100 d-flex justify-content-between align-items-center">
-          <p className="card-text m-0 text-muted text-truncate">@{track.user.username}</p>
+
+          <Link to={"/user/" + track.user.id} className="card-text m-0 text-muted text-truncate">
+            @{track.user.username}
+          </Link>
+
           <span onClick={() => { addToFavorite(track) }}>
             <i className={state.favoriteTracks.find(t => t.id === track.id)
               ? "fas fa-heart color-rose"

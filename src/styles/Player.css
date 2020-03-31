@@ -6,18 +6,18 @@
   right: 10px;
   display: flex;
   flex-direction: column;
-  background-color: #1b2e38f3 ;
-  border:10px solid #121e25;
+  background-color:#152b38fa;
+  border:7px solid #102430fa;
   z-index: 9999;
 }
 
 .btn-hide-player {
   position: absolute;
-  right: 0;
-  top:0;
+  right: -7px;
+  top:-32px;
   background-color: inherit !important;
   border: 0;
-  color: #6b6b6b !important;
+  color: #cccccc !important;
 }
 
 .btn-hide-player:hover {
@@ -40,7 +40,7 @@
   display: flex;  
   justify-content: space-between;
   align-items: center;
-  background-color: #294150;
+  background-image: linear-gradient(to bottom, #294150, #121e25);
   border-top:4px solid #121e25;
   border-bottom:4px solid #121e25;
 }
@@ -86,7 +86,8 @@
   font-size: 12px !important;
   background-color: inherit;
   padding: 0 10px 0 0 !important;
-  border-bottom:1px solid #121e25;
+  background-image: linear-gradient(to bottom, #243844, #12242e);
+  border-bottom:1px solid #0d151a;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -94,7 +95,7 @@
 }
 
 .list-traks-fav .list-group-item:hover {
-  background-color: rgba(0, 52, 80, 0.514);
+  background-color: rgba(5, 34, 49, 0.514);
 }
 
 .list-traks-fav .list-group-item h6 {font-size: 12px !important; font-weight: 100;}
@@ -115,7 +116,7 @@
 }
 
 .active-track {
-  background-color: #121e25 !important;
+  background: #173446 !important;
 }
 
 /* headphones */

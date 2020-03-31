@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 export default function Navbar ({ sender }) {
 
@@ -11,7 +12,9 @@ export default function Navbar ({ sender }) {
 
   return <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
     <div className="container">
-      <a className="navbar-brand" href="#"><i className="fas fa-meteor"></i> Soundme</a>
+
+      <Link className="navbar-brand" to="/"><i className="fas fa-meteor"></i> Soundme</Link>
+
       <button className="navbar-toggler" type="button" data-toggle="collapse">
         <span className="navbar-toggler-icon"></span>
       </button>

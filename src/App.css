@@ -3,8 +3,6 @@ body {
   overflow-x: hidden;
 }
 
-a {text-decoration: none !important;}
-
 .navbar {
   background-color: #38383a !important;
   background: linear-gradient(to right bottom, rgb(32, 60, 74), rgb(52, 60, 64) 50%, rgb(1, 52, 78) 100%);
@@ -106,6 +104,10 @@ footer {
 
 .w-10 {
   width: 10% !important;
+}
+
+.fs-18 {
+  font-size: 18px !important;
 }
 
 .fs-14 {
