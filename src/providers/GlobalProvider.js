@@ -6,7 +6,8 @@ let initState = {
   currentTrackPlay: {},
   favoriteTracks: [],
   activeGenre: 'Rock',
-  currentTrackIndex: 0
+  currentTrackIndex: 0,
+  searchQuery: ''
 };
 
 if (localStorage.getItem('soundme')) {

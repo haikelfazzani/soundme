@@ -1,25 +1,22 @@
 import React, { useEffect, useState, useContext } from 'react';
 import ScService from '../services/ScService';
-
+import GlobalContext from '../providers/GlobalContext';
 import Card from '../components/Card';
-import Navbar from '../components/Navbar';
 import Spinner from '../components/Spinner';
-import Player from '../containers/Player';
 
 import searchImg from '../img/search.svg'
-import GlobalContext from '../providers/GlobalContext';
 
 import '../styles/ListGenres.css';
+import { withRouter } from 'react-router-dom';
 
 const genres = ['Rock', 'Metal', 'Blues', 'Jazz', 'HipHop', 'Pop', 'Reggae',
   'Dubstep', 'EDM', 'Electronic', 'House', 'Trance', 'Piano'
 ];
 
-export default function Home () {
+function Home () {
 
   const { state, setState } = useContext(GlobalContext);
   const [tracks, setTracks] = useState([]);
-  const [query, setQuery] = useState(null);
   const [activeGenre, setActiveGenre] = useState(state.activeGenre);
 
   useEffect(() => {
@@ -28,14 +25,13 @@ export default function Home () {
       .catch(e => { });
   }, []);
 
-  const getSearchQuery = value => {
-    setQuery(value);
-    ScService.searchQuery(value)
+  useEffect(() => {
+    ScService.searchQuery(state.searchQuery)
       .then((result) => {
         if (result && result.length > 0) { setTracks(result); }
       })
       .catch(e => { });
-  }
+  }, [state.searchQuery]);
 
   const onGenreSelect = (genre) => {
     ScService.getTracks(genre.toLowerCase())
@@ -48,8 +44,7 @@ export default function Home () {
   }
 
   return (<>
-    <Navbar sender={getSearchQuery} />
-
+    
     <div className="list-genres">
       <div className="container">
         <ul className="overflow-auto">
@@ -59,7 +54,7 @@ export default function Home () {
       </div>
     </div>
 
-    <div className="container py-4 mb-5">
+    <div className="container py-4 min-vh-100">
       <div className="row">
         {tracks && tracks.length > 0
           ? tracks.map((track, i) => <div className="col-md-3 mb-3" key={track.id}>
@@ -73,7 +68,7 @@ export default function Home () {
           </>}
       </div>
     </div>
-
-    <Player />
   </>);
 }
+
+export default withRouter(Home);

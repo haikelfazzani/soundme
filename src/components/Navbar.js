@@ -1,13 +1,16 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useContext } from 'react';
+import { Link, withRouter } from 'react-router-dom';
+import GlobalContext from '../providers/GlobalContext';
 
-export default function Navbar ({ sender }) {
+function Navbar (props) {
 
+  const { state, setState } = useContext(GlobalContext);
   const [query, setQuery] = useState('');
 
   const onSearch = e => {
     e.preventDefault();
-    sender(query);
+    setState({ ...state, searchQuery: query });
+    props.history.push("/");
   }
 
   return <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -37,3 +40,5 @@ export default function Navbar ({ sender }) {
     </div>
   </nav>;
 }
+
+export default withRouter(Navbar)
