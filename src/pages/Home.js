@@ -1,13 +1,12 @@
 import React, { useEffect, useState, useContext } from 'react';
+import { withRouter } from 'react-router-dom';
 import ScService from '../services/ScService';
 import GlobalContext from '../providers/GlobalContext';
 import Card from '../components/Card';
 import Spinner from '../components/Spinner';
 
-import searchImg from '../img/search.svg'
-
 import '../styles/ListGenres.css';
-import { withRouter } from 'react-router-dom';
+import Skeleton from '../components/Skeleton';
 
 const genres = ['Rock', 'Metal', 'Blues', 'Jazz', 'HipHop', 'Pop', 'Reggae',
   'Dubstep', 'EDM', 'Electronic', 'House', 'Trance', 'Piano'
@@ -63,7 +62,7 @@ function Home () {
               : <Card track={track} active={true} />}
           </div>)
           : <>
-            <img src={searchImg} alt=".." className="img-fluid w-50 mx-auto py-5" />
+            <Skeleton />
             <Spinner />
           </>}
       </div>

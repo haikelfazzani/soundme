@@ -1,18 +1,18 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { useParams } from 'react-router-dom';
-import Navbar from '../components/Navbar';
+import GlobalContext from '../providers/GlobalContext';
+
+import { useParams, withRouter } from 'react-router-dom';
 import ScUserService from '../services/ScUserService';
 import Card from '../components/Card';
-import GlobalContext from '../providers/GlobalContext';
+
+import Skeleton from '../components/Skeleton';
+import Spinner from '../components/Spinner';
 
 import formatNum from '../util/formatNum';
 
 import '../styles/User.css';
-import Spinner from '../components/Spinner';
 
-import searchImg from '../img/search.svg';
-
-export default function User () {
+function User () {
 
   const { state } = useContext(GlobalContext);
   const [userInfos, setUserInfos] = useState({});
@@ -95,8 +95,10 @@ export default function User () {
 
       </div>
       : <div className="container py-3 mb-5">
-        <img src={searchImg} alt=".." className="img-fluid w-50 mx-auto py-5" />
+        <Skeleton />
         <Spinner />
       </div>}
   </>);
 }
+
+export default withRouter(User);

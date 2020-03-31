@@ -1,0 +1,60 @@
+.skeleton-container {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-skeleton {
+  background-color: #ffffff;
+  border: 1px solid #e4e4e4;
+  padding: 15px;
+  width: 32%;
+}
+
+.picture {
+  height: 70px;
+  width: 70px;
+  margin-bottom: 10px !important;
+}
+.comment {
+  height: 15px;
+  background: #777;
+  margin-top: 10px;
+}
+
+.wrapper {
+  width: 0;
+  animation: fullView 0.5s forwards linear;
+}
+
+.animate {
+  animation : shimmer 2s infinite;
+  background: linear-gradient(to right, #eff1f3 4%, #e2e2e2 25%, #eff1f3 36%);
+  background-size: 1000px 100%;
+}
+
+@keyframes fullView {
+  100% {width: 100%; }
+}
+
+@keyframes shimmer {
+  0% {background-position: -1000px 0;}
+  100% { background-position: 1000px 0;}
+}
+
+@media screen and (max-width: 900px) {
+  .card-skeleton {width: 49%;}
+}
+
+@media screen and (max-width: 600px) {
+  .skeleton-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .card-skeleton {width: 100%;}
+}
