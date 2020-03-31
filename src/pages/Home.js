@@ -27,7 +27,10 @@ function Home () {
   useEffect(() => {
     ScService.searchQuery(state.searchQuery)
       .then((result) => {
-        if (result && result.length > 0) { setTracks(result); }
+        if (result && result.length > 0) {
+          setTracks([]);
+          setTimeout(() => { setTracks(result); }, 500);
+        }
       })
       .catch(e => { });
   }, [state.searchQuery]);
@@ -35,15 +38,20 @@ function Home () {
   const onGenreSelect = (genre) => {
     ScService.getTracks(genre.toLowerCase())
       .then((result) => {
-        setTracks(result);
-        setActiveGenre(genre);
-        setState({ ...state, activeGenre: genre });
+        if (result.length > 0) {
+          setTracks([]);
+          setTimeout(() => {
+            setTracks(result);
+            setActiveGenre(genre);
+            setState({ ...state, activeGenre: genre });
+          }, 500);
+        }
       })
       .catch(e => { });
   }
 
   return (<>
-    
+
     <div className="list-genres">
       <div className="container">
         <ul className="overflow-auto">
@@ -57,7 +65,7 @@ function Home () {
       <div className="row">
         {tracks && tracks.length > 0
           ? tracks.map((track, i) => <div className="col-md-3 mb-3" key={track.id}>
-            {state.currentTrackPlay.id === track.id
+            {(state.currentTrackPlay && state.currentTrackPlay.id === track.id)
               ? <Card track={track} />
               : <Card track={track} active={true} />}
           </div>)

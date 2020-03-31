@@ -21,7 +21,5 @@ export default function GlobalProvider ({ children }) {
     localStorage.setItem('soundme', JSON.stringify(state));
   }, [state]);
 
-  return <GlobalContext.Provider value={{ state, setState }}>
-    {children}
-  </GlobalContext.Provider>;
+  return <GlobalContext.Provider value={{ state, setState }}>{children}</GlobalContext.Provider>;
 }

@@ -73,7 +73,7 @@ function User () {
                 <p className="card-text fs-14 user-desc mb-3">{userInfos.description}</p>
 
                 <div>
-                  {userProfiles.map(up => <a href={up.service} target="_blank" className="fs-12 mr-2 text-uppercase ltsp"
+                  {userProfiles.map(up => <a href={up.service} target="_blank" className="fs-10 mr-2 text-uppercase ltsp"
                     rel="noopener noreferrer" key={up.id}>
                     <i className="fas fa-external-link-square-alt"></i> {up.service}
                   </a>)}

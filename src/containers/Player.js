@@ -23,19 +23,18 @@ function Player () {
   const [settings, setSettings] = useState({ isPlaying: false, loop: false, isEnded: false });
 
   useEffect(() => {
-    scPlayer.src = state.currentTrackPlay.uri + API_KEY;
-
+    scPlayer.src = state.currentTrackPlay.uri + API_KEY; 
+    
     function playTrack () {
       if (scPlayer.readyState >= 1) {
         scPlayer.play();
-        setSettings({ ...settings, isPlaying: true });
         setTrackDuration(scPlayer.duration);
+        setSettings({ ...settings, isPlaying: true });        
       }
     }
 
     function updateTime () {
       setTimeUpdate(scPlayer.currentTime);
-
       if (scPlayer.currentTime >= scPlayer.duration) {
         setSettings({ ...settings, isEnded: true });
       }
@@ -52,23 +51,26 @@ function Player () {
     }
   }, [state.currentTrackPlay.id]);
 
-  useEffect(() => {
-    if (settings.isEnded && !settings.loop) {
-      if (state.currentTrackIndex < state.favoriteTracks.length - 1) {
-        setState({
-          ...state,
-          currentTrackPlay: state.favoriteTracks[state.currentTrackIndex + 1],
-          currentTrackIndex: state.currentTrackIndex + 1
-        });
+  useEffect(() => {        
+    if(state.favoriteTracks.length > 0) {
+      if (settings.isEnded && !settings.loop) {
+        
+        if (state.currentTrackIndex < state.favoriteTracks.length - 1) {
+          setState({
+            ...state,
+            currentTrackPlay: state.favoriteTracks[state.currentTrackIndex + 1],
+            currentTrackIndex: state.currentTrackIndex + 1
+          });
+        }
+        else {
+          setState({
+            ...state,
+            currentTrackPlay: state.favoriteTracks[0],
+            currentTrackIndex: 0
+          });
+        }
+        setSettings({ ...settings, isEnded: false });
       }
-      else {
-        setState({
-          ...state,
-          currentTrackPlay: state.favoriteTracks[0],
-          currentTrackIndex: 0
-        });
-      }
-      setSettings({ ...settings, isEnded: false });
     }
   }, [settings.isEnded]);
 

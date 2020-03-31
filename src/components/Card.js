@@ -24,8 +24,7 @@ export default function Card ({ track, active = false }) {
 
     <div onClick={() => { playTrack(track); }} className="img-flip">
       <div className="fadeIn">
-        {active ? <i className="fas fa-play"></i>
-          : <i className="fas fa-music"></i>}
+        {active ? <i className="fas fa-play"></i> : <i className="fas fa-music"></i>}
       </div>
 
       <img

@@ -16,9 +16,6 @@
   max-height: 85px;
   width: 100%;
   object-fit: cover;
-  animation-name: imgScale;
-  animation-duration: 1s;
-  animation-fill-mode: both;
 }
 
 .card-body {
@@ -77,17 +74,6 @@
   z-index: 999;
 }
 
-
 .active-card {background-color: #243a45; color: #eeeeee;}
 .active-card h5 {color: #ffffff !important;}
 .active-card img {border: 2px solid #ffffff;}
-
-@keyframes imgScale {
-  0% {
-    transform: scale(0,0);
-  }
-
-  100% {
-    transform: scale(1,1);
-  }
-}
