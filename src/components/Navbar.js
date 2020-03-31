@@ -21,12 +21,13 @@ export default function Navbar ({ sender }) {
         <ul className="navbar-nav mr-auto"></ul>
 
         <form className="form-inline my-2 my-lg-0" onSubmit={onSearch}>
-          <input className="form-control mr-sm-2" type="search"
-            placeholder="Search" aria-label="Search"
-            onChange={(e) => { setQuery(e.target.value) }} value={query} />
-          <button className="btn btn-outline-light my-2 my-sm-0" type="submit">
-            <i className="fas fa-search"></i>
-          </button>
+          <input
+            className="form-control" type="text"
+            placeholder="Search"
+            onChange={(e) => { setQuery(e.target.value) }}
+            value={query}
+          />
+          <button type="submit"> <i className="fas fa-search"></i></button>
         </form>
 
       </div>

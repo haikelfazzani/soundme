@@ -30,7 +30,7 @@ function ListFavoriteTracks () {
         <div className="d-flex align-items-center w-75" onClick={() => { onClickTrackList(track, i); }}>
           <img src={track && track.artwork_url ? track.artwork_url : placeImg} alt="..." className="mr-2" />
           <div>
-          <h6 className="m-0 text-wrap">{track.title}</h6>
+          <h6 className="m-0 text-truncate">{track.title}</h6>
           <p className="m-0 text-wrap text-muted">@{track.user.username}</p>
           </div>
         </div>

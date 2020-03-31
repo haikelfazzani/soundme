@@ -26,7 +26,7 @@ export default function Card ({ track, active = false }) {
     <div onClick={() => { playTrack(track); }} className="img-flip">
       <div className="fadeIn">
         {active ? <i className="fas fa-play"></i>
-          : <img src={loadingImg} alt="loading" />}
+          : <i className="fas fa-music"></i>}
       </div>
 
       <img
@@ -38,22 +38,23 @@ export default function Card ({ track, active = false }) {
       />
     </div>
 
-    <div className="card-body d-flex justify-content-between">
-      <div className="w-90 d-flex">
-        <a href={state.currentTrackPlay.permalink_url} target="_blank" rel="noopener noreferrer">
-          <img src={track.user.avatar_url} className="mr-2" alt="..." />
-        </a>
-        <div>
-          <h5 className="card-title m-0">{track.title}</h5>
-          <p className="card-text m-0">@{track.user.username}</p>
+    <div className="card-body">
+      <img src={track.user.avatar_url} alt={track.title} />
+
+      <div className="card-details">
+        <h5 className="card-title m-0 text-truncate">{track.title}</h5>
+
+        <div className="w-100 d-flex justify-content-between align-items-center">
+          <p className="card-text m-0 text-muted text-truncate">@{track.user.username}</p>
+          <span onClick={() => { addToFavorite(track) }}>
+            <i className={state.favoriteTracks.find(t => t.id === track.id)
+              ? "fas fa-heart color-rose"
+              : "fas fa-heart text-muted"}>
+            </i>
+          </span>
         </div>
       </div>
-      <span onClick={() => { addToFavorite(track) }} className="w-10 d-flex justify-content-end">
-        <i className={state.favoriteTracks.find(t => t.id === track.id)
-          ? "fas fa-heart color-rose"
-          : "fas fa-heart"}>
-        </i>
-      </span>
+
     </div>
   </div>;
 }

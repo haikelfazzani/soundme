@@ -59,8 +59,7 @@ export default function Home () {
       </div>
     </div>
 
-    <div className="container py-5">
-
+    <div className="container py-4 mb-5">
       <div className="row">
         {tracks && tracks.length > 0
           ? tracks.map((track, i) => <div className="col-md-3 mb-3" key={track.id}>

@@ -1,4 +1,4 @@
-body {
+body {  
   background-color: rgb(245, 245, 245);
   overflow-x: hidden;
 }
@@ -17,7 +17,10 @@ a {text-decoration: none !important;}
   font-family: 'Sriracha';
 }
 
-.navbar input {min-width: 300px;}
+.form-inline {position: relative;}
+.form-inline input {min-width: 300px; height: 30px;}
+.form-inline button {color: #16a2ea; background-color: inherit; height: 30px; border: 0; line-height: 1;
+   position: absolute; right: 2px; outline: none !important;}
 
 .spinner-container {
   height: 100vh;

@@ -52,7 +52,7 @@ export default function PlayerControls ({ scPlayer, settings, setSettings, timeu
           : <i className="fas fa-undo-alt"></i>}
       </li>
 
-      <li> {timeFormat(timeupdate) + '/' + timeFormat(trackDuration)}</li>
+      <li className="fs-12"> {timeFormat(timeupdate) + '/' + timeFormat(trackDuration)}</li>
 
       <li>
         <input type="range"

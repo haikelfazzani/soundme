@@ -2,7 +2,7 @@
 🎧 listen to your favorite music from SoundCloud
 
 ### Capture
-![](https://i.ibb.co/WyPkFfw/soundme.png)
+![](https://i.ibb.co/Gvdf4Gy/soundme.png)
 
 ### Techs
 - React/Context API

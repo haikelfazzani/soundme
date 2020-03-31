@@ -98,7 +98,7 @@ function Player () {
         />
 
         <div className="py-2">
-          <h5 className="m-0 fs-14 w-75">{state.currentTrackPlay.title || '...'}</h5>
+          <h5 className="m-0 fs-14 w-75 text-truncate text-wrap">{state.currentTrackPlay.title || '...'}</h5>
           <p className="m-0 text-muted fs-12">
             {state.currentTrackPlay.user
               ? '@' + state.currentTrackPlay.user.username
