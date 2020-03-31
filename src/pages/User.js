@@ -11,6 +11,7 @@ import Spinner from '../components/Spinner';
 import formatNum from '../util/formatNum';
 
 import '../styles/User.css';
+import InlineCard from '../components/InlineCard';
 
 function User () {
 
@@ -28,8 +29,8 @@ function User () {
         setUserTracks(result.tracks);
         setUserProfiles(result.profiles);
       })
-      .catch(e => {})
-  }, []);
+      .catch(e => { })
+  }, [params.id]);
 
   return (<>
     {Object.keys(userInfos).length > 0
@@ -40,7 +41,7 @@ function User () {
             <div className="col-md-2 pr-2">
               <img
                 src={userInfos.avatar_url.replace('large.jpg', 't300x300.jpg')}
-                className="card-img"
+                className="card-img rounded-circle"
                 alt={userInfos.username}
                 style={{ maxWidth: '162px' }}
               />
@@ -64,11 +65,11 @@ function User () {
                   </div>
                 </div>
 
-                <p className="card-text fs-14 country mb-2">
+                {userInfos.country && <p className="card-text fs-14 country mb-2">
                   <small className="text-muted">
                     <i className="fas fa-street-view"></i> {userInfos.city}, {userInfos.country}
                   </small>
-                </p>
+                </p>}
 
                 <p className="card-text fs-14 user-desc mb-3">{userInfos.description}</p>
 
@@ -86,10 +87,8 @@ function User () {
         </div>
 
         <div className="row">
-          {userTracks.map((track, i) => <div className="col-md-3 mb-3" key={track.id}>
-            {state.currentTrackPlay.id === track.id
-              ? <Card track={track} />
-              : <Card track={track} active={true} />}
+          {userTracks.map((track, i) => <div className="col-md-4 mb-3" key={track.id}>
+            <InlineCard track={track} active={state.currentTrackPlay.id !== track.id} />            
           </div>)}
         </div>
 

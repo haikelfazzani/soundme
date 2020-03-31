@@ -1,0 +1,17 @@
+.card-inline {
+  position: relative;
+  padding-bottom: 0 !important;
+}
+
+.card-btn-add-fav {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.card-inline h5 {font-size: 16px !important;}
+
+.card-inline .card-footer {
+  background-color: inherit !important;
+  color: #6c757d!important;
+}

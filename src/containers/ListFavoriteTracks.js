@@ -45,4 +45,4 @@ function ListFavoriteTracks () {
   );
 }
 
-export default React.memo(ListFavoriteTracks);
+export default ListFavoriteTracks;

@@ -1,8 +1,9 @@
 import React, { useContext } from 'react';
-import '../styles/Card.css';
-import placeImg from '../img/1.png';
 import GlobalContext from '../providers/GlobalContext';
 import { Link } from 'react-router-dom';
+
+import '../styles/Card.css';
+import placeImg from '../img/1.png';
 
 export default function Card ({ track, active = false }) {
 
@@ -32,7 +33,7 @@ export default function Card ({ track, active = false }) {
           ? track.artwork_url.replace('large.jpg', 't300x300.jpg')
           : placeImg}
         className="img-header"
-        alt="..."
+        alt={track.title}
       />
     </div>
 
