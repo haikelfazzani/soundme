@@ -20,8 +20,6 @@ function User () {
   const [userTracks, setUserTracks] = useState([]);
   const [userProfiles, setUserProfiles] = useState([]);
 
-  const [trackSearch, setTrackSearch] = useState('');
-
   let params = useParams();
 
   useEffect(() => {
@@ -36,12 +34,10 @@ function User () {
   }, [params.id]);
 
   const onTrackFilter = (e) => {
-
-    let searchVal = e.target.value.toLowerCase().trim();
-    setTrackSearch(searchVal);
+    let searchVal = (e.target.value).toLowerCase().trim();
 
     let userLocal = JSON.parse(localStorage.getItem('sc-user-tracks'));
-    let filtredTrakcs = userLocal.filter(t => t.title.toLowerCase().includes(e.target.value));
+    let filtredTrakcs = userLocal.filter(t => t.title.toLowerCase().includes(searchVal));
     filtredTrakcs = filtredTrakcs.length > 0 ? filtredTrakcs : userLocal;
 
     setUserTracks(filtredTrakcs);
@@ -54,7 +50,7 @@ function User () {
         <div className="col-md-4">
 
           {Object.keys(userInfos).length > 0
-            ? <div className="card card-user mb-3">
+            ? <div className="card card-user mb-3 box-none">
 
               <img
                 src={userInfos.avatar_url.replace('large.jpg', 't500x500.jpg')}
@@ -115,8 +111,7 @@ function User () {
                 <input
                   type="search"
                   className="form-control"
-                  onChange={onTrackFilter}
-                  value={trackSearch}
+                  onKeyUp={onTrackFilter}
                   placeholder="Search and filter user tracks.."
                 />
               </div>

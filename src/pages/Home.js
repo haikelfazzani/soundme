@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { withRouter } from 'react-router-dom';
 import ScService from '../services/ScService';
 import GlobalContext from '../providers/GlobalContext';
 

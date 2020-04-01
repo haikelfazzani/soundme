@@ -106,6 +106,10 @@ footer {
   color: #E91E63 !important;
 }
 
+.color-gray {color: #dbdbdb!important;}
+
+.box-none {box-shadow: none !important;}
+
 .w-90 {
   width: 90% !important;
 }
