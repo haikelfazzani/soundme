@@ -1,15 +1,14 @@
 .player {
-  width: 340px;  
+  width: 310px;  
   color: #ffffff;
   position: fixed;
   bottom: 10px;
   right: 10px;
   display: flex;
-  flex-direction: column;
-  background-color:#152b38fa;
-  background: linear-gradient(0deg, rgba(17, 14, 31, .35), rgba(17, 14, 31, .35)),
-    linear-gradient(330deg, #2d0b6c -10%, #498ca3 46.3%, #d95749 110%);
-  padding: 15px;
+  background-color:#191c1d;
+  padding: 10px;
+  background-size: cover;
+  background-position: center;
   z-index: 9999;
 }
 
@@ -26,12 +25,7 @@
   color: #ffffff !important;
 }
 
-.player img {
-  max-width: 85px;
-  max-height: 85px;
-  object-fit: cover;
-}
-
+.player h5>a {letter-spacing: 1px; font-size: 16px !important; padding: 0 5px; color: #ffffff;}
 
 /* Controls */
 .player .controls {
@@ -85,7 +79,7 @@
   font-size: 12px !important;
   padding: 5px 0 !important;
   background-color: inherit;
-  border-bottom:1px solid #0d151a2f;
+  border-bottom:1px solid #2b4454;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -93,7 +87,7 @@
 }
 
 .list-traks-fav .list-group-item:hover {
-  background-color: rgba(5, 34, 49, 0.514);
+  background-color: rgba(253, 253, 253, 0.089);
 }
 
 .list-traks-fav .list-group-item h6 {font-size: 12px !important; font-weight: 100;}
@@ -101,7 +95,7 @@
 .list-traks-fav img {
   max-width: 50px !important;
   max-height: 50px !important;
-  border-radius: 0% !important;
+  border-radius: 50% !important;
   border: 0;
   object-fit: cover;
 }
@@ -114,7 +108,7 @@
 }
 
 .active-track {
-  background: #0000003b !important;
+  background: rgba(255, 255, 255, 0.144) !important;
 }
 
 /* headphones */

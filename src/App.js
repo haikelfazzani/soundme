@@ -24,10 +24,10 @@ export default function App () {
         <Route path="/user/:id" component={User} />
         <Redirect from="*" to="/" />
       </Switch>
+
+      <Player />
     </Router>
 
-    <Footer />
-
-    <Player />
+    <Footer />    
   </>);
 }
