@@ -1,8 +1,10 @@
 ### Soundme  
 🎧 listen to your favorite music from SoundCloud
 
-### Capture
+### Captures
 ![](https://i.ibb.co/Gvdf4Gy/soundme.png)
+
+![](https://i.ibb.co/PtYKbD7/soundme2.png)
 
 ### Techs
 - React/Context API
