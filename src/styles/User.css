@@ -1,19 +1,24 @@
-.user-infos,.country {
+.card-user {
+  padding: 15px;
+}
+
+.card-user li {
+  background-color: inherit!important;
+}
+
+.user-infos {
   text-transform: uppercase;
   font-weight: 100;
   font-size: 14px;
   letter-spacing: 1px;
+  border: 0 !important;
 }
 
-.ltsp {letter-spacing: 1px;}
+.country {
+  font-size: 14px !important;
+  letter-spacing: 1px;
+}
 
-.user-desc {
-
-    text-overflow: ellipsis;
-
-    display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 3;
-  overflow: hidden;
-height:65px;
+.ltsp {
+  letter-spacing: 1px;
 }

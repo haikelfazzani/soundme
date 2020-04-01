@@ -11,16 +11,16 @@ import Footer from './components/Footer';
 import './App.css';
 import './styles/Queries.css';
 import './styles/Animation.css';
+import Search from './pages/Search';
 
 export default function App () {
 
   return (<>
-    
-
     <Router>
-    <Navbar />
+      <Navbar />
       <Switch>
         <Route exact path="/" component={Home} />
+        <Route path="/search" component={Search} />
         <Route path="/user/:id" component={User} />
         <Redirect from="*" to="/" />
       </Switch>

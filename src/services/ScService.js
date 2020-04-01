@@ -13,39 +13,15 @@ export default class ScService {
   }
 
   static async getTracks (genre) {
-    let localGenre = this.getLocalGenreTracks(genre);
-    if (localGenre) {
-      return [];
-    }
-    else {
-      await this.initSc();
-      const tracks = await window.SC.get('/tracks', { genres: genre || 'rock', limit: 98 });
-      localStorage.setItem('sc-genre', genre);
-      return tracks;
-    }
+    await this.initSc();
+    const tracks = await window.SC.get('/tracks', { genres: genre || 'rock', limit: 98 });
+    return tracks;
   }
 
   static async searchQuery (query) {
-    let localQuery = localStorage.getItem('sc-search-query');
-    if (localQuery.trim() === query.trim()) {
-      return JSON.parse(localStorage.getItem('sc-search-query-tracks'));
-    }
-    else {
-      await this.initSc();
-      query = encodeURIComponent(query);
-      const tracks = await window.SC.get('/tracks', { q: query, limit: 98 });
-      localStorage.setItem('sc-search-query-tracks', JSON.stringify(tracks));
-      localStorage.setItem('sc-search-query', query);
-      return tracks;
-    }
-  }
-
-  /**
-   * Get Genre tracks from localStorage
-   * if the user click the same Genre section, data will be fetched from localStorage
-   */
-  static getLocalGenreTracks (genre) {
-    let localGenre = localStorage.getItem('sc-genre');
-    return localGenre && localGenre === genre;
+    await this.initSc();
+    query = encodeURIComponent(query);
+    const tracks = await window.SC.get('/tracks', { q: query, limit: 98 });
+    return tracks;
   }
 }

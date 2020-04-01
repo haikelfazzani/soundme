@@ -3,15 +3,15 @@ import GlobalContext from '../providers/GlobalContext';
 
 import { useParams, withRouter } from 'react-router-dom';
 import ScUserService from '../services/ScUserService';
-import Card from '../components/Card';
 
+import InlineCard from '../components/InlineCard';
 import Skeleton from '../components/Skeleton';
 import Spinner from '../components/Spinner';
 
 import formatNum from '../util/formatNum';
 
 import '../styles/User.css';
-import InlineCard from '../components/InlineCard';
+import SkeletonUser from '../components/SkeletonUser';
 
 function User () {
 
@@ -19,6 +19,8 @@ function User () {
   const [userInfos, setUserInfos] = useState({});
   const [userTracks, setUserTracks] = useState([]);
   const [userProfiles, setUserProfiles] = useState([]);
+
+  const [trackSearch, setTrackSearch] = useState('');
 
   let params = useParams();
 
@@ -28,76 +30,114 @@ function User () {
         setUserInfos(result.details);
         setUserTracks(result.tracks);
         setUserProfiles(result.profiles);
+        localStorage.setItem('sc-user-tracks', JSON.stringify(result.tracks));
       })
       .catch(e => { })
   }, [params.id]);
 
-  return (<>
-    {Object.keys(userInfos).length > 0
-      ? <div className="container py-3 min-vh-100">
-        <div className="card mb-3">
-          <div className="row no-gutters">
+  const onTrackFilter = (e) => {
 
-            <div className="col-md-2 pr-2">
+    let searchVal = e.target.value.toLowerCase().trim();
+    setTrackSearch(searchVal);
+
+    let userLocal = JSON.parse(localStorage.getItem('sc-user-tracks'));
+    let filtredTrakcs = userLocal.filter(t => t.title.toLowerCase().includes(e.target.value));
+    filtredTrakcs = filtredTrakcs.length > 0 ? filtredTrakcs : userLocal;
+
+    setUserTracks(filtredTrakcs);
+  }
+
+  return (
+    <div className="container py-3 min-vh-100">
+
+      <div className="row">
+        <div className="col-md-4">
+
+          {Object.keys(userInfos).length > 0
+            ? <div className="card card-user mb-3">
+
               <img
-                src={userInfos.avatar_url.replace('large.jpg', 't300x300.jpg')}
-                className="card-img rounded-circle"
+                src={userInfos.avatar_url.replace('large.jpg', 't500x500.jpg')}
+                className="card-img"
                 alt={userInfos.username}
-                style={{ maxWidth: '162px' }}
               />
-            </div>
 
-            <div className="col-md-10">
               <div className="card-body flex-column">
+                <ul className="list-group list-group-flush">
 
-                <div className="w-100 d-flex justify-content-between align-items-center">
-                  <h5 className="card-title fs-18 mb-0">
-                    {userInfos.username} <span><i className={"fas fa-circle fs-12 " + (userInfos.online ? 'text-sucess' : 'text-danger')}></i></span>
-                  </h5>
+                  <li className="list-group-item pr-0 pl-0">
+                    <h5 className="card-title fs-18 m-0">
+                      <span><i className={"fas fa-circle " + (userInfos.online ? 'text-sucess' : 'text-danger')}></i></span> {userInfos.username}
+                    </h5>
+                  </li>
 
-                  <div className="mb-2 user-infos">
-                    <span className="badge badge-primary mr-2"><i className="fas fa-volume-up"></i> {userInfos.track_count} tracks</span>
-                    <span className="badge badge-primary mr-2"><i className="fab fa-gratipay"></i> {userInfos.public_favorites_count} favorites</span>
-                    <span className="badge badge-primary mr-2"><i className="fas fa-users"></i> {userInfos.followings_count} followings</span>
-                    <span className="badge badge-primary mr-2">
-                      <i className="fas fa-user-friends"></i> {formatNum(userInfos.followers_count)} followers
-                      </span>
-                  </div>
-                </div>
+                  {userInfos.country && <li className="list-group-item pr-0 pl-0">
+                    <p className="card-text country m-0">
+                      <i className="fas fa-street-view"></i> {userInfos.city}, {userInfos.country}
+                    </p>
+                  </li>}
 
-                {userInfos.country && <p className="card-text fs-14 country mb-2">
-                  <small className="text-muted">
-                    <i className="fas fa-street-view"></i> {userInfos.city}, {userInfos.country}
-                  </small>
-                </p>}
+                  {userInfos.description && <li className="list-group-item pr-0 pl-0">
+                    <p className="card-text fs-14 m-0 text-dark">
+                      <i className="fas fa-info-circle"></i> {userInfos.description}</p>
+                  </li>}
 
-                <p className="card-text fs-14 user-desc mb-3">{userInfos.description}</p>
-
-                <div>
-                  {userProfiles.map(up => <a href={up.service} target="_blank" className="fs-10 mr-2 text-uppercase ltsp"
-                    rel="noopener noreferrer" key={up.id}>
-                    <i className="fas fa-external-link-square-alt"></i> {up.service}
-                  </a>)}
-                </div>
-
+                  {userProfiles.length > 0
+                    && userProfiles.map(up =>
+                      <li className="list-group-item pr-0 pl-0" key={up.id}>
+                        <a href={up.service} target="_blank"
+                          className="text-uppercase ltsp d-flex justify-content-between align-items-center text-dark text-decoration-none"
+                          rel="noopener noreferrer">
+                          <span><i className="fas fa-globe mr-1"></i> _{up.service}</span>
+                          <i className="fas fa-arrow-alt-circle-right"></i>
+                        </a>
+                      </li>)}
+                </ul>
               </div>
 
             </div>
-          </div>
+            : <SkeletonUser />}
         </div>
 
-        <div className="row">
-          {userTracks.map((track, i) => <div className="col-md-4 mb-3" key={track.id}>
-            <InlineCard track={track} active={state.currentTrackPlay.id !== track.id} />            
-          </div>)}
+
+        <div className="col-md-8">
+
+          {Object.keys(userInfos).length > 0
+            ? <>
+              <div className="mb-3 bg-dark d-flex justify-content-between">
+                <span className="btn btn-dark user-infos"><i className="fas fa-volume-up"></i> {userInfos.track_count} tracks</span>
+                <span className="btn btn-dark user-infos"><i className="fab fa-gratipay"></i> {userInfos.public_favorites_count} favorites</span>
+                <span className="btn btn-dark user-infos"><i className="fas fa-users"></i> {userInfos.followings_count} followings</span>
+                <span className="btn btn-dark user-infos"><i className="fas fa-user-friends"></i> {formatNum(userInfos.followers_count)} followers</span>
+              </div>
+
+              <div className="form-group">
+                <input
+                  type="search"
+                  className="form-control"
+                  onChange={onTrackFilter}
+                  value={trackSearch}
+                  placeholder="Search and filter user tracks.."
+                />
+              </div>
+
+              <div className="row">
+                {userTracks.map((track, i) => <div className="col-md-6 mb-3" key={track.id}>
+                  <InlineCard track={track} active={state.currentTrackPlay.id !== track.id} />
+                </div>)}
+              </div>
+
+            </>
+            : <>
+              <Skeleton />
+              <Spinner />
+            </>}
         </div>
 
       </div>
-      : <div className="container py-3 mb-5">
-        <Skeleton />
-        <Spinner />
-      </div>}
-  </>);
+
+    </div>
+  );
 }
 
 export default withRouter(User);

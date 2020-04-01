@@ -15,6 +15,10 @@ body {
   font-family: 'Sriracha';
 }
 
+input[type="search"] {border-radius: 0 !important;}
+
+.text-muted {color: #dbdbdb !important;}
+
 .form-inline {position: relative;}
 .form-inline input {min-width: 300px; height: 30px;}
 .form-inline button {color: #16a2ea; background-color: inherit; height: 30px; border: 0; line-height: 1;
@@ -57,6 +61,7 @@ footer {
   animation-fill-mode: both;
 }
 
+.btn {border-radius: 0;}
 
 @-webkit-keyframes fadeIn {
   0% {
@@ -95,6 +100,8 @@ footer {
   background: #16a2ea;
 }
 
+.btn-dark, .bg-dark {background-color: #243a45 !important;}
+
 .color-rose {
   color: #E91E63 !important;
 }
@@ -126,3 +133,5 @@ footer {
 .cp {
   cursor: pointer;
 }
+
+.lsp2 {letter-spacing: 2px;}

@@ -1,22 +1,12 @@
-import React, { useState, useContext } from 'react';
-import { Link, withRouter } from 'react-router-dom';
-import GlobalContext from '../providers/GlobalContext';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import FormSearch from '../containers/FormSearch';
 
-function Navbar (props) {
+export default function Navbar () {
 
-  const { state, setState } = useContext(GlobalContext);
-  const [query, setQuery] = useState('');
   const [showMenu, setShowMenu] = useState(false);
 
-  const onSearch = e => {
-    e.preventDefault();
-    setState({ ...state, searchQuery: query });
-    props.history.push("/");
-  }
-
-  const onDropMenu = () => {
-    setShowMenu(!showMenu);
-  }
+  const onDropMenu = () => { setShowMenu(!showMenu); }
 
   return <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
     <div className="container">
@@ -32,19 +22,9 @@ function Navbar (props) {
 
         <ul className="navbar-nav mr-auto"></ul>
 
-        <form className="form-inline my-2 my-lg-0" onSubmit={onSearch}>
-          <input
-            className="form-control" type="text"
-            placeholder="Search"
-            onChange={(e) => { setQuery(e.target.value) }}
-            value={query}
-          />
-          <button type="submit"> <i className="fas fa-search"></i></button>
-        </form>
+        <FormSearch />
 
       </div>
     </div>
   </nav>;
 }
-
-export default withRouter(Navbar)

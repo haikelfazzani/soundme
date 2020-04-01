@@ -2,17 +2,15 @@ import React, { useEffect, useState, useContext } from 'react';
 import { withRouter } from 'react-router-dom';
 import ScService from '../services/ScService';
 import GlobalContext from '../providers/GlobalContext';
-import Card from '../components/Card';
-import Spinner from '../components/Spinner';
 
 import '../styles/ListGenres.css';
-import Skeleton from '../components/Skeleton';
+import ListTracks from '../containers/ListTracks';
 
 const genres = ['Rock', 'Metal', 'Blues', 'Jazz', 'HipHop', 'Pop', 'Reggae',
   'Dubstep', 'EDM', 'Electronic', 'House', 'Trance', 'Piano'
 ];
 
-function Home () {
+export default function Home () {
 
   const { state, setState } = useContext(GlobalContext);
   const [tracks, setTracks] = useState([]);
@@ -23,17 +21,6 @@ function Home () {
       .then((result) => { setTracks(result); })
       .catch(e => { });
   }, []);
-
-  useEffect(() => {
-    ScService.searchQuery(state.searchQuery)
-      .then((result) => {
-        if (result && result.length > 0) {
-          setTracks([]);
-          setTimeout(() => { setTracks(result); }, 500);
-        }
-      })
-      .catch(e => { });
-  }, [state.searchQuery]);
 
   const onGenreSelect = (genre) => {
     ScService.getTracks(genre.toLowerCase())
@@ -51,7 +38,6 @@ function Home () {
   }
 
   return (<>
-
     <div className="list-genres">
       <div className="container">
         <ul className="overflow-auto">
@@ -61,21 +47,6 @@ function Home () {
       </div>
     </div>
 
-    <div className="container py-4 min-vh-100">
-      <div className="row">
-        {tracks && tracks.length > 0
-          ? tracks.map((track, i) => <div className="col-md-3 mb-3" key={track.id}>
-            {(state.currentTrackPlay && state.currentTrackPlay.id === track.id)
-              ? <Card track={track} />
-              : <Card track={track} active={true} />}
-          </div>)
-          : <>
-            <Skeleton />
-            <Spinner />
-          </>}
-      </div>
-    </div>
+    <ListTracks tracks={tracks} />
   </>);
 }
-
-export default withRouter(Home);

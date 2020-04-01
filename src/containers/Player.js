@@ -1,10 +1,9 @@
-import React, { useEffect, useContext, useState, useCallback } from 'react';
+import React, { useEffect, useContext, useState } from 'react';
 import GlobalContext from '../providers/GlobalContext';
 import '../styles/Player.css';
 
 import placeImg from '../img/1.png';
 import ListFavoriteTracks from '../containers/ListFavoriteTracks';
-import timeFormat from '../util/timeFormat';
 import PlayerControls from './PlayerControls';
 
 const placeImgWave = 'https://wave.sndcdn.com/uUGj1BxQeo90_m.png';
@@ -85,7 +84,7 @@ function Player () {
   }
 
   return <>
-    <div className="player pulseUpOut pb-0" style={{ display: !showPlayer ? 'flex' : 'none' }}>
+    <div className="player pulseUpOut" style={{ display: !showPlayer ? 'flex' : 'none' }}>
 
       <button className="btn-hide-player" onClick={onShowPlayer} data-toggle="tooltip" data-placement="top" title="Close player">
         <i className="fas fa-minus"></i>

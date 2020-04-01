@@ -7,17 +7,19 @@
   display: flex;
   flex-direction: column;
   background-color:#152b38fa;
-  border:7px solid #102430fa;
+  background: linear-gradient(0deg, rgba(17, 14, 31, .35), rgba(17, 14, 31, .35)),
+    linear-gradient(330deg, #2d0b6c -10%, #498ca3 46.3%, #d95749 110%);
+  padding: 15px;
   z-index: 9999;
 }
 
 .btn-hide-player {
   position: absolute;
-  right: -7px;
-  top:-32px;
-  background-color: inherit !important;
+  right: 0;
+  top:0;
+  background-color:  transparent;
   border: 0;
-  color: #cccccc !important;
+  color: #ececec !important;
 }
 
 .btn-hide-player:hover {
@@ -40,14 +42,11 @@
   display: flex;  
   justify-content: space-between;
   align-items: center;
-  background-image: linear-gradient(to bottom, #294150, #121e25);
-  border-top:4px solid #121e25;
-  border-bottom:4px solid #121e25;
 }
 
 .player .controls li {
   font-size: 16px;
-  padding: 3px 10px;
+  padding: 5px 0;
   color: #e7e7e7;
   border: 0;
 }
@@ -78,16 +77,15 @@
 /* list favorite tracks */
 .list-traks-fav {
   max-height: 260px;
-  border-top:4px solid #121e25;
+  margin-top: 10px;
   overflow: auto;
 }
 
 .list-traks-fav .list-group-item {
   font-size: 12px !important;
+  padding: 5px 0 !important;
   background-color: inherit;
-  padding: 0 10px 0 0 !important;
-  background-image: linear-gradient(to bottom, #243844, #12242e);
-  border-bottom:1px solid #0d151a;
+  border-bottom:1px solid #0d151a2f;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -116,7 +114,7 @@
 }
 
 .active-track {
-  background: #173446 !important;
+  background: #0000003b !important;
 }
 
 /* headphones */
