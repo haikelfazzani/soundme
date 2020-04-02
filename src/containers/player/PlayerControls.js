@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import timeFormat from '../util/timeFormat';
+import timeFormat from '../../util/timeFormat';
 
 export default function PlayerControls ({ scPlayer, settings, setSettings, timeupdate, trackDuration }) {
 

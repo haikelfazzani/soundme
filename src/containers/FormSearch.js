@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import GlobalContext from '../providers/GlobalContext';
 import { withRouter } from 'react-router-dom';
 
+// form search: navbar -> search for track by title
 function FormSearch (props) {
 
   const { state, setState } = useContext(GlobalContext);

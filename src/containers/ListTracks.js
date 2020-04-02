@@ -5,6 +5,7 @@ import Card from '../components/Card';
 import Skeleton from '../components/Skeleton';
 import Spinner from '../components/Spinner';
 
+// home page: list fetched tracks
 export default function ListTracks ({ tracks }) {
 
   const { state } = useContext(GlobalContext);

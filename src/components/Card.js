@@ -2,8 +2,10 @@ import React, { useContext } from 'react';
 import GlobalContext from '../providers/GlobalContext';
 import { Link } from 'react-router-dom';
 
+import Img from './Img';
+
 import '../styles/Card.css';
-import placeImg from '../img/1.png';
+import BtnAddToFav from './BtnAddToFav';
 
 export default function Card ({ track, active = false }) {
 
@@ -11,15 +13,7 @@ export default function Card ({ track, active = false }) {
 
   const playTrack = (track) => {
     setState({ ...state, currentTrackPlay: track });
-  }
-
-  const addToFavorite = (track) => {
-    let tracks = state.favoriteTracks;
-
-    if (!tracks.some(t => t.id === track.id)) {
-      setState({ ...state, favoriteTracks: [track, ...state.favoriteTracks] });
-    }
-  }
+  }  
 
   return <div className={active ? "card h-100" : "card h-100 active-card"}>
 
@@ -28,11 +22,9 @@ export default function Card ({ track, active = false }) {
         {active ? <i className="fas fa-play"></i> : <i className="fas fa-music"></i>}
       </div>
 
-      <img
-        src={track.artwork_url
-          ? track.artwork_url.replace('large.jpg', 't300x300.jpg')
-          : placeImg}
-        className="img-header"
+      <Img
+        src={track.artwork_url ? track.artwork_url.replace('large.jpg', 't300x300.jpg') : ''}
+        clx="img-header"
         alt={track.title}
       />
     </div>
@@ -49,12 +41,7 @@ export default function Card ({ track, active = false }) {
             @{track.user.username}
           </Link>
 
-          <span onClick={() => { addToFavorite(track) }}>
-            <i className={state.favoriteTracks.find(t => t.id === track.id)
-              ? "fas fa-heart color-orange"
-              : "fas fa-heart text-muted"}>
-            </i>
-          </span>
+          <BtnAddToFav clickedTrack={track} />
         </div>
       </div>
 

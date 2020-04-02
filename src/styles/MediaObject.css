@@ -10,11 +10,13 @@
   top: 0;
 }
 
-.card-inline h5 {font-size: 14px;
+.card-inline a {
+  font-size: 14px;
   color: #FF9800;
-  font-weight: 400;}
+  font-weight: 400;
+}
 
 .card-inline .card-footer {
   background-color: inherit !important;
-  color: #dbdbdb!important;
+  color: #dbdbdb !important;
 }

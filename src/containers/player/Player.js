@@ -1,9 +1,9 @@
 import React, { useEffect, useContext, useState } from 'react';
-import GlobalContext from '../providers/GlobalContext';
-import '../styles/Player.css';
+import GlobalContext from '../../providers/GlobalContext';
+import '../../styles/Player.css';
 
-import placeImg from '../img/1.png';
-import ListFavoriteTracks from '../containers/ListFavoriteTracks';
+import placeImg from '../../img/1.png';
+import ListFavoriteTracks from './ListFavoriteTracks';
 import PlayerControls from './PlayerControls';
 import { Link } from 'react-router-dom';
 
@@ -26,8 +26,6 @@ function Player () {
   const [settings, setSettings] = useState({ isPlaying: false, loop: false, isEnded: false });
 
   useEffect(() => {
-    scPlayer.src = state.currentTrackPlay.uri + API_KEY;
-
     function playTrack () {
       if (scPlayer.readyState >= 1) {
         scPlayer.play();
@@ -44,6 +42,7 @@ function Player () {
     }
 
     if (state.currentTrackPlay.id) {
+      scPlayer.src = state.currentTrackPlay.uri + API_KEY;
       scPlayer.addEventListener('loadedmetadata', playTrack, false);
       scPlayer.addEventListener('timeupdate', updateTime, false);
     }
@@ -55,13 +54,15 @@ function Player () {
   }, [state.currentTrackPlay.id]);
 
   useEffect(() => {
-    let imgUrl = '';
+    if (state.currentTrackPlay.id) {
+      let imgUrl = '';
 
-    imgUrl = state.currentTrackPlay.artwork_url
-      ? state.currentTrackPlay.artwork_url.replace('large.jpg', 't500x500.jpg')
-      : placeImg;
+      imgUrl = state.currentTrackPlay.artwork_url
+        ? state.currentTrackPlay.artwork_url.replace('large.jpg', 't500x500.jpg')
+        : placeImg;
 
-    setTrackImg(`linear-gradient(rgba(23, 27, 29, 0.8), rgba(18, 19, 20, 0.92)),url(${imgUrl})`)
+      setTrackImg(`linear-gradient(rgba(23, 27, 29, 0.8), rgba(18, 19, 20, 0.92)),url(${imgUrl})`);
+    }
   }, [state.currentTrackPlay.id]);
 
   useEffect(() => {
@@ -98,7 +99,7 @@ function Player () {
   }
 
   return <>
-    <div className="player pulseUpOut"
+    {Object.keys(state.currentTrackPlay).length > 2 && <div className="player pulseUpOut"
       style={{ display: !showPlayer ? 'flex' : 'none', backgroundImage: trackImg }}>
 
       <button className="btn-hide-player" onClick={onShowPlayer} data-toggle="tooltip" data-placement="top" title="Close player">
@@ -135,6 +136,8 @@ function Player () {
         <ListFavoriteTracks />
       </div>
     </div>
+
+    }
 
     <div className="headphones"
       style={{ display: showPlayer ? 'flex' : 'none' }}

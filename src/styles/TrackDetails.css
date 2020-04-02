@@ -1,0 +1,15 @@
+.comments ul {
+  max-height: 450px;
+  overflow: auto;
+}
+
+.comments li {
+  border-bottom: 1px solid #161616;
+  padding: 10px;
+}
+
+.comments li img {
+  width: 30px !important;
+  height: 30px !important;
+  object-fit: cover;
+}
