@@ -61,7 +61,7 @@ function Player () {
       ? state.currentTrackPlay.artwork_url.replace('large.jpg', 't500x500.jpg')
       : placeImg;
 
-    setTrackImg(`linear-gradient(rgba(45, 59, 66, 0.7), rgb(12, 54, 75)),url(${imgUrl})`)
+    setTrackImg(`linear-gradient(rgba(23, 27, 29, 0.8), rgba(18, 19, 20, 0.92)),url(${imgUrl})`)
   }, [state.currentTrackPlay.id]);
 
   useEffect(() => {

@@ -30,7 +30,7 @@ export default function Search (props) {
       <button className="btn btn-dark text-uppercase fs-12 lsp2 mr-0">
         <i className="fas fa-search fs-14"></i> Search results for
       </button>
-      <button className="btn btn-primary text-uppercase fs-12 lsp2 m-0">{query || 'Not found'}</button>
+      <button className="btn btn-warning text-uppercase fs-12 lsp2 m-0">{query || 'Not found'}</button>
     </div>
     <ListTracks tracks={tracks} />
   </>);

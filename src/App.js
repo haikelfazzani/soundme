@@ -8,10 +8,11 @@ import Player from './containers/Player';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 
-import './App.css';
+import './styles/App.css';
 import './styles/Queries.css';
 import './styles/Animation.css';
 import Search from './pages/Search';
+import TrackDetails from './pages/TrackDetails';
 
 export default function App () {
 
@@ -22,6 +23,7 @@ export default function App () {
         <Route exact path="/" component={Home} />
         <Route path="/search" component={Search} />
         <Route path="/user/:id" component={User} />
+        <Route path="/track/:id" component={TrackDetails} />
         <Redirect from="*" to="/" />
       </Switch>
 

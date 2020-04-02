@@ -1,7 +1,7 @@
 .list-genres {
   width: 100%;
-  background-color: white;
-  box-shadow: 0 0 10px #c0c0c0;
+  background-color: #222326;
+  box-shadow: 0 0 10px #000000;
   overflow: auto;
 }
 
@@ -15,18 +15,21 @@
   overflow: auto;
 }
 
-.list-genres li:first-child { border-left: 1px solid #dfdfdf !important;}
+.list-genres li:first-child { border-left: 1px solid #161616 !important;}
 
 .list-genres .list-group-item.active,
 .list-genres li {
   width: 100%;
   text-align: center;
-  border-right: 1px solid #dfdfdf !important;
+  background-color: inherit;
+  border-right: 1px solid #161616 !important;
   border: transparent;
   border-radius: 0;
   font-weight: 600;
 }
 
+.list-genres .list-group-item.active { background-color: #FF9800; }
+
 .list-genres li:hover {
-  background-color: #f0f0f0;
+  background-color: #121314;
 }

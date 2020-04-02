@@ -51,7 +51,7 @@ export default function Card ({ track, active = false }) {
 
           <span onClick={() => { addToFavorite(track) }}>
             <i className={state.favoriteTracks.find(t => t.id === track.id)
-              ? "fas fa-heart color-rose"
+              ? "fas fa-heart color-orange"
               : "fas fa-heart text-muted"}>
             </i>
           </span>

@@ -79,7 +79,7 @@
   font-size: 12px !important;
   padding: 5px 0 !important;
   background-color: inherit;
-  border-bottom:1px solid #2b4454;
+  border-bottom:1px solid #00000038;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -87,7 +87,7 @@
 }
 
 .list-traks-fav .list-group-item:hover {
-  background-color: rgba(253, 253, 253, 0.089);
+  background-color: rgba(255, 255, 255, 0.08);
 }
 
 .list-traks-fav .list-group-item h6 {font-size: 12px !important; font-weight: 100;}

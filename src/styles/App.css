@@ -1,27 +1,35 @@
 body {  
-  background-color: rgb(245, 245, 245);
+  background-color: #121314;
+  color: #ffffff;
   overflow-x: hidden;
 }
 
 .navbar {
-  background-color: #38383a !important;
-  background: linear-gradient(to right bottom, rgb(32, 60, 74), rgb(52, 60, 64) 50%, rgb(1, 52, 78) 100%);
-  border-bottom: 4px solid #16a2ea;
+ border-bottom: 4px solid #FF9800;
   padding: 10px 0;
 }
 
 .navbar-brand {
-  color: #16a2ea !important;
+  color: #FF9800 !important;
   font-family: 'Sriracha';
 }
 
-input[type="search"] {border-radius: 0 !important;}
+input[type="search"] { 
+  background-color: inherit;
+  color: #FF9800 !important;     
+  padding: 12px; 
+  width: 100%; 
+  border: 0;  
+  outline: none !important;
+}
 
-.text-muted {color: #8e8e8e  !important;}
+.text-muted {color: #cacaca  !important;}
+
+.text-dark {color: #adadad !important;}
 
 .form-inline {position: relative;}
 .form-inline input {min-width: 300px; height: 30px;}
-.form-inline button {color: #16a2ea; background-color: inherit; height: 30px; border: 0; line-height: 1;
+.form-inline button {color: #FF9800; background-color: inherit; height: 30px; border: 0; line-height: 1;
    position: absolute; right: 2px; outline: none !important;}
 
 .spinner-container {
@@ -44,9 +52,7 @@ input[type="search"] {border-radius: 0 !important;}
 
 footer {
   width: 100%;
-  background-color: #38383a !important;
-  background: linear-gradient(to right bottom, rgb(32, 60, 74), rgb(52, 60, 64) 50%, rgb(1, 52, 78) 100%);
-  border-top: 1px solid #38383a;
+  border-top: 1px solid #000000;
   font-size: 12px;
   text-align: center;
   text-transform: uppercase;
@@ -89,26 +95,29 @@ footer {
 }
 
 ::-webkit-scrollbar-track {
-  background: #121e25;
+  background: #121314;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #1b2e38ee;
+  background: #1d1d1d;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #16a2ea;
+  background: #FF9800;
 }
 
-.btn-dark, .bg-dark {background-color: #243a45 !important;}
-
-.color-rose {
-  color: #007bff !important;
+.btn-dark, .bg-dark {background-color: #1d1d1d !important;}
+.bg-orange {background-color: #FF9800 !important;}
+.color-orange {
+  color: #FF9800 !important;
 }
 
 .color-gray {color: #dbdbdb!important;}
 
 .box-none {box-shadow: none !important;}
+
+.border-none {border: 0 !important;}
+.bg-inherit {background-color: inherit !important;}
 
 .w-90 {
   width: 90% !important;
