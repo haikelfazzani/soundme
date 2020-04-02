@@ -17,7 +17,7 @@ body {
 
 input[type="search"] {border-radius: 0 !important;}
 
-.text-muted {color: #dbdbdb !important;}
+.text-muted {color: #8e8e8e  !important;}
 
 .form-inline {position: relative;}
 .form-inline input {min-width: 300px; height: 30px;}
@@ -103,7 +103,7 @@ footer {
 .btn-dark, .bg-dark {background-color: #243a45 !important;}
 
 .color-rose {
-  color: #E91E63 !important;
+  color: #007bff !important;
 }
 
 .color-gray {color: #dbdbdb!important;}

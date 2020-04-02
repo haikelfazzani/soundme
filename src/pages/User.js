@@ -47,7 +47,7 @@ function User () {
     <div className="container py-3 min-vh-100">
 
       <div className="row">
-        <div className="col-md-4">
+        <div className="col-md-3">
 
           {Object.keys(userInfos).length > 0
             ? <div className="card card-user mb-3 box-none">
@@ -96,15 +96,15 @@ function User () {
         </div>
 
 
-        <div className="col-md-8">
+        <div className="col-md-9">
 
           {Object.keys(userInfos).length > 0
             ? <>
-              <div className="mb-3 bg-dark d-flex justify-content-between">
-                <span className="btn btn-dark user-infos"><i className="fas fa-volume-up"></i> {userInfos.track_count} tracks</span>
-                <span className="btn btn-dark user-infos"><i className="fab fa-gratipay"></i> {userInfos.public_favorites_count} favorites</span>
-                <span className="btn btn-dark user-infos"><i className="fas fa-users"></i> {userInfos.followings_count} followings</span>
-                <span className="btn btn-dark user-infos"><i className="fas fa-user-friends"></i> {formatNum(userInfos.followers_count)} followers</span>
+              <div className="mb-3 bg-primary d-flex justify-content-between">
+                <span className="btn btn-primary user-infos"><i className="fas fa-volume-up"></i> {userInfos.track_count} tracks</span>
+                <span className="btn btn-primary user-infos"><i className="fab fa-gratipay"></i> {userInfos.public_favorites_count} favorites</span>
+                <span className="btn btn-primary user-infos"><i className="fas fa-users"></i> {userInfos.followings_count} followings</span>
+                <span className="btn btn-primary user-infos"><i className="fas fa-user-friends"></i> {formatNum(userInfos.followers_count)} followers</span>
               </div>
 
               <div className="form-group">
@@ -117,7 +117,7 @@ function User () {
               </div>
 
               <div className="row">
-                {userTracks.map((track, i) => <div className="col-md-6 mb-3" key={track.id}>
+                {userTracks.map((track, i) => <div className="col-md-4 mb-3" key={track.id}>
                   <InlineCard track={track} active={state.currentTrackPlay.id !== track.id} />
                 </div>)}
               </div>

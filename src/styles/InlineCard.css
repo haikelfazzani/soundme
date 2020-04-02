@@ -1,6 +1,7 @@
 .card-inline {
   position: relative;
   padding-bottom: 0 !important;
+  justify-content: space-between;
 }
 
 .card-btn-add-fav {

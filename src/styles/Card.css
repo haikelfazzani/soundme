@@ -55,7 +55,6 @@
   align-items: center;
 }
 
-
 .img-flip {
   position: relative;
 }
@@ -74,22 +73,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #ffffff;
-  background-color: rgba(0, 0, 0, 0.767);
+  color: #007bff;
+  background-color: #1c1d25cc;
   z-index: 999;
 }
 
-.active-card {
-  background-color: #007bff;
-  color: #ffffff !important;
-  background: linear-gradient(0deg, rgba(17, 14, 31, .35), rgba(17, 14, 31, .35)),
-    linear-gradient(330deg, #2d0b6c -10%, #498ca3 46.3%, #d95749 110%);
-}
-
-.active-card h5 {
-  color: #ffffff !important;
-}
-
-.active-card img {
-  border: 2px solid #ffffff;
+.active-card,.active-card img {
+  border: 1px solid;
+  border-color: #007bff;
 }
