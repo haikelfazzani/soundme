@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import ScService from '../services/ScService';
 import ListTracks from '../containers/ListTracks';
+import ListGenres from '../containers/ListGenres';
 
 export default function Search (props) {
 
@@ -26,11 +27,12 @@ export default function Search (props) {
   }, [props.location.search]);
 
   return (<>
+    <ListGenres />
     <div className="container mt-4 mb-0">
-      <button className="btn btn-dark text-uppercase fs-12 lsp2 mr-0">
+      <div className="btn btn-dark text-uppercase fs-12 lsp2 mr-0">
         <i className="fas fa-search fs-14"></i> Search results for
-      </button>
-      <button className="btn btn-warning text-uppercase fs-12 lsp2 m-0">{query || 'Not found'}</button>
+      </div>
+      <div className="btn btn-warning text-uppercase fs-12 lsp2 m-0">{query || 'Not found'}</div>
     </div>
     <ListTracks tracks={tracks} />
   </>);

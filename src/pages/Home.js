@@ -4,48 +4,29 @@ import GlobalContext from '../providers/GlobalContext';
 
 import '../styles/ListGenres.css';
 import ListTracks from '../containers/ListTracks';
-
-const genres = ['Rock', 'Metal', 'Blues', 'Jazz', 'HipHop', 'Pop', 'Reggae',
-  'Dubstep', 'EDM', 'Electronic', 'House', 'Trance', 'Piano'
-];
+import ListGenres from '../containers/ListGenres';
 
 export default function Home () {
 
-  const { state, setState } = useContext(GlobalContext);
+  const { state } = useContext(GlobalContext);
   const [tracks, setTracks] = useState([]);
-  const [activeGenre, setActiveGenre] = useState(state.activeGenre);
+
 
   useEffect(() => {
-    ScService.getTracks(activeGenre)
-      .then((result) => { setTracks(result); })
-      .catch(e => { });
-  }, []);
-
-  const onGenreSelect = (genre) => {
-    ScService.getTracks(genre.toLowerCase())
+    ScService.getTracks(state.activeGenre)
       .then((result) => {
-        if (result.length > 0) {
+        if (result && result.length > 0) {
           setTracks([]);
-          setTimeout(() => {
-            setTracks(result);
-            setActiveGenre(genre);
-            setState({ ...state, activeGenre: genre });
-          }, 500);
+          setTimeout(() => { setTracks(result); }, 500);
         }
       })
       .catch(e => { });
-  }
+  }, [state.activeGenre]);
+
+
 
   return (<>
-    <div className="list-genres">
-      <div className="container">
-        <ul className="overflow-auto">
-          {genres.map(g => <li className={"list-group-item cp fs-12 text-uppercase " + (activeGenre === g ? "active" : "")}
-            key={g} onClick={() => { onGenreSelect(g) }}>{g}</li>)}
-        </ul>
-      </div>
-    </div>
-
+    <ListGenres />
     <ListTracks tracks={tracks} />
   </>);
 }
