@@ -1,23 +1,20 @@
-import React, { useContext } from 'react';
-import GlobalContext from '../providers/GlobalContext';
+import React from 'react';
+import { useStoreActions } from 'easy-peasy';
 import { Link } from 'react-router-dom';
+
+import BtnAddToFav from './BtnAddToFav';
+
+import '../styles/Card.css';
 
 import Img from './Img';
 
-import '../styles/Card.css';
-import BtnAddToFav from './BtnAddToFav';
-
 export default function Card ({ track, active = false }) {
 
-  const { state, setState } = useContext(GlobalContext);
-
-  const playTrack = (track) => {
-    setState({ ...state, currentTrackPlay: track });
-  }  
+  const setCurrentTrackPlay = useStoreActions(actions => actions.setCurrentTrackPlay);
 
   return <div className={active ? "card h-100" : "card h-100 active-card"}>
 
-    <div onClick={() => { playTrack(track); }} className="img-flip">
+    <div onClick={() => {setCurrentTrackPlay(track); }} className="img-flip">
       <div className="fadeIn">
         {active ? <i className="fas fa-play"></i> : <i className="fas fa-music"></i>}
       </div>

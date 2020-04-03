@@ -1,6 +1,6 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import GlobalContext from '../../providers/GlobalContext';
+import { useStoreActions } from 'easy-peasy';
 
 import Img from '../../components/Img';
 import BtnAddToFav from '../../components/BtnAddToFav';
@@ -13,10 +13,10 @@ import '../../styles/MediaObject.css';
 // Page User: MediaObject for track list 
 export default function MediaObject ({ track, active }) {
 
-  const { state, setState } = useContext(GlobalContext);
+  const setCurrentTrackPlay = useStoreActions(actions => actions.setCurrentTrackPlay);
 
   const playTrack = (track) => {
-    setState({ ...state, currentTrackPlay: track });
+    setCurrentTrackPlay(track);
   }
 
   return (

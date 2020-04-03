@@ -1,6 +1,5 @@
-import React, { useEffect, useState, useContext } from 'react';
-import ScService from '../services/ScService';
-import GlobalContext from '../providers/GlobalContext';
+import React, { useEffect, useState } from 'react';
+import { useStoreState, useStoreActions } from 'easy-peasy';
 
 import '../styles/ListGenres.css';
 import ListTracks from '../containers/ListTracks';
@@ -8,20 +7,26 @@ import ListGenres from '../containers/ListGenres';
 
 export default function Home () {
 
-  const { state } = useContext(GlobalContext);
+  const activeGenre = useStoreState(state => state.activeGenre);
+  const getTracksByGenre = useStoreActions(actions => actions.getTracksByGenre);
+
   const [tracks, setTracks] = useState([]);
 
 
   useEffect(() => {
-    ScService.getTracks(state.activeGenre)
-      .then((result) => {
+    getTracksByGenre(activeGenre)
+      .then(result => {
         if (result && result.length > 0) {
           setTracks([]);
           setTimeout(() => { setTracks(result); }, 500);
+          localStorage.setItem('sc-tracks', JSON.stringify(result));
         }
       })
-      .catch(e => { });
-  }, [state.activeGenre]);
+      .catch(e => {
+        let t = JSON.parse(localStorage.getItem('sc-tracks'));
+        setTracks(t);
+       });
+  }, [activeGenre]);
 
 
 

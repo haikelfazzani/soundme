@@ -1,11 +1,13 @@
-import React, { useEffect, useContext, useState } from 'react';
-import GlobalContext from '../../providers/GlobalContext';
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { useStoreState, useStoreActions } from 'easy-peasy';
+
+import ListFavoriteTracks from './ListFavoriteTracks';
+import PlayerControls from './PlayerControls';
+
 import '../../styles/Player.css';
 
 import placeImg from '../../img/1.png';
-import ListFavoriteTracks from './ListFavoriteTracks';
-import PlayerControls from './PlayerControls';
-import { Link } from 'react-router-dom';
 
 const placeImgWave = 'https://wave.sndcdn.com/uUGj1BxQeo90_m.png';
 
@@ -14,7 +16,8 @@ let scPlayer = new window.Audio();
 
 function Player () {
 
-  const { state, setState } = useContext(GlobalContext);
+  const { currentTrackPlay, currentTrackIndex, favoriteTracks } = useStoreState(state => state);
+  const { setCurrentTrackPlay, setCurrentTrackPlayIndx } = useStoreActions(actions => actions);
 
   const [trackDuration, setTrackDuration] = useState(0);
   const [timeupdate, setTimeUpdate] = useState(0);
@@ -41,8 +44,8 @@ function Player () {
       }
     }
 
-    if (state.currentTrackPlay.id) {
-      scPlayer.src = state.currentTrackPlay.uri + API_KEY;
+    if (currentTrackPlay.id) {
+      scPlayer.src = currentTrackPlay.uri + API_KEY;
       scPlayer.addEventListener('loadedmetadata', playTrack, false);
       scPlayer.addEventListener('timeupdate', updateTime, false);
     }
@@ -51,37 +54,32 @@ function Player () {
       scPlayer.removeEventListener('loadedmetadata', playTrack);
       scPlayer.removeEventListener('timeupdate', updateTime);
     }
-  }, [state.currentTrackPlay.id]);
+  }, [currentTrackPlay.id]);
 
   useEffect(() => {
-    if (state.currentTrackPlay.id) {
+    if (currentTrackPlay.id) {
       let imgUrl = '';
 
-      imgUrl = state.currentTrackPlay.artwork_url
-        ? state.currentTrackPlay.artwork_url.replace('large.jpg', 't500x500.jpg')
+      imgUrl = currentTrackPlay.artwork_url
+        ? currentTrackPlay.artwork_url.replace('large.jpg', 't500x500.jpg')
         : placeImg;
 
       setTrackImg(`linear-gradient(rgba(23, 27, 29, 0.8), rgba(18, 19, 20, 0.92)),url(${imgUrl})`);
     }
-  }, [state.currentTrackPlay.id]);
+  }, [currentTrackPlay.id]);
 
   useEffect(() => {
-    if (state.favoriteTracks.length > 0) {
+    if (favoriteTracks.length > 0) {
       if (settings.isEnded && !settings.loop) {
 
-        if (state.currentTrackIndex < state.favoriteTracks.length - 1) {
-          setState({
-            ...state,
-            currentTrackPlay: state.favoriteTracks[state.currentTrackIndex + 1],
-            currentTrackIndex: state.currentTrackIndex + 1
-          });
+        if (currentTrackIndex < favoriteTracks.length - 1) {
+          let ctx = currentTrackIndex + 1;
+          setCurrentTrackPlay(favoriteTracks[ctx]);
+          setCurrentTrackPlayIndx(ctx);
         }
         else {
-          setState({
-            ...state,
-            currentTrackPlay: state.favoriteTracks[0],
-            currentTrackIndex: 0
-          });
+          setCurrentTrackPlay(favoriteTracks[0]);
+          setCurrentTrackPlayIndx(0);
         }
         setSettings({ ...settings, isEnded: false });
       }
@@ -99,7 +97,7 @@ function Player () {
   }
 
   return <>
-    {Object.keys(state.currentTrackPlay).length > 2 && <div className="player pulseUpOut"
+    {Object.keys(currentTrackPlay).length > 2 && <div className="player pulseUpOut"
       style={{ display: !showPlayer ? 'flex' : 'none', backgroundImage: trackImg }}>
 
       <button className="btn-hide-player" onClick={onShowPlayer} data-toggle="tooltip" data-placement="top" title="Close player">
@@ -110,11 +108,11 @@ function Player () {
 
         <div className="w-100 text-center py-2">
           <h5 className="m-0 text-wrap">
-            <Link to={'/user/' + state.currentTrackPlay.user.id}>
-              {state.currentTrackPlay.title || '...'}
+            <Link to={'/user/' + currentTrackPlay.user.id}>
+              {currentTrackPlay.title || '...'}
             </Link>
           </h5>
-          <p className="m-0 text-muted fs-12">{state.currentTrackPlay.genre}</p>
+          <p className="m-0 text-muted fs-12">{currentTrackPlay.genre}</p>
         </div>
 
         {scPlayer && <PlayerControls
@@ -127,8 +125,8 @@ function Player () {
 
         <div className="wave_url" onMouseDown={onSeek}>
           <img
-            src={state.currentTrackPlay.waveform_url || placeImgWave}
-            alt={state.currentTrackPlay.title || '...'}
+            src={currentTrackPlay.waveform_url || placeImgWave}
+            alt={currentTrackPlay.title || '...'}
           />
           <div style={{ width: ((timeupdate * 100 / trackDuration) || 0) + '%' }}></div>
         </div>

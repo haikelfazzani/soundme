@@ -1,29 +1,26 @@
-import React, { useContext } from 'react';
-import GlobalContext from '../../providers/GlobalContext';
+import React from 'react';
+import { useStoreState, useStoreActions } from 'easy-peasy';
 import timeFormat from '../../util/timeFormat';
 import Img from '../../components/Img';
 
 function ListFavoriteTracks () {
 
-  const { state, setState } = useContext(GlobalContext);
+  const { currentTrackPlay, favoriteTracks } = useStoreState(state => state);
+  const {
+    setCurrentTrackPlay,
+    setCurrentTrackPlayIndx,
+    removeTrackFromFavorite
+  } = useStoreActions(actions => actions);
 
   const onClickTrackList = (track, trackIndex) => {
-    setState({
-      ...state,
-      currentTrackPlay: track,
-      currentTrackIndex: trackIndex
-    });
-  }
-
-  const rmFavoriteTrack = (trackId) => {
-    let newList = state.favoriteTracks.filter(t => t.id !== trackId);
-    setState({ ...state, favoriteTracks: newList });
+    setCurrentTrackPlay(track);
+    setCurrentTrackPlayIndx(trackIndex);
   }
 
   return (
     <ul className="list-group list-group-flush list-traks-fav">
-      {state.favoriteTracks.map((track, i) => <li key={track.id} className={
-        state.currentTrackPlay.id !== track.id
+      {favoriteTracks.map((track, i) => <li key={track.id} className={
+        currentTrackPlay.id !== track.id
           ? "list-group-item pr-2"
           : "list-group-item active-track pr-2"}>
 
@@ -43,7 +40,7 @@ function ListFavoriteTracks () {
 
         <div className="w-25 d-flex justify-content-end">
           <span className="fs-12 mr-2">{timeFormat(track.duration / 1000)}</span>
-          <span className="badge fs-12" onClick={() => { rmFavoriteTrack(track.id) }}>X</span>
+          <span className="badge fs-12" onClick={() => { removeTrackFromFavorite(track.id); }}>X</span>
         </div>
 
       </li>)}

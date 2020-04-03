@@ -22,8 +22,10 @@ export default function App () {
       <Switch>
         <Route exact path="/" component={Home} />
         <Route path="/search" component={Search} />
+        
         <Route path="/user/:id" component={User} />
         <Route path="/track/:id" component={Track} />
+        
         <Redirect from="*" to="/" />
       </Switch>
 

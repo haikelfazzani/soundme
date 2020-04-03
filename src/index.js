@@ -1,13 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { StoreProvider ,createStore } from 'easy-peasy';
+import ScModel from './providers/ScModel';
+
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import GlobalProvider from './providers/GlobalProvider';
+
+const store = createStore(ScModel);
 
 ReactDOM.render(
-  <GlobalProvider>
+  <StoreProvider store={store}>
     <App />
-  </GlobalProvider>,
+  </StoreProvider>,
   document.getElementById('root')
 );
 

@@ -1,5 +1,5 @@
-import React, { useContext, useState } from 'react';
-import GlobalContext from '../providers/GlobalContext';
+import React from 'react';
+import { useStoreState,useStoreActions  } from 'easy-peasy';
 import { withRouter } from 'react-router-dom';
 
 const genres = ['Rock', 'Metal', 'Blues', 'Jazz', 'HipHop', 'Pop', 'Reggae',
@@ -8,13 +8,11 @@ const genres = ['Rock', 'Metal', 'Blues', 'Jazz', 'HipHop', 'Pop', 'Reggae',
 
 function ListGenres (props) {
 
-  const { state, setState } = useContext(GlobalContext);
-  const [activeGenre, setActiveGenre] = useState(state.activeGenre);
+  const activeGenre = useStoreState(state => state.activeGenre);
+  const setGenre = useStoreActions(actions => actions.setGenre);
 
   const onGenreSelect = (genre) => {
-    setActiveGenre(genre);
-    setState({ ...state, activeGenre: genre });
-    
+    setGenre(genre);
     if (props.location.pathname !== '/') {
       props.history.push('/');
     }

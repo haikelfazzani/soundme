@@ -1,17 +1,17 @@
-import React, { useState, useContext } from 'react';
-import GlobalContext from '../providers/GlobalContext';
+import React, { useState } from 'react';
 import { withRouter } from 'react-router-dom';
+import { useStoreActions } from 'easy-peasy';
 
 // form search: navbar -> search for track by title
 function FormSearch (props) {
 
-  const { state, setState } = useContext(GlobalContext);
   const [query, setQuery] = useState('');
+  const setSearchQuery = useStoreActions(actions => actions.setSearchQuery);
 
   const onSearch = e => {
     e.preventDefault();
     if (query && query.length > 0) {
-      setState({ ...state, searchQuery: query });
+      setSearchQuery(query);
       props.history.push("/search?q=" + query);
     }
   }

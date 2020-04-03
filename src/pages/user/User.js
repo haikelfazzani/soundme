@@ -1,7 +1,6 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams, withRouter } from 'react-router-dom';
-import GlobalContext from '../../providers/GlobalContext';
-
+import { useStoreState } from 'easy-peasy';
 import ScUserService from '../../services/ScUserService';
 
 import CardUser from './CardUser';
@@ -17,7 +16,7 @@ import '../../styles/User.css';
 
 function User () {
 
-  const { state } = useContext(GlobalContext);
+  const currentTrackPlay = useStoreState(state => state.currentTrackPlay);
   const [user, setUser] = useState({ infos: [], tracks: [], profiles: [] });
 
   let params = useParams();
@@ -75,7 +74,7 @@ function User () {
             {Object.keys(user.infos).length > 0
               ? <div className="row">
                 {user.tracks.map((track, i) => <div className="col-md-4 mb-3" key={track.id}>
-                  <MediaObject track={track} active={state.currentTrackPlay.id !== track.id} />
+                  <MediaObject track={track} active={currentTrackPlay.id !== track.id} />
                 </div>)}
               </div>
               : <><Skeleton /><Spinner /></>}
