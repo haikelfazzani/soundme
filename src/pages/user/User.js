@@ -4,7 +4,6 @@ import { useStoreState } from 'easy-peasy';
 import ScUserService from '../../services/ScUserService';
 
 import CardUser from './CardUser';
-import MediaObject from './MediaObject';
 
 import Spinner from '../../components/Spinner';
 import Skeleton from '../../components/Skeleton';
@@ -13,6 +12,8 @@ import SkeletonUser from '../../components/SkeletonUser';
 import formatNum from '../../util/formatNum';
 
 import '../../styles/User.css';
+import Card from '../../components/Card';
+import Header from './Header';
 
 function User () {
 
@@ -24,7 +25,7 @@ function User () {
   useEffect(() => {
     ScUserService.getInfosAndTracks(params.id)
       .then(result => {
-        setUser({ infos: result.details, tracks: result.tracks, profiles: result.profiles });
+        setUser({ infos: result.infos, tracks: result.tracks, profiles: result.profiles });
         localStorage.setItem('sc-user-tracks', JSON.stringify(result.tracks));
       })
       .catch(e => { })
@@ -42,23 +43,15 @@ function User () {
 
   return (
     <>
-      <div className="list-genres">
-        <div className="container">
-          <ul className="overflow-auto">
-            <li className="list-group-item cp fs-12 text-uppercase"><i className="fas fa-volume-up"></i> {user.infos.track_count} tracks</li>
-            <li className="list-group-item cp fs-12 text-uppercase"><i className="fab fa-gratipay"></i> {user.infos.public_favorites_count} favorites</li>
-            <li className="list-group-item cp fs-12 text-uppercase"><i className="fas fa-users"></i> {user.infos.followings_count} followings</li>
-            <li className="list-group-item cp fs-12 text-uppercase"><i className="fas fa-user-friends"></i> {formatNum(user.infos.followers_count)} followers</li>
-            <li className="list-group-item cp fs-12 text-uppercase p-0">
-              <input
-                type="search"
-                onKeyUp={onTrackFilter}
-                placeholder="Filter tracks.."
-              />
-            </li>
-          </ul>
-        </div>
-      </div>
+      <Header user={user}>
+        <li className="list-group-item cp fs-12 text-uppercase p-0">
+          <input
+            type="search"
+            onKeyUp={onTrackFilter}
+            placeholder="Filter tracks.."
+          />
+        </li>
+      </Header>
 
       <div className="container py-3 min-vh-100">
 
@@ -74,7 +67,7 @@ function User () {
             {Object.keys(user.infos).length > 0
               ? <div className="row">
                 {user.tracks.map((track, i) => <div className="col-md-4 mb-3" key={track.id}>
-                  <MediaObject track={track} active={currentTrackPlay.id !== track.id} />
+                  <Card track={track} active={currentTrackPlay.id !== track.id} />
                 </div>)}
               </div>
               : <><Skeleton /><Spinner /></>}

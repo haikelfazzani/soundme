@@ -4,6 +4,8 @@ body {
   overflow-x: hidden;
 }
 
+ul {list-style: none !important;}
+
 .navbar {
  border-bottom: 4px solid #FF9800;
   padding: 10px 0;

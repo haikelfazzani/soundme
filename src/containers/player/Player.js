@@ -70,16 +70,16 @@ function Player () {
 
   useEffect(() => {
     if (favoriteTracks.length > 0) {
+      let cti = 0;
       if (settings.isEnded && !settings.loop) {
-
-        if (currentTrackIndex < favoriteTracks.length - 1) {
-          let ctx = currentTrackIndex + 1;
-          setCurrentTrackPlay(favoriteTracks[ctx]);
-          setCurrentTrackPlayIndx(ctx);
+        if (currentTrackIndex < favoriteTracks.length - 1) { 
+          cti = currentTrackIndex + 1;         
+          setCurrentTrackPlay(favoriteTracks[cti]);
+          setCurrentTrackPlayIndx(cti);
         }
         else {
-          setCurrentTrackPlay(favoriteTracks[0]);
-          setCurrentTrackPlayIndx(0);
+          setCurrentTrackPlay(favoriteTracks[cti]);
+          setCurrentTrackPlayIndx(cti);
         }
         setSettings({ ...settings, isEnded: false });
       }

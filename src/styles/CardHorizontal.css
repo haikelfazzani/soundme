@@ -1,0 +1,5 @@
+.card-horizontal img {
+  width: 110px !important;
+  height: 70px !important;
+  object-fit: cover;
+}

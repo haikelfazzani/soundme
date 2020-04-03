@@ -7,6 +7,7 @@ import BtnAddToFav from './BtnAddToFav';
 import '../styles/Card.css';
 
 import Img from './Img';
+import formatNum from '../util/formatNum';
 
 export default function Card ({ track, active = false }) {
 
@@ -14,7 +15,7 @@ export default function Card ({ track, active = false }) {
 
   return <div className={active ? "card h-100" : "card h-100 active-card"}>
 
-    <div onClick={() => {setCurrentTrackPlay(track); }} className="img-flip">
+    <div onClick={() => { setCurrentTrackPlay(track); }} className="img-flip">
       <div className="fadeIn">
         {active ? <i className="fas fa-play"></i> : <i className="fas fa-music"></i>}
       </div>
@@ -30,7 +31,9 @@ export default function Card ({ track, active = false }) {
       <img src={track.user.avatar_url} alt={track.title} />
 
       <div className="card-details">
-        <h5 className="card-title m-0 text-truncate">{track.title}</h5>
+        <Link to={'/track/' + track.id} className="card-title m-0 text-truncate">
+          {track.title}
+        </Link>
 
         <div className="w-100 d-flex justify-content-between align-items-center">
 
@@ -43,5 +46,14 @@ export default function Card ({ track, active = false }) {
       </div>
 
     </div>
+
+    {parseInt(track.playback_count, 10) > 0
+      ? <div className="card-footer mt-1">
+        <span><i className="fas fa-play"></i> <small>{formatNum(track.playback_count)}</small></span>
+        <span><i className="fas fa-thumbs-up"></i> <small>{formatNum(track.favoritings_count)}</small></span>
+        <span><i className="fas fa-comments"></i> <small>{formatNum(track.comment_count)}</small></span>
+        <span><i className="fas fa-share"></i> <small>{formatNum(track.reposts_count)}</small></span>
+      </div>
+      : <div className="pb-1"></div>}
   </div>;
 }

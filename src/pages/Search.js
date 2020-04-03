@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import ScService from '../services/ScService';
+import { useStoreState, useStoreActions } from 'easy-peasy';
 import ListTracks from '../containers/ListTracks';
 import ListGenres from '../containers/ListGenres';
-import { useStoreState, useStoreActions } from 'easy-peasy';
 
 export default function Search (props) {
 

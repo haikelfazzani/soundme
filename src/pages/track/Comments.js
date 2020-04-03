@@ -19,7 +19,7 @@ const Comment = ({ comment }) => (
 )
 
 export default function Comments ({ comments }) {
-  return <div className="col-md-4 comments">
+  return <>
 
     <div className="list-group-item text-dark bg-dark">
       <i className="fas fa-comments"></i> Comments
@@ -28,5 +28,5 @@ export default function Comments ({ comments }) {
     <ul className="list-group">
       {comments.map(comment => <Comment comment={comment} key={'c' + comment.id} />)}
     </ul>
-  </div>
+  </>
 }
