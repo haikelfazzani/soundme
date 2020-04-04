@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, withRouter } from 'react-router-dom';
 import ScUserService from '../../services/ScUserService';
 
+import InlineList from '../../components/InlineList';
 import CardHorizontal from '../../components/CardHorizontal';
-import ListTracks from './ListTracks';
 import Comments from './Comments';
 
 import Spinner from '../../components/Skeleton';
@@ -11,43 +11,51 @@ import Skeleton from '../../components/Spinner';
 
 import '../../styles/TrackDetails.css';
 
-export default function Track () {
+function Track (props) {
 
   const params = useParams();
-  const [details, setDetails] = useState({ track: {}, tracks: [], comments: [] });  
+  const [details, setDetails] = useState({ track: {}, infos: [], comments: [] });
 
   useEffect(() => {
-    ScUserService.getTrackComments(params.id)
-      .then(comments => {
-
-        let tracks = JSON.parse(localStorage.getItem('sc-user-tracks'));
-        let currTrack = tracks.find(t => t.id === parseInt(params.id, 10));
-
-        setDetails({ ...details, track: currTrack, tracks, comments });
+    ScUserService.getTrackAndComments(params.userId, params.id)
+      .then(result => {
+        setDetails({ track: result.track, infos: result.infos, comments: result.comments });
       })
       .catch(e => { })
   }, [params]);
 
 
+  const onGoBack = () => {
+    props.history.goBack();
+  }
+
   return (
-    <div className="container py-3 mb-5 min-vh-100">
-      {details.track && Object.keys(details.track).length > 3
-        ? <div className="row">
+    <>
+      <InlineList data={details.infos} />
+      <div className="container py-3 mb-5 min-vh-100">
 
-          <div className="col-md-8">
-            <CardHorizontal track={details.track} bg="bg-orange" active={false} isList={false} />
-            <ListTracks tracks={details.tracks} />
+        <button onClick={onGoBack} className="btn btn-dark mb-3">
+          <i className="fas fa-hand-point-left"></i>
+        </button>
+
+        {details.track && Object.keys(details.track).length > 0
+          ? <div className="row">
+
+            <div className="col-md-4">
+              <CardHorizontal track={details.track} bg="bg-orange" />
+            </div>
+
+            <div className="col-md-8 comments">
+              {details.comments.length > 0 && <Comments comments={details.comments} />}
+            </div>
           </div>
 
-          <div className="col-md-4 comments">
-            {details.comments.length > 0 && <Comments comments={details.comments} />}
-          </div>
-        </div>
-
-        : <>
-          <Skeleton />
-          <Spinner />
-        </>}
-    </div>
-  );
+          : <>
+            <Skeleton />
+            <Spinner />
+          </>}
+      </div>
+    </>);
 }
+
+export default withRouter(Track);

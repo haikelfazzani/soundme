@@ -1,5 +1,18 @@
+.card-horizontal {
+  padding: 7px;
+}
+
 .card-horizontal img {
-  width: 110px !important;
-  height: 70px !important;
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 100% !important;
+  max-height: 100% !important;
   object-fit: cover;
 }
+
+.card-horizontal h5 {
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: 100;
+}
+.card-horizontal p {font-size: 14px !important;}

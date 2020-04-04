@@ -24,7 +24,7 @@ export default function App () {
         <Route path="/search" component={Search} />
         
         <Route path="/user/:id" component={User} />
-        <Route path="/track/:id" component={Track} />
+        <Route path="/track/:userId/:id" component={Track} />
         
         <Redirect from="*" to="/" />
       </Switch>

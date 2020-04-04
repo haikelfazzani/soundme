@@ -31,7 +31,7 @@ export default function Card ({ track, active = false }) {
       <img src={track.user.avatar_url} alt={track.title} />
 
       <div className="card-details">
-        <Link to={'/track/' + track.id} className="card-title m-0 text-truncate">
+        <Link to={'/track/' + track.user.id + '/' + track.id} className="card-title m-0 text-truncate">
           {track.title}
         </Link>
 
