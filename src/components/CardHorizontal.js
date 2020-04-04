@@ -14,8 +14,8 @@ export default function CardHorizontal ({ track }) {
       />
 
       <div className="card-body d-flex flex-column">
-        <h5 className="card-title m-0"><i className="fas fa-headphones"></i> {track.title}</h5>
-        <p className="card-text m-0"><i className="fas fa-user"></i> @{track.user.username}</p>
+        <h5 className="card-title color-orange">{track.title}</h5>
+        <p className="card-text m-0">@{track.user.username}</p>
         <p className="card-text m-0"><i className="fas fa-drum"></i> {track.genre}</p>
       </div>
     </div>

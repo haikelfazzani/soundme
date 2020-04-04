@@ -3,17 +3,15 @@ import { useParams, withRouter } from 'react-router-dom';
 import { useStoreState } from 'easy-peasy';
 import ScUserService from '../../services/ScUserService';
 
+import Header from './Header';
 import CardUser from './CardUser';
 
 import Spinner from '../../components/Spinner';
 import Skeleton from '../../components/Skeleton';
 import SkeletonUser from '../../components/SkeletonUser';
 
-import formatNum from '../../util/formatNum';
-
 import '../../styles/User.css';
 import Card from '../../components/Card';
-import Header from './Header';
 
 function User () {
 
@@ -26,7 +24,6 @@ function User () {
     ScUserService.getInfosAndTracks(params.id)
       .then(result => {
         setUser({ infos: result.infos, tracks: result.tracks, profiles: result.profiles });
-        localStorage.setItem('sc-user-tracks', JSON.stringify(result.tracks));
       })
       .catch(e => { })
   }, [params.id]);

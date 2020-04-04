@@ -15,4 +15,4 @@
   letter-spacing: 2px;
   font-weight: 100;
 }
-.card-horizontal p {font-size: 14px !important;}
+.card-horizontal p {font-size: 14px !important; letter-spacing: 2px;}

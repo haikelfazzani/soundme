@@ -19,20 +19,20 @@ export default class ScUserService {
   }
 
   static async getTrackAndComments (userId, trackId) {
-    const tracks = await this.getTracks(userId);
-    const comments = await axios.get(BASE_URL + '/tracks/' + trackId + '/comments' + API_KEY);
+    let tracks = await this.getTracks(userId);
+    let comments = await axios.get(BASE_URL + '/tracks/' + trackId + '/comments' + API_KEY);
 
     let track = tracks.data.find(t => t.id === parseInt(trackId, 10));
 
     let infos = [
       'Plays: ' + formatNum(track.playback_count),
-      'Favs: ' + formatNum(track.favoritings_count),
-      'Reposts: ' + track.reposts_count,
+      'Favoritings: ' + formatNum(track.favoritings_count),
+      'Reposts: ' + formatNum(track.reposts_count),
       'Comments: ' + formatNum(track.comment_count),
       'Duration: ' + timeFormat(track.duration / 1024),
       'Downloads: ' + track.download_count
     ];
-    
+
     return {
       track,
       infos,

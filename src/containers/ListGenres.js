@@ -1,7 +1,6 @@
 import React from 'react';
-import { useStoreState,useStoreActions  } from 'easy-peasy';
+import { useStoreState, useStoreActions } from 'easy-peasy';
 import { withRouter } from 'react-router-dom';
-import InlineList from '../components/InlineList';
 
 const genres = ['Rock', 'Metal', 'Blues', 'Jazz', 'HipHop', 'Pop', 'Reggae',
   'Dubstep', 'EDM', 'Electronic', 'House', 'Trance', 'Piano'
@@ -19,7 +18,20 @@ function ListGenres (props) {
     }
   }
 
-  return <InlineList data={genres} onItemClick={onGenreSelect} active={activeGenre} />;
+  return <div className="list-genres">
+    <div className="container">
+      <ul className="overflow-auto">
+
+        {genres.map(g => <li
+          className={"list-group-item cp fs-12 text-uppercase " + (activeGenre === g ? "active" : "")}
+          key={g}
+          onClick={() => { onGenreSelect(g) }}>
+          {g}
+        </li>)}
+
+      </ul>
+    </div>
+  </div>;
 }
 
 export default withRouter(ListGenres);
