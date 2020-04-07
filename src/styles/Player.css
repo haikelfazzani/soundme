@@ -1,14 +1,16 @@
 .player {
-  width: 310px;  
+  width: 320px;  
+  max-height: 100%;
   color: #ffffff;
   position: fixed;
-  bottom: 10px;
-  right: 10px;
+  bottom: 0;
+  right: 0;
   display: flex;
   background-color:#191c1d;
   padding: 10px;
   background-size: cover;
   background-position: center;
+  overflow: auto;
   z-index: 9999;
 }
 
@@ -70,9 +72,7 @@
 
 /* list favorite tracks */
 .list-traks-fav {
-  max-height: 260px;
-  margin-top: 10px;
-  overflow: auto;
+  margin-top: 10px;  
 }
 
 .list-traks-fav .list-group-item {

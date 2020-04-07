@@ -24,6 +24,7 @@ function User () {
     ScUserService.getInfosAndTracks(params.id)
       .then(result => {
         setUser({ infos: result.infos, tracks: result.tracks, profiles: result.profiles });
+        localStorage.setItem('sc-user-tracks', JSON.stringify(result.tracks));
       })
       .catch(e => { })
   }, [params.id]);

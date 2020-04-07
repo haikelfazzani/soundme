@@ -5,8 +5,14 @@ let genreActions = {
   setGenre: action((state, activeGenre) => {
     return { ...state, activeGenre };
   }),
-  getTracksByGenre: thunk(async (actions, activeGenre) => {
-    let tracks = await ScService.getTracks(activeGenre);
+  getTracksByGenre: thunk(async (actions, { activeGenre, limit }) => {
+    let tracks = [];
+    if (limit) {
+      tracks = await ScService.getTracks(activeGenre, limit);
+    }
+    else {
+      tracks = await ScService.getTracks(activeGenre);
+    }
     return tracks;
   }),
 }
@@ -43,7 +49,7 @@ let playerActions = {
     let newList = state.favoriteTracks.filter(t => t.id !== trackIdToBeRemoved);
 
     localStorage.setItem('sc-favorite-tracks', JSON.stringify(newList));
-    
+
     return { ...state, favoriteTracks: newList };
   })
 }

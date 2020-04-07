@@ -46,7 +46,7 @@ function Track (props) {
             </div>
 
             <div className="col-md-8 comments">
-              {details.comments.length > 0 && <Comments comments={details.comments} />}
+              <Comments comments={details.comments} />
             </div>
           </div>
 
