@@ -75,7 +75,7 @@
   align-items: center;
   color: #FF9800;
   background-color: #1c1d25cc;
-  z-index: 999;
+  z-index: 1;
 }
 
 .active-card,.active-card img {

@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
-import timeFormat from '../../util/timeFormat';
+import { useStoreState, useStoreActions } from 'easy-peasy';
 
-export default function PlayerControls ({ scPlayer, settings, setSettings, timeupdate, trackDuration }) {
+export default function PlayerControls ({ scPlayer, settings, setSettings }) {
 
-  const [volume, setVolume] = useState(100);
+  const { currentTrackIndex, favoriteTracks } = useStoreState(state => state);
+  const { setCurrentTrackPlay, setCurrentTrackPlayIndx } = useStoreActions(actions => actions);
+
+  const [volume, setVolume] = useState(1);
 
   const onControls = (control) => {
     switch (control) {
@@ -17,15 +20,40 @@ export default function PlayerControls ({ scPlayer, settings, setSettings, timeu
         scPlayer.pause();
         break;
 
-      case 'stop':
-        setSettings({ ...settings, isPlaying: false });
-        scPlayer.pause();
-        scPlayer.currentTime = 0
-        break;
-
       case 'loop':
         setSettings({ ...settings, loop: !settings.loop });
         scPlayer.loop = !settings.loop;
+        break;
+
+      case 'volume':
+        scPlayer.volume = scPlayer.volume === 1 ? 0 : 1;
+        setVolume(scPlayer.volume);
+        break;
+
+      case 'next':
+        let cti = 0;
+        if (currentTrackIndex < favoriteTracks.length - 1) {
+          cti = currentTrackIndex + 1;
+          setCurrentTrackPlay(favoriteTracks[cti]);
+          setCurrentTrackPlayIndx(cti);
+        }
+        else {
+          setCurrentTrackPlay(favoriteTracks[cti]);
+          setCurrentTrackPlayIndx(cti);
+        }
+        break;
+
+      case 'previous':
+        let cnt = favoriteTracks.length - 1;
+        if (currentTrackIndex > 0) {
+          cnt = currentTrackIndex - 1;
+          setCurrentTrackPlay(favoriteTracks[cnt]);
+          setCurrentTrackPlayIndx(cnt);
+        }
+        else {
+          setCurrentTrackPlay(favoriteTracks[cnt]);
+          setCurrentTrackPlayIndx(cnt);
+        }
         break;
 
       default:
@@ -33,39 +61,32 @@ export default function PlayerControls ({ scPlayer, settings, setSettings, timeu
     }
   }
 
-  const onVolume = (e) => {
-    setVolume(e.target.value);
-    scPlayer.volume = (e.target.value / 100);
-  }
-
   return (
     <ul className="controls">
-      <li onClick={() => { onControls(!settings.isPlaying ? 'play' : 'pause'); }}>
-        <i className={!settings.isPlaying ? "fas fa-play" : "fas fa-pause"}></i>
-      </li>
-
-      <li onClick={() => { onControls('stop'); }}><i className="fas fa-stop"></i></li>
 
       <li onClick={() => { onControls('loop'); }}>
-        {settings.loop
-          ? <i className="fas fa-long-arrow-alt-right"></i>
-          : <i className="fas fa-undo-alt"></i>}
-      </li>     
+        <i className="fas fa-sync" style={{ color: settings.loop ? '#ddd' : '#fff' }}></i>
+      </li>
 
-      <li className="fs-12"> {timeFormat(timeupdate) + ' / ' + timeFormat(trackDuration)}</li> 
+      <li onClick={() => { onControls('previous'); }}>
+        <i className="fas fa-step-backward"></i>
+      </li>
 
-      <li>
-        <input type="range"
-          className="custom-range"
-          id="customRange1"
-          min="0"
-          max="100"
-          onChange={onVolume}
-          value={volume}
-          style={{ 'height': '0.7rem', maxWidth:'80px' }}
-        />
-      </li>      
-          
+      <li onClick={() => { onControls(!settings.isPlaying ? 'play' : 'pause'); }}>
+        <i className={!settings.isPlaying
+          ? "far fa-play-circle fs-34"
+          : "far fa-pause-circle fs-34"}>
+        </i>
+      </li>
+
+      <li onClick={() => { onControls('next'); }}>
+        <i className="fas fa-step-forward"></i>
+      </li>
+
+      <li onClick={() => { onControls('volume'); }}>
+        <i className={"fas " + (volume === 0 ? "fa-volume-mute" : "fa-volume-up")}></i>
+      </li>
+
     </ul>
   );
 }

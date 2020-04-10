@@ -17,7 +17,7 @@ function FormSearch (props) {
   }
 
   return (
-    <form className="form-inline my-2 my-lg-0" autoComplete="on" onSubmit={onSearch}>
+    <form className="top-search form-inline" autoComplete="on" onSubmit={onSearch}>
       <input
         className="form-control w-100" type="text"
         placeholder="Search"

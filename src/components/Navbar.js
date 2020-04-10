@@ -5,26 +5,46 @@ import FormSearch from '../containers/FormSearch';
 export default function Navbar () {
 
   const [showMenu, setShowMenu] = useState(false);
+  const [showSearch, setShowSearch] = useState(false);
 
   const onDropMenu = () => { setShowMenu(!showMenu); }
+  const showSearchBar = () => { setShowSearch(!showSearch); }
 
-  return <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div className="container">
+  return <>
+    <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div className="container">
 
-      <Link className="navbar-brand" to="/"><i className="fas fa-meteor"></i> Soundme</Link>
+        <Link className="navbar-brand" to="/"><i className="fas fa-meteor"></i> Soundme</Link>
 
-      <button className="navbar-toggler" type="button" data-toggle="collapse" onClick={onDropMenu}>
-        <span className="navbar-toggler-icon"></span>
-      </button>
+        <button className="navbar-toggler" type="button" data-toggle="collapse" onClick={onDropMenu}>
+          <span className="navbar-toggler-icon"></span>
+        </button>
 
-      <div className="collapse navbar-collapse" id="navbarSupportedContent"
-        style={{ display: showMenu ? 'block' : 'none' }}>
+        <div className="collapse navbar-collapse" id="navbarSupportedContent"
+          style={{ display: showMenu ? 'block' : 'none' }}>
 
-        <ul className="navbar-nav mr-auto"></ul>
+          <ul className="navbar-nav mr-auto"></ul>
 
-        <FormSearch />
+          <ul className="navbar-nav">
+            <li className="nav-item">
+              <Link className="nav-link" to="/"><i className="fas fa-home"></i> Home</Link>
+            </li>
 
+            <li className="nav-item">
+              <Link className="nav-link" to="/lyrics"><i className="fas fa-circle"></i> Find Lyric</Link>
+            </li>
+            <li className="nav-item" onClick={showSearchBar}>
+              <span className="nav-link">
+                <i className="fa fa-search"></i>
+              </span>
+            </li>
+          </ul>
+
+        </div>
       </div>
-    </div>
-  </nav>;
+
+
+    </nav>
+    <div style={{ display: showSearch ? 'block' : 'none' }}><FormSearch /></div>
+  </>;
 }

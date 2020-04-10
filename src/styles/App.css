@@ -1,38 +1,41 @@
-body {  
+body {
   background-color: #121314;
   color: #ffffff;
   overflow-x: hidden;
 }
 
-ul {list-style: none !important;}
+ul {
+  list-style: none !important;
+}
 
 .navbar {
- border-bottom: 4px solid #FF9800;
-  padding: 10px 0;
+  border-bottom: 4px solid #FF9800;
+  padding: 10px 0;  
 }
+
+.nav-link {
+  font-size: 12px;
+  color: #ececec !important;  
+  text-transform: uppercase;
+  cursor: pointer;
+  letter-spacing: 2px;
+ }
+
+ .nav-link:hover {color: #ffffff !important;}
 
 .navbar-brand {
   color: #FF9800 !important;
   font-family: 'Sriracha';
 }
 
-input[type="search"] { 
-  background-color: inherit;
-  color: #FF9800 !important;     
-  padding: 12px; 
-  width: 100%; 
-  border: 0;  
-  outline: none !important;
+.text-muted {
+  color: #cacaca !important;
 }
 
-.text-muted {color: #cacaca  !important;}
+.text-dark {
+  color: #adadad !important;
+}
 
-.text-dark {color: #adadad !important;}
-
-.form-inline {position: relative;}
-.form-inline input {min-width: 300px; height: 30px;}
-.form-inline button {color: #FF9800; background-color: inherit; height: 30px; border: 0; line-height: 1;
-   position: absolute; right: 2px; outline: none !important;}
 
 .spinner-container {
   height: 100vh;
@@ -69,7 +72,9 @@ footer {
   animation-fill-mode: both;
 }
 
-.btn {border-radius: 0;}
+.btn {
+  border-radius: 0;
+}
 
 @-webkit-keyframes fadeIn {
   0% {
@@ -108,18 +113,34 @@ footer {
   background: #FF9800;
 }
 
-.btn-dark, .bg-dark {background-color: #1d1d1d !important;}
-.bg-orange {background-color: #FF9800 !important;}
+.btn-dark,
+.bg-dark {
+  background-color: #1d1d1d !important;
+}
+
+.bg-orange {
+  background-color: #FF9800 !important;
+}
+
 .color-orange {
   color: #FF9800 !important;
 }
 
-.color-gray {color: #dbdbdb!important;}
+.color-gray {
+  color: #dbdbdb !important;
+}
 
-.box-none {box-shadow: none !important;}
+.box-none {
+  box-shadow: none !important;
+}
 
-.border-none {border: 0 !important;}
-.bg-inherit {background-color: inherit !important;}
+.border-none {
+  border: 0 !important;
+}
+
+.bg-inherit {
+  background-color: inherit !important;
+}
 
 .w-90 {
   width: 90% !important;
@@ -127,6 +148,14 @@ footer {
 
 .w-10 {
   width: 10% !important;
+}
+
+.w-20 {
+  width: 20% !important;
+}
+
+.fs-34 {
+  font-size: 34px !important;
 }
 
 .fs-18 {
@@ -149,4 +178,38 @@ footer {
   cursor: pointer;
 }
 
-.lsp2 {letter-spacing: 2px;}
+.lsp2 {
+  letter-spacing: 2px;
+}
+
+
+input[type="search"] {
+  background-color: inherit;
+  color: #FF9800 !important;
+  padding: 12px;
+  width: 100%;
+  border: 0;
+  outline: none !important;
+}
+
+
+.top-search {
+  position: fixed;
+  top: 110px;
+  right:0;
+  width: 20%;
+  z-index: 4;
+}
+
+.top-search input {border-radius: 0;}
+
+.form-inline button {
+  color: #FF9800;
+  background-color: inherit;
+  height: 30px;
+  border: 0;
+  line-height: 1;
+  position: absolute;
+  right: 2px;
+  outline: none !important;
+}

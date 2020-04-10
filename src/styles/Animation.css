@@ -8,7 +8,6 @@
   50% { transform: scale(0.5);  }  
   100% { transform: translateY(0) scale(1); transform: scaleX(1); }
 }
-
 @keyframes spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }

@@ -1,0 +1,28 @@
+.lyrics {
+  width: 100%;
+  background-color: #222326;
+  box-shadow: 0 0 10px #000000;
+  overflow: auto;
+}
+
+.lyrics .row {margin-right: 0; margin-left: 0;}
+
+.lyrics input {
+  background-color:  inherit;
+  color: inherit;
+  border: 0;
+  border-left: 2px solid rgb(24, 24, 24);
+  padding: 10px 15px;
+}
+
+.lyrics button {
+  background-color: inherit;
+  color: inherit;
+  border: 0;
+}
+
+.lyrics input:last-child,.lyrics button {
+  border-right: 2px solid rgb(24, 24, 24);
+}
+
+pre {color: #ffffff; padding: 20px !important;     box-shadow: 0 0.5em 2em 0 rgba(0, 0, 0, 0.25); }

@@ -13,6 +13,7 @@ import Footer from './components/Footer';
 import './styles/App.css';
 import './styles/Queries.css';
 import './styles/Animation.css';
+import Lyrics from './pages/Lyrics';
 
 export default function App () {
 
@@ -22,6 +23,7 @@ export default function App () {
       <Switch>
         <Route exact path="/" component={Home} />
         <Route path="/search" component={Search} />
+        <Route path="/lyrics" component={Lyrics} />
         
         <Route path="/user/:id" component={User} />
         <Route path="/track/:userId/:id" component={Track} />

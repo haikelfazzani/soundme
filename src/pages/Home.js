@@ -48,7 +48,7 @@ export default function Home () {
     <ListGenres />
     <ListTracks tracks={tracks} />
     <div className="w-100 d-flex justify-content-center">
-      <button className="btn btn-dark w-25 fs-12" onClick={onLoadMore}>LOAD MORE</button>
+      <button className="btn btn-dark w-25 fs-12 lsp2" onClick={onLoadMore}>LOAD MORE</button>
     </div>
   </>);
 }
