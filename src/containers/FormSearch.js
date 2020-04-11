@@ -17,14 +17,15 @@ function FormSearch (props) {
   }
 
   return (
-    <form className="top-search form-inline" autoComplete="on" onSubmit={onSearch}>
+    <form className="top-search form-inline pulseUpOut" onSubmit={onSearch}>
       <input
         className="form-control w-100" type="text"
         placeholder="Search"
         onChange={(e) => { setQuery(e.target.value) }}
         value={query}
+        required
       />
-      <button type="submit"> <i className="fas fa-search"></i></button>
+      <button type="submit"><i className="fas fa-search"></i></button>
     </form>
   );
 }

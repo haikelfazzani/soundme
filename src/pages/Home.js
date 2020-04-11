@@ -18,7 +18,7 @@ export default function Home () {
       .then(result => {
         if (result && result.length > 0) {
           setTracks([]);
-          setTimeout(() => { setTracks(result); }, 500);
+          setTimeout(() => { setTracks(result); }, 200);
           localStorage.setItem('sc-tracks', JSON.stringify(result));
         }
       })
@@ -33,7 +33,7 @@ export default function Home () {
       .then(result => {
         if (result && result.length > 0) {
           setTracks([]);
-          setTimeout(() => { setTracks(result); }, 500);
+          setTimeout(() => { setTracks(result); }, 200);
           setLimit(limit + 48)
           localStorage.setItem('sc-tracks', JSON.stringify(result));
         }

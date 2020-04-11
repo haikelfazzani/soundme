@@ -195,13 +195,16 @@ input[type="search"] {
 
 .top-search {
   position: fixed;
-  top: 110px;
-  right:0;
-  width: 20%;
-  z-index: 4;
+  top: 11px;
+    right: 30%;
+    width: 40%;
+    z-index: 4;
 }
 
-.top-search input {border-radius: 0;}
+.top-search input {border-radius: 0;
+  background-color: inherit;
+  border: 1px solid #ff9800;
+  color: #fff;}
 
 .form-inline button {
   color: #FF9800;

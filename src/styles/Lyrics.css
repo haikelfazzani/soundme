@@ -5,10 +5,13 @@
   overflow: auto;
 }
 
-.lyrics .row {margin-right: 0; margin-left: 0;}
+.lyrics .row {
+  margin-right: 0;
+  margin-left: 0;
+}
 
 .lyrics input {
-  background-color:  inherit;
+  background-color: inherit;
   color: inherit;
   border: 0;
   border-left: 2px solid rgb(24, 24, 24);
@@ -16,13 +19,23 @@
 }
 
 .lyrics button {
-  background-color: inherit;
-  color: inherit;
+  height: 100%;
   border: 0;
 }
 
-.lyrics input:last-child,.lyrics button {
+.lyrics input:last-child,
+.lyrics button {
   border-right: 2px solid rgb(24, 24, 24);
 }
 
-pre {color: #ffffff; padding: 20px !important;     box-shadow: 0 0.5em 2em 0 rgba(0, 0, 0, 0.25); }
+pre {
+  color: #ffffff;
+  padding: 20px !important;
+  box-shadow: 0 0.5em 2em 0 rgba(0, 0, 0, 0.25);
+}
+
+.upper-text {
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}

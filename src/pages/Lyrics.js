@@ -1,26 +1,37 @@
 import React, { useState, useEffect } from 'react';
 import LyricsService from '../services/LyricsSercice';
+import SkeletonLyrics from '../components/SkeletonLyrics';
+import Spinner from '../components/Spinner';
 
 import '../styles/Lyrics.css';
-import SkeletonLyrics from '../components/SkeletonLyrics';
+
+let audio = new Audio();
 
 export default function Lyrics () {
 
-  const [lyricState, setLyricState] = useState({ artist: '', songname: '', lyric: null });
+  const [lyricState, setLyricState] = useState({ artist: '', songname: '', lyric: null, infos: {} });
+  const [previewTime, setPreviewTime] = useState(30);
 
   useEffect(() => {
-    let local = localStorage.getItem('lyrics-search');
+    setTimeout(() => {
+      let local = localStorage.getItem('lyrics-search');
 
-    if (local) {
-      let v = JSON.parse(local);
-      setLyricState({ artist: v.artist, songname: v.songname, lyric: v.lyric });
-    }
-    else {
-      LyricsService.getLyric('linkin park', 'numb')
-        .then(lyric => {
-          setLyricState({ artist: 'linkin park', songname: 'numb', lyric });
-        })
-    }
+      if (local) {
+        let v = JSON.parse(local);
+        setLyricState({ artist: v.artist, songname: v.songname, lyric: v.lyric, infos: v.infos });
+      }
+      else {
+        LyricsService.getLyric('linkin park', 'numb')
+          .then(data => {
+            setLyricState({
+              artist: '',
+              songname: '',
+              lyric: data.lyric,
+              infos: data.infos
+            });
+          })
+      }
+    }, 500);
   }, []);
 
   const onChange = (e) => {
@@ -30,9 +41,44 @@ export default function Lyrics () {
   const onSearchLyric = async (e) => {
     e.preventDefault();
     setLyricState({ ...lyricState, lyric: null });
-    let lyric = await LyricsService.getLyric(lyricState.artist, lyricState.songname);
-    setLyricState({ ...lyricState, lyric });
-    localStorage.setItem('lyrics-search', JSON.stringify({ ...lyricState, lyric }));
+    let { lyric, infos } = await LyricsService.getLyric(lyricState.artist, lyricState.songname);
+
+    setTimeout(() => {
+      setLyricState({ ...lyricState, lyric, infos });
+      localStorage.setItem('lyrics-search', JSON.stringify({ ...lyricState, lyric, infos }));
+    }, 500);
+  }
+
+  useEffect(() => {
+    const updateTime = () => {
+      let p = 30 - parseInt(audio.currentTime, 10);
+      setPreviewTime(p < 10 ? '0' + p : p);
+    }
+
+    audio.addEventListener('timeupdate', updateTime);
+
+    return () => audio.removeEventListener('timeupdate', updateTime);
+  }, []);
+
+  const onControls = (control) => {
+    switch (control) {
+      case 'play':
+        audio.src = lyricState.infos.preview;
+        audio.play();
+        break;
+
+      case 'stop':
+        audio.pause();
+        audio.currentTime = 0;
+        break;
+
+      case 'volume':
+        audio.volume = audio.volume === 0 ? 1 : 0;
+        break;
+
+      default:
+        break;
+    }
   }
 
   return (<>
@@ -60,7 +106,10 @@ export default function Lyrics () {
             />
           </div>
 
-          <button type="submit" className="col-md-1 p-0 w-100 btn btn-dark"><i className="fa fa-search"></i></button>
+          <div className="col-md-1 p-0">
+            <button type="submit" className="btn btn-dark"><i className="fa fa-search"></i></button>
+            <button type="reset" className="btn btn-dark"><i className="fa fa-trash"></i></button>
+          </div>
         </form>
       </div>
     </div>
@@ -76,9 +125,28 @@ export default function Lyrics () {
           <div className="btn btn-warning text-uppercase fs-12 lsp2 m-0">{lyricState.artist} - {lyricState.songname}</div>
         </div>
 
-        <pre className="bg-dark">{lyricState.lyric}</pre>
+        <div className="row">
+          <div className="col-md-9"><pre className="bg-dark">{lyricState.lyric}</pre></div>
+          <div className="col-md-3">
+            <img src={lyricState.infos.image} alt={lyricState.artist} className="w-100 img-thumbnail mb-3" />
+            <button className="upper-text text-truncate btn btn-warning w-100">
+              {lyricState.artist} - {lyricState.songname}
+            </button>
+
+            <div className="mt-3 d-flex justify-content-between">
+              <button className="btn btn-dark" onClick={() => { onControls('play'); }}><i className="fa fa-play"></i></button>
+              <button className="btn btn-dark" onClick={() => { onControls('stop'); }}><i className="fa fa-stop"></i></button>
+              <button className="btn btn-dark" onClick={() => { onControls('volume'); }}><i className="fa fa-volume-up"></i></button>
+              <button className="btn btn-dark">{previewTime} <i className="fas fa-hourglass-start fs-12"></i></button>
+            </div>
+
+          </div>
+        </div>
       </div>
-      : <div className="container py-5"><SkeletonLyrics /></div>}
+      : <div className="container py-5">
+        <SkeletonLyrics />
+        <Spinner />
+      </div>}
 
   </>);
 }
