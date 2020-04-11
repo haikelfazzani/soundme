@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import LyricsService from '../services/LyricsSercice';
 import SkeletonLyrics from '../components/SkeletonLyrics';
-import Spinner from '../components/Spinner';
 
 import '../styles/Lyrics.css';
 
@@ -125,27 +124,34 @@ export default function Lyrics () {
           <div className="btn btn-warning text-uppercase fs-12 lsp2 m-0">{lyricState.artist} - {lyricState.songname}</div>
         </div>
 
-        <div className="row">
-          <div className="col-md-9"><pre className="bg-dark">{lyricState.lyric}</pre></div>
-          <div className="col-md-3">
-            <img src={lyricState.infos.image} alt={lyricState.artist} className="w-100 img-thumbnail mb-3" />
-            <button className="upper-text text-truncate btn btn-warning w-100">
-              {lyricState.artist} - {lyricState.songname}
-            </button>
+        {Object.keys(lyricState.infos).length > 0
+          && <div className="row">
+            <div className="col-md-9"><pre className="bg-dark">{lyricState.lyric}</pre></div>
+            <div className="col-md-3">
+              <img src={lyricState.infos.image} alt={lyricState.artist} className="w-100 img-thumbnail mb-3" />
+              <button className="upper-text text-truncate btn btn-warning w-100">
+                {lyricState.artist} - {lyricState.songname}
+              </button>
 
-            <div className="mt-3 d-flex justify-content-between">
-              <button className="btn btn-dark" onClick={() => { onControls('play'); }}><i className="fa fa-play"></i></button>
-              <button className="btn btn-dark" onClick={() => { onControls('stop'); }}><i className="fa fa-stop"></i></button>
-              <button className="btn btn-dark" onClick={() => { onControls('volume'); }}><i className="fa fa-volume-up"></i></button>
-              <button className="btn btn-dark">{previewTime} <i className="fas fa-hourglass-start fs-12"></i></button>
+              <div className="mt-3 d-flex justify-content-between">
+                <button className="btn btn-dark" onClick={() => { onControls('play'); }}><i className="fa fa-play"></i></button>
+                <button className="btn btn-dark" onClick={() => { onControls('stop'); }}><i className="fa fa-stop"></i></button>
+                <button className="btn btn-dark" onClick={() => { onControls('volume'); }}><i className="fa fa-volume-up"></i></button>
+                <button className="btn btn-dark">{previewTime} <i className="fas fa-hourglass-start fs-12"></i></button>
+              </div>
+
             </div>
-
-          </div>
-        </div>
+          </div>}
       </div>
-      : <div className="container py-5">
+      : <div className="container py-3">
+        <div className="mb-3">
+          <div className="btn btn-dark text-uppercase fs-12 lsp2 mr-0">
+            <i className="fas fa-search fs-14"></i> Search results for
+        </div>
+
+          <div className="btn btn-warning text-uppercase fs-12 lsp2 m-0">Not found</div>
+        </div>
         <SkeletonLyrics />
-        <Spinner />
       </div>}
 
   </>);

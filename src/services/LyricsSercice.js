@@ -21,8 +21,10 @@ export default class LyricsService {
           infos
         };
       } catch (error) {
-        console.log(error);
-        return resp;
+        return {
+          lyric: null,
+          infos: {}
+        };
       }
     }
     else return resp;
