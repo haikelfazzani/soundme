@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useStoreState, useStoreActions } from 'easy-peasy';
 
-export default function PlayerControls ({ scPlayer, settings, setSettings }) {
+function PlayerControls ({ scPlayer, settings, setSettings }) {
 
   const { currentTrackIndex, favoriteTracks } = useStoreState(state => state);
   const { setCurrentTrackPlay, setCurrentTrackPlayIndx } = useStoreActions(actions => actions);
@@ -90,3 +90,5 @@ export default function PlayerControls ({ scPlayer, settings, setSettings }) {
     </ul>
   );
 }
+
+export default React.memo(PlayerControls);

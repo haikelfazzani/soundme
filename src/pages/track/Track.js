@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useParams, withRouter } from 'react-router-dom';
 import ScUserService from '../../services/ScUserService';
 
-import InlineList from '../../components/InlineList';
 import CardHorizontal from '../../components/CardHorizontal';
 import Comments from './Comments';
 
@@ -30,32 +29,30 @@ function Track (props) {
   }
 
   return (
-    <>
-      <InlineList data={details.infos} />
-      <div className="container py-3 mb-5 min-vh-100">
+    <div className="container py-3 mb-5 min-vh-100">
 
-        <button onClick={onGoBack} className="btn btn-dark mb-3">
-          <i className="fas fa-hand-point-left"></i>
-        </button>
+      <button onClick={onGoBack} className="btn btn-dark mb-3">
+        <i className="fas fa-hand-point-left"></i>
+      </button>
 
-        {details.track && Object.keys(details.track).length > 0
-          ? <div className="row">
+      {details.track && Object.keys(details.track).length > 0
+        ? <div>
 
-            <div className="col-md-4">
-              <CardHorizontal track={details.track} bg="bg-orange" />
-            </div>
-
-            <div className="col-md-8 comments">
-              <Comments comments={details.comments} />
-            </div>
+          <div className="mb-3">
+            <CardHorizontal track={details.track} data={details.infos} bg="bg-orange" />
           </div>
 
-          : <>
-            <Skeleton />
-            <Spinner />
-          </>}
-      </div>
-    </>);
+          <div className="comments">
+            <Comments comments={details.comments} />
+          </div>
+        </div>
+
+        : <>
+          <Skeleton />
+          <Spinner />
+        </>}
+    </div>
+  );
 }
 
 export default withRouter(Track);

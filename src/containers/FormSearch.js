@@ -17,7 +17,7 @@ function FormSearch (props) {
   }
 
   return (
-    <form className="top-search form-inline pulseUpOut" onSubmit={onSearch}>
+    <form className="d-flex justify-content-center align-items-center top-form-search" onSubmit={onSearch}>
       <input
         className="form-control w-100" type="text"
         placeholder="Search"
@@ -25,7 +25,7 @@ function FormSearch (props) {
         value={query}
         required
       />
-      <button type="submit"><i className="fas fa-search"></i></button>
+      <button type="submit" className="btn btn-dark"><i className="fas fa-search"></i></button>
     </form>
   );
 }

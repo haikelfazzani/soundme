@@ -46,6 +46,7 @@ function User () {
           <input
             type="search"
             onKeyUp={onTrackFilter}
+            className="h-100 w-100 py-2"
             placeholder="Filter tracks.."
           />
         </li>

@@ -1,6 +1,15 @@
+:root {
+  --bg-main: #121314;
+  --bg-light: #222326;
+  --border-color: #0c0c0c;
+  --black: #000000;
+  --orange: #FF9800;
+}
+
 body {
-  background-color: #121314;
+  background-color: var(--bg-main);
   color: #ffffff;
+  font-family: 'Open Sans';
   overflow-x: hidden;
 }
 
@@ -10,18 +19,20 @@ ul {
 
 .navbar {
   border-bottom: 4px solid #FF9800;
-  padding: 10px 0;  
+  padding: 10px 0;
 }
 
 .nav-link {
   font-size: 12px;
-  color: #ececec !important;  
+  color: #ececec !important;
   text-transform: uppercase;
   cursor: pointer;
   letter-spacing: 2px;
- }
+}
 
- .nav-link:hover {color: #ffffff !important;}
+.nav-link:hover {
+  color: #ffffff !important;
+}
 
 .navbar-brand {
   color: #FF9800 !important;
@@ -74,16 +85,6 @@ footer {
 
 .btn {
   border-radius: 0;
-}
-
-@-webkit-keyframes fadeIn {
-  0% {
-    opacity: 0;
-  }
-
-  100% {
-    opacity: 1;
-  }
 }
 
 @keyframes fadeIn {
@@ -183,36 +184,26 @@ footer {
 }
 
 
-input[type="search"] {
-  background-color: inherit;
-  color: #FF9800 !important;
-  padding: 12px;
-  width: 100%;
-  border: 0;
-  outline: none !important;
+/**************************/
+
+.top-form-search {
+  position: relative;
 }
 
-
-.top-search {
-  position: fixed;
-  top: 11px;
-    right: 30%;
-    width: 40%;
-    z-index: 4;
+.top-form-search .form-control {
+  padding: 6px 10px 6px 20px;
+  background-color: var(--bg-light);
+  color: #e3e3e3;
+  font-size: 12px;
+  font-weight: 300;
 }
 
-.top-search input {border-radius: 0;
-  background-color: inherit;
-  border: 1px solid #ff9800;
-  color: #fff;}
-
-.form-inline button {
-  color: #FF9800;
-  background-color: inherit;
-  height: 30px;
-  border: 0;
-  line-height: 1;
+.top-form-search .btn {
+  padding: 0;
   position: absolute;
-  right: 2px;
-  outline: none !important;
+  top: 5px;
+  right: 6px;
+  border: 0;
+  color: #e3e3e3;
+  background-color: transparent !important;
 }

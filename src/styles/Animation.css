@@ -12,3 +12,21 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+.slideIn {
+  animation: SlideIn 1.5s forwards;
+}
+
+@keyframes SlideIn {
+  0% {
+    background-color: var(--orange);
+    transform: translateX(-500px);
+  }
+  60% {
+    background-color: var(--orange);
+  }
+  100% {
+    background-color: initial;
+    transform: translateX(0);
+  }
+}

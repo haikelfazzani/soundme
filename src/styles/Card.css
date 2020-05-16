@@ -3,7 +3,7 @@
   padding: 7px;
   padding-bottom: 0;
   border-radius: 0;
-  background-color: #222326;
+  background-color: var(--bg-light);
   border: 1px solid #0c0c0c;
   transition: box-shadow .2s ease-in-out;
 }

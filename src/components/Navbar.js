@@ -5,10 +5,8 @@ import FormSearch from '../containers/FormSearch';
 export default function Navbar () {
 
   const [showMenu, setShowMenu] = useState(false);
-  const [showSearch, setShowSearch] = useState(false);
 
   const onDropMenu = () => { setShowMenu(!showMenu); }
-  const showSearchBar = () => { setShowSearch(!showSearch); }
 
   return <>
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -23,9 +21,7 @@ export default function Navbar () {
         <div className="collapse navbar-collapse" id="navbarSupportedContent"
           style={{ display: showMenu ? 'block' : 'none' }}>
 
-          <ul className="navbar-nav mr-auto"></ul>
-
-          <ul className="navbar-nav">
+          <ul className="navbar-nav mr-auto">
             <li className="nav-item">
               <Link className="nav-link" to="/"><i className="fas fa-home"></i> Home</Link>
             </li>
@@ -33,11 +29,10 @@ export default function Navbar () {
             <li className="nav-item">
               <Link className="nav-link" to="/lyrics"><i className="fas fa-circle"></i> Find Lyric</Link>
             </li>
-            <li className="nav-item" onClick={showSearchBar}>
-              <span className="nav-link">
-                <i className="fa fa-search"></i>
-              </span>
-            </li>
+          </ul>
+
+          <ul className="navbar-nav">
+            <li className="nav-item"><FormSearch /></li>
           </ul>
 
         </div>
@@ -45,6 +40,5 @@ export default function Navbar () {
 
 
     </nav>
-    <div style={{ display: showSearch ? 'block' : 'none' }}><FormSearch /></div>
   </>;
 }
