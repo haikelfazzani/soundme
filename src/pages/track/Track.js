@@ -20,7 +20,9 @@ function Track (props) {
       .then(result => {
         setDetails({ track: result.track, infos: result.infos, comments: result.comments });
       })
-      .catch(e => { })
+      .catch(e => {
+        props.history.goBack();
+      });
   }, [params]);
 
 

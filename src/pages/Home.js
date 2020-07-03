@@ -4,8 +4,9 @@ import { useStoreState, useStoreActions } from 'easy-peasy';
 import '../styles/ListGenres.css';
 import ListTracks from '../containers/ListTracks';
 import ListGenres from '../containers/ListGenres';
+import { withRouter } from 'react-router-dom';
 
-export default function Home () {
+function Home () {
 
   const activeGenre = useStoreState(state => state.activeGenre);
   const getTracksByGenre = useStoreActions(actions => actions.getTracksByGenre);
@@ -52,3 +53,5 @@ export default function Home () {
     </div>
   </>);
 }
+
+export default withRouter(Home);

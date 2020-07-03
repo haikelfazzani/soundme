@@ -13,7 +13,7 @@ import SkeletonUser from '../../components/SkeletonUser';
 import '../../styles/User.css';
 import Card from '../../components/Card';
 
-function User () {
+function User (props) {
 
   const currentTrackPlay = useStoreState(state => state.currentTrackPlay);
   const [user, setUser] = useState({ infos: [], tracks: [], profiles: [] });
@@ -26,7 +26,9 @@ function User () {
         setUser({ infos: result.infos, tracks: result.tracks, profiles: result.profiles });
         localStorage.setItem('sc-user-tracks', JSON.stringify(result.tracks));
       })
-      .catch(e => { })
+      .catch(e => { 
+        props.history.push('/');
+      })
   }, [params.id]);
 
   const onTrackFilter = (e) => {
@@ -42,11 +44,11 @@ function User () {
   return (
     <>
       <Header user={user}>
-        <li className="list-group-item cp fs-12 text-uppercase p-0">
+        <li className="list-group-item cp fs-12 text-uppercase p-0 disp-none">
           <input
             type="search"
             onKeyUp={onTrackFilter}
-            className="h-100 w-100 py-2"
+            className="h-100 w-100 py-2 pl-2 bg-dark border-none"
             placeholder="Filter tracks.."
           />
         </li>
