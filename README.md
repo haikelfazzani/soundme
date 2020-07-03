@@ -1,14 +1,15 @@
 ### Soundme  
 🎧 listen to your favorite music from SoundCloud
 
+- [x] Soundcloud player
+- [x] Lyrics finder
+
 ### Captures
-![](https://i.ibb.co/Gvdf4Gy/soundme.png)
+![](https://i.ibb.co/xsSrcCz/soundme.png)
 
-![](https://i.ibb.co/PtYKbD7/soundme2.png)
-
-### Techs
-- React/Context API
-- React router dom
+### Built with
+- React/React router dom
+- Easy peasy (Redux)
 - SoundCloud API
 - Axios
 - HTML 5 Audio API

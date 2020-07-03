@@ -5,8 +5,8 @@ const BASE_URL = 'https://api.soundcloud.com/tracks?linked_partitioning=1';
 export default class ScService {
 
   static async getKey () {
-    const api = await axios.get('https://bitbucket.org/!api/2.0/snippets/haikel2090/rn8a68/7f86164ec21e567b483c6fc33a2732147f585689/files/no.json');
-    return api.data.api;
+    const api = await axios.get('https://api.npoint.io/a6b9d3882951b3d37df5');
+    return api.data.api_key;
   }
 
   static async initSc () {
