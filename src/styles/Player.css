@@ -61,7 +61,7 @@
 .wave_url>div {
   width: 0;
   height: 100%;
-  background-color: #121314;
+  background-color: var(--dark);
   position: absolute;
   left: 0;
   top: 0;

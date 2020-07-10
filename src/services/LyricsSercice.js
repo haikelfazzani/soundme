@@ -32,15 +32,19 @@ export default class LyricsService {
 
   static async getLyricInfo (artist, title) {
 
-    let url = `https://api.deezer.com/search/track/autocomplete?limit=1&q=${title}&output=jsonp`;
+    try {
+      let url = `https://api.deezer.com/search/track/autocomplete?limit=1&q=${title}&output=jsonp`;
 
-    let jsonp = await axios.jsonp(url);
-    let resp = await jsonp.data[0];
+      let jsonp = await axios.jsonp(url);
+      let resp = await jsonp.data[0];
 
-    return {
-      preview: resp.preview,
-      duration: resp.duration,
-      image: resp.artist.picture_big
-    };
+      return {
+        preview: resp.preview,
+        duration: resp.duration,
+        image: resp.artist.picture_big
+      };
+    } catch (error) {
+      return null;
+    }
   }
 }

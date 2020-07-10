@@ -25,12 +25,12 @@ export default class ScUserService {
     let track = tracks.data.find(t => t.id === parseInt(trackId, 10));
 
     let infos = [
-      'Plays: ' + formatNum(track.playback_count),
-      'Favoritings: ' + formatNum(track.favoritings_count),
-      'Reposts: ' + formatNum(track.reposts_count),
-      'Comments: ' + formatNum(track.comment_count),
-      'Duration: ' + timeFormat(track.duration / 1024),
-      'Downloads: ' + track.download_count
+      { icon: 'fa fa-play', data: formatNum(track.playback_count) },
+      { icon: 'fa fa-heart', data: formatNum(track.favoritings_count) },
+      { icon: 'fa fa-share', data: formatNum(track.reposts_count) },
+      { icon: 'fa fa-comment', data: formatNum(track.comment_count) },
+      { icon: 'fa fa-clock', data: timeFormat(track.duration / 1024) },
+      { icon: 'fa fa-download', data: track.download_count }
     ];
 
     return {

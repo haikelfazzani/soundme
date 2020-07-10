@@ -4,8 +4,7 @@ export default function Footer () {
   return (
     <footer className="bg-dark py-3 mt-5">
       <div className="container">
-        <p className="text-muted m-0 lsp2">
-          Created with <i className="fas fa-heart"></i> and <i className="fas fa-coffee"></i> by <a href="https://github.com/haikelfazzani/soundme" className="text-muted" target="_blank" rel="noopener noreferrer">Haikel Fazzani</a></p>
+        <p className="text-muted m-0 fs-10 lsp2">Copyright © 2020 <a href="https://github.com/haikelfazzani/soundme" className="text-muted">Soundme</a>. All rights reserved.</p>
       </div>
     </footer>
   );
