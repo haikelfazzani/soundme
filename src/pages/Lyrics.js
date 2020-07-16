@@ -39,13 +39,17 @@ export default function Lyrics () {
 
   const onSearchLyric = async (e) => {
     e.preventDefault();
-    setLyricState({ ...lyricState, lyric: null });
-    let { lyric, infos } = await LyricsService.getLyric(lyricState.artist, lyricState.songname);
+    try {
+      setLyricState({ ...lyricState, lyric: null });
+      let { lyric, infos } = await LyricsService.getLyric(lyricState.artist, lyricState.songname);
 
-    setTimeout(() => {
-      setLyricState({ ...lyricState, lyric, infos });
-      localStorage.setItem('lyrics-search', JSON.stringify({ ...lyricState, lyric, infos }));
-    }, 500);
+      setTimeout(() => {
+        setLyricState({ ...lyricState, lyric, infos });
+        localStorage.setItem('lyrics-search', JSON.stringify({ ...lyricState, lyric, infos }));
+      }, 500);
+    } catch (error) {
+
+    }
   }
 
   useEffect(() => {
@@ -106,7 +110,7 @@ export default function Lyrics () {
           </div>
 
           <div className="col-md-1 p-0">
-            <button type="submit" className="btn btn-dark btn-block"><i className="fa fa-search"></i></button>            
+            <button type="submit" className="btn btn-dark btn-block"><i className="fa fa-search"></i></button>
           </div>
         </form>
       </div>
