@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { useStoreState, useStoreActions } from 'easy-peasy';
 import ListTracks from '../containers/ListTracks';
 import ListGenres from '../containers/ListGenres';
+import { withRouter } from 'react-router-dom';
 
-export default function Search (props) {
+function Search (props) {
 
   const searchQuery = useStoreState(state => state.searchQuery);
   const getTracksBySearch = useStoreActions(actions => actions.getTracksBySearch);
@@ -13,12 +14,19 @@ export default function Search (props) {
     let userQuery = props.location.search.split("=");
 
     if (userQuery[1] && userQuery[1].length > 0) {
-      getTracksBySearch(userQuery[1]).then(result => {
-        if (result && result.length > 0) {
-          setTracks([]);
-          setTimeout(() => { setTracks(result); }, 500);
-        }
-      });
+      getTracksBySearch(userQuery[1])
+        .then(result => {
+          if (result && result.length > 0) {
+            setTracks([]);
+            setTimeout(() => { setTracks(result); }, 500);
+          }
+          else {
+            props.history.goBack();
+          }
+        })
+        .catch(e => {
+          props.history.goBack();
+        });
     }
   }, [props.location.search]);
 
@@ -33,3 +41,5 @@ export default function Search (props) {
     <ListTracks tracks={tracks} />
   </>);
 }
+
+export default withRouter(Search);

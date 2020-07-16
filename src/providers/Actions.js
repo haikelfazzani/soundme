@@ -29,7 +29,6 @@ let searchQueryActions = {
 
 let playerActions = {
   setCurrentTrackPlay: action((state, currentTrackPlay) => {
-    console.log(currentTrackPlay);
     state.currentTrackPlay = currentTrackPlay;
   }),
   setCurrentTrackPlayIndx: action((state, currentTrackIndex) => {
@@ -48,10 +47,8 @@ let playerActions = {
   }),
   removeTrackFromFavorite: action((state, trackIdToBeRemoved) => {
     let newList = state.favoriteTracks.filter(t => t.id !== trackIdToBeRemoved);
-
     localStorage.setItem('sc-favorite-tracks', JSON.stringify(newList));
-
-    return { ...state, favoriteTracks: newList };
+    state.favoriteTracks = newList;
   })
 }
 

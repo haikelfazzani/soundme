@@ -114,6 +114,10 @@ footer {
   background: #FF9800;
 }
 
+.badge-dark {
+  background-color: #131415 !important;
+}
+
 .btn-dark,
 .bg-dark {
   background-color: #1d1d1d !important;

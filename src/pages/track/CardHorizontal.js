@@ -1,5 +1,5 @@
-import React from 'react';
-import { useStoreActions } from 'easy-peasy';
+import React, { useState, useEffect } from 'react';
+import { useStoreActions, useStoreState } from 'easy-peasy';
 
 import Img from '../../components/Img';
 import '../../styles/CardHorizontal.css';
@@ -7,12 +7,19 @@ import '../../styles/CardHorizontal.css';
 export default function CardHorizontal ({ track, data }) {
 
   const setCurrentTrackPlay = useStoreActions(actions => actions.setCurrentTrackPlay);
+  const { currentTrackPlay } = useStoreState(state => state);
+  const [isPlaying, setIsPlayin] = useState(false);
+
+  useEffect(() => {
+    setIsPlayin(currentTrackPlay.title === track.title);
+  }, [currentTrackPlay.title]);
 
   return (
-    <div className="card card-horizontal mb-3 py-3 pr-3 pl-3">
+    <div className="card card-horizontal mb-3 py-3 pr-3 pl-3"
+      style={{ background: `linear-gradient(rgba(23, 27, 29, 0.93), rgba(18, 19, 20, 0.97)), url(${track.waveform_url})` }}>
       <div className="row no-gutters">
         <div className="col-md-2 disp-none img-track" onClick={() => { setCurrentTrackPlay(track); }}>
-          <span><i className="fa fa-play"></i></span>
+          <span><i className={"fa fa-" + (isPlaying ? 'music' : 'play')}></i></span>
           <Img
             src={track.artwork_url ? track.artwork_url.replace('large.jpg', 't500x500.jpg') : null}
             alt={track.title}
