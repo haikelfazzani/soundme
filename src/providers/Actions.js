@@ -3,7 +3,7 @@ import ScService from '../services/ScService';
 
 let genreActions = {
   setGenre: action((state, activeGenre) => {
-    return { ...state, activeGenre };
+    state.activeGenre = activeGenre;
   }),
   getTracksByGenre: thunk(async (actions, { activeGenre, limit }) => {
     let tracks = [];
@@ -19,7 +19,7 @@ let genreActions = {
 
 let searchQueryActions = {
   setSearchQuery: action((state, searchQuery) => {
-    return { ...state, searchQuery };
+    state.searchQuery = searchQuery;
   }),
   getTracksBySearch: thunk(async (actions, query) => {
     let tracks = await ScService.searchQuery(query);
@@ -29,10 +29,11 @@ let searchQueryActions = {
 
 let playerActions = {
   setCurrentTrackPlay: action((state, currentTrackPlay) => {
-    return { ...state, currentTrackPlay };
+    console.log(currentTrackPlay);
+    state.currentTrackPlay = currentTrackPlay;
   }),
   setCurrentTrackPlayIndx: action((state, currentTrackIndex) => {
-    return { ...state, currentTrackIndex };
+    state.currentTrackIndex = currentTrackIndex;
   }),
   // add a track to list favorite
   addTrackToFavorite: action((state, trackToBeAdded) => {
@@ -42,7 +43,7 @@ let playerActions = {
       let favs = [trackToBeAdded, ...state.favoriteTracks];
 
       localStorage.setItem('sc-favorite-tracks', JSON.stringify(favs));
-      return { ...state, favoriteTracks: favs };
+      state.favoriteTracks = favs;
     }
   }),
   removeTrackFromFavorite: action((state, trackIdToBeRemoved) => {

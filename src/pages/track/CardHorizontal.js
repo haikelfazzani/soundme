@@ -1,13 +1,18 @@
 import React from 'react';
-import Img from './Img';
-import '../styles/CardHorizontal.css';
+import { useStoreActions } from 'easy-peasy';
+
+import Img from '../../components/Img';
+import '../../styles/CardHorizontal.css';
 
 export default function CardHorizontal ({ track, data }) {
+
+  const setCurrentTrackPlay = useStoreActions(actions => actions.setCurrentTrackPlay);
 
   return (
     <div className="card card-horizontal mb-3 py-3 pr-3 pl-3">
       <div className="row no-gutters">
-        <div className="col-md-2 disp-none">
+        <div className="col-md-2 disp-none img-track" onClick={() => { setCurrentTrackPlay(track); }}>
+          <span><i className="fa fa-play"></i></span>
           <Img
             src={track.artwork_url ? track.artwork_url.replace('large.jpg', 't500x500.jpg') : null}
             alt={track.title}

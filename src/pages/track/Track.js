@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams, withRouter } from 'react-router-dom';
 import ScUserService from '../../services/ScUserService';
 
-import CardHorizontal from '../../components/CardHorizontal';
+import CardHorizontal from './CardHorizontal';
 import Comments from './Comments';
 
 import Spinner from '../../components/Skeleton';

@@ -48,11 +48,11 @@
   object-fit: cover;
 }
 
-.card-footer {
-  padding: .5em;
+.card-footer {  
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: .5em;
 }
 
 .img-flip {
@@ -60,13 +60,13 @@
 }
 
 .img-flip>div {
-  font-size: 50px;
+  display: none;  
   height: 100%;
   width: 100%;
   position: absolute;
   top: 0;
   left: 0;
-  display: none;
+  font-size: 50px;  
 }
 
 .img-flip:hover>div {
