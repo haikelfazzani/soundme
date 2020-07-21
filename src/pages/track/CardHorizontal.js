@@ -7,7 +7,7 @@ import '../../styles/CardHorizontal.css';
 export default function CardHorizontal ({ track, data }) {
 
   const setCurrentTrackPlay = useStoreActions(actions => actions.setCurrentTrackPlay);
-  const { currentTrackPlay } = useStoreState(state => state);
+  const { currentTrackPlay, currTrackTimeUpdate, currTrackDuration } = useStoreState(state => state);
   const [isPlaying, setIsPlayin] = useState(false);
 
   useEffect(() => {
@@ -16,7 +16,23 @@ export default function CardHorizontal ({ track, data }) {
 
   return (
     <div className="card card-horizontal mb-3 py-3 pr-3 pl-3"
-      style={{ background: `linear-gradient(rgba(23, 27, 29, 0.93), rgba(18, 19, 20, 0.97)), url(${track.waveform_url})` }}>
+      style={{
+        background: `linear-gradient(rgba(23, 27, 29, 0.85), rgba(18, 19, 20, 0.97)), url(${track.waveform_url})`
+      }}>
+
+      {currentTrackPlay.id && currentTrackPlay.id === track.id
+        && <div
+          className="h-100"
+          style={{
+            width: ((currTrackTimeUpdate * 100 / currTrackDuration) || 0) + '%',
+            background: 'rgba(255, 255, 255, 0.60)',
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            zIndex: -1
+          }}>
+        </div>}
+
       <div className="row no-gutters">
         <div className="col-md-2 disp-none img-track" onClick={() => { setCurrentTrackPlay(track); }}>
           <span><i className={"fa fa-" + (isPlaying ? 'music' : 'play')}></i></span>

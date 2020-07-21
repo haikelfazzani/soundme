@@ -1,7 +1,7 @@
 import React from 'react';
 import formatNum from '../../util/formatNum';
 
-export default function Header ({ children, user }) {
+export default function Header ({ user }) {
   return (
     <div className="list-genres">
       <div className="container">
@@ -13,10 +13,7 @@ export default function Header ({ children, user }) {
             <i className="fas fa-user-friends"></i> {formatNum(user.infos.followers_count)} followers
           </li>
 
-          {children}
-
         </ul>
-
       </div>
     </div>
   );

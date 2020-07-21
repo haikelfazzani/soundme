@@ -78,9 +78,10 @@ footer {
   }
 }
 
-
+/****************************/
 ::-webkit-scrollbar {
   width: 3px;
+  height: 3px;
 }
 
 ::-webkit-scrollbar-track {
@@ -89,14 +90,22 @@ footer {
 
 ::-webkit-scrollbar-thumb {
   background: #1d1d1d;
+  border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
   background: #FF9800;
 }
 
+/***********************************/
+
 .badge-dark {
   background-color: #131415 !important;
+}
+
+.btn:focus, .btn:active {
+  outline: none !important;
+  box-shadow: none !important;
 }
 
 .btn-dark,
@@ -118,10 +127,6 @@ footer {
 
 .box-none {
   box-shadow: none !important;
-}
-
-.border-none {
-  border: 0 !important;
 }
 
 .bg-inherit {

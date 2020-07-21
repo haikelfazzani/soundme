@@ -17,11 +17,21 @@ let scPlayer = new window.Audio();
 
 function Player () {
 
-  const { currentTrackPlay, currentTrackIndex, favoriteTracks } = useStoreState(state => state);
-  const { setCurrentTrackPlay, setCurrentTrackPlayIndx } = useStoreActions(actions => actions);
+  const {
+    currentTrackPlay,
+    currentTrackIndex,
+    favoriteTracks,
+    currTrackTimeUpdate,
+    currTrackDuration
+  } = useStoreState(state => state);
 
-  const [trackDuration, setTrackDuration] = useState(0);
-  const [timeupdate, setTimeUpdate] = useState(0);
+  const {
+    setCurrentTrackPlay,
+    setCurrentTrackPlayIndx,
+    setCurrTrackTimeUpdate,
+    setCurrTrackDuration
+  } = useStoreActions(actions => actions);
+
   const [showPlayer, setShowPlayer] = useState(false);
 
   // current track plays image: background image for the player
@@ -33,13 +43,13 @@ function Player () {
     function playTrack () {
       if (scPlayer.readyState >= 1) {
         scPlayer.play();
-        setTrackDuration(scPlayer.duration);
+        setCurrTrackDuration(scPlayer.duration);
         setSettings({ ...settings, isPlaying: true });
       }
     }
 
     function updateTime () {
-      setTimeUpdate(scPlayer.currentTime);
+      setCurrTrackTimeUpdate(scPlayer.currentTime);
       if (scPlayer.currentTime >= scPlayer.duration) {
         setSettings({ ...settings, isEnded: true });
       }
@@ -90,50 +100,50 @@ function Player () {
   const onShowPlayer = () => { setShowPlayer(!showPlayer); };
 
   const onSeek = (e) => {
-    var rect = e.target.getBoundingClientRect();
-    var cursorPosition = e.clientX - rect.left;
-    var widthInPerc = ((cursorPosition * 100) / 340);
+    let rect = e.target.getBoundingClientRect();
+    let cursorPosition = e.clientX - rect.left;
+    let widthInPerc = ((cursorPosition * 100) / 340);
 
-    scPlayer.currentTime = ((trackDuration * widthInPerc) / 100);
+    scPlayer.currentTime = ((currTrackDuration * widthInPerc) / 100);
   }
 
   return <>
-    {Object.keys(currentTrackPlay).length > 2 
-    && <div className="player pulseUpOut"
-      style={{ display: !showPlayer ? 'flex' : 'none', backgroundImage: trackImg }}>
+    {Object.keys(currentTrackPlay).length > 2
+      && <div className="player pulseUpOut"
+        style={{ display: !showPlayer ? 'flex' : 'none', backgroundImage: trackImg }}>
 
-      <button className="btn-hide-player" onClick={onShowPlayer} data-toggle="tooltip" data-placement="top" title="Close player">
-        <i className="fas fa-minus"></i>
-      </button>
+        <button className="btn-hide-player" onClick={onShowPlayer} data-toggle="tooltip" data-placement="top" title="Close player">
+          <i className="fas fa-minus"></i>
+        </button>
 
-      <div>
-        <h5 className="w-75 text-wrap text-center mx-auto">
-          <Link to={'/user/' + currentTrackPlay.user.id}>{currentTrackPlay.title || '...'}</Link>
-        </h5>        
+        <div>
+          <h5 className="w-75 text-wrap text-center mx-auto">
+            <Link to={'/user/' + currentTrackPlay.user.id}>{currentTrackPlay.title || '...'}</Link>
+          </h5>
 
-        <div className="w-100 d-flex justify-content-center align-items-center fs-12 mb-2">
-          <span>{timeFormat(timeupdate)}</span>
-          <i className="fas fa-signature mr-2 ml-2"></i>
-          <span>{timeFormat(trackDuration)}</span>
+          <div className="w-100 d-flex justify-content-center align-items-center fs-12 mb-2">
+            <span>{timeFormat(currTrackTimeUpdate)}</span>
+            <i className="fas fa-signature mr-2 ml-2"></i>
+            <span>{timeFormat(currTrackDuration)}</span>
+          </div>
+
+          <div className="wave_url" onMouseDown={onSeek}>
+            <img
+              src={currentTrackPlay.waveform_url || placeImgWave}
+              alt={currentTrackPlay.title || '...'}
+            />
+            <div style={{ width: ((currTrackTimeUpdate * 100 / currTrackDuration) || 0) + '%' }}></div>
+          </div>
+
+          {scPlayer && <PlayerControls
+            scPlayer={scPlayer}
+            settings={settings}
+            setSettings={setSettings}
+          />}
+
+          <ListFavoriteTracks />
         </div>
-
-        <div className="wave_url" onMouseDown={onSeek}>
-          <img
-            src={currentTrackPlay.waveform_url || placeImgWave}
-            alt={currentTrackPlay.title || '...'}
-          />
-          <div style={{ width: ((timeupdate * 100 / trackDuration) || 0) + '%' }}></div>
-        </div>        
-
-        {scPlayer && <PlayerControls
-          scPlayer={scPlayer}
-          settings={settings}
-          setSettings={setSettings}
-        />}        
-
-        <ListFavoriteTracks />
       </div>
-    </div>
 
     }
 

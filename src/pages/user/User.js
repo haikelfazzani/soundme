@@ -31,28 +31,9 @@ function User (props) {
       })
   }, [params.id]);
 
-  const onTrackFilter = (e) => {
-    let searchVal = (e.target.value).toLowerCase().trim();
-
-    let userLocal = JSON.parse(localStorage.getItem('sc-user-tracks'));
-    let filtredTrakcs = userLocal.filter(t => t.title.toLowerCase().includes(searchVal));
-    filtredTrakcs = filtredTrakcs.length > 0 ? filtredTrakcs : userLocal;
-
-    setUser({ ...user, tracks: filtredTrakcs });
-  }
-
   return (
     <>
-      <Header user={user}>
-        <li className="list-group-item cp fs-12 text-uppercase p-0 disp-none">
-          <input
-            type="search"
-            onKeyUp={onTrackFilter}
-            className="h-100 w-100 py-2 pl-2 bg-dark border-none"
-            placeholder="Filter tracks.."
-          />
-        </li>
-      </Header>
+      <Header user={user} />
 
       <div className="container py-3 min-vh-100">
 

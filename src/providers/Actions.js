@@ -49,7 +49,14 @@ let playerActions = {
     let newList = state.favoriteTracks.filter(t => t.id !== trackIdToBeRemoved);
     localStorage.setItem('sc-favorite-tracks', JSON.stringify(newList));
     state.favoriteTracks = newList;
-  })
+  }),
+
+  setCurrTrackTimeUpdate: action((state, currTrackTimeUpdate) => {
+    state.currTrackTimeUpdate = currTrackTimeUpdate;
+  }),
+  setCurrTrackDuration: action((state, currTrackDuration) => {
+    state.currTrackDuration = currTrackDuration;
+  }),
 }
 
 export { playerActions, searchQueryActions, genreActions };

@@ -18,7 +18,7 @@ function Track (props) {
   useEffect(() => {
     ScUserService.getTrackAndComments(params.userId, params.id)
       .then(result => {
-        setDetails({ track: result.track, infos: result.infos, comments: result.comments });
+        setDetails({ track: result.track, infos: result.infos, comments: result.comments.slice(0,100) });
       })
       .catch(e => {
         props.history.goBack();
@@ -33,12 +33,13 @@ function Track (props) {
   return (
     <div className="container py-3 mb-5 min-vh-100">
 
-      <button onClick={onGoBack} className="btn btn-dark mb-3">
-        <i className="fas fa-hand-point-left"></i>
-      </button>
-
       {details.track && Object.keys(details.track).length > 0
-        ? <div>
+        ? <div className="position-relative">
+
+          <button onClick={onGoBack} className="btn position-absolute text-muted border-0"
+            style={{ left: '3px', top: '3x', zIndex: 9 }}>
+            <i className="fas fa-hand-point-left"></i>
+          </button>
 
           <div className="mb-3">
             <CardHorizontal track={details.track} data={details.infos} bg="bg-orange" />

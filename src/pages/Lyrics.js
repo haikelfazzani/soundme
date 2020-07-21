@@ -94,7 +94,7 @@ export default function Lyrics () {
               name="artist"
               onChange={onChange}
               value={lyricState.artist}
-              placeholder="Artist: linkin park"
+              placeholder="linkin park"
               className="w-50"
               required
             />
@@ -103,7 +103,7 @@ export default function Lyrics () {
               name="songname"
               onChange={onChange}
               value={lyricState.songname}
-              placeholder="Song: numb"
+              placeholder="numb"
               className="w-50"
               required
             />
@@ -133,10 +133,10 @@ export default function Lyrics () {
             <div className="col-md-3">
               <img src={lyricState.infos.image} alt={lyricState.artist} className="w-100 img-thumbnail mb-3" />
               <button className="upper-text text-truncate btn btn-warning w-100">
-                {lyricState.artist} - {lyricState.songname}
+                <i className="fa fa-music"></i> {lyricState.artist} - {lyricState.songname}
               </button>
 
-              <div className="mt-3 d-flex justify-content-between">
+              <div className="w-100 btn-group py-3">
                 <button className="btn btn-dark" onClick={() => { onControls('play'); }}><i className="fa fa-play"></i></button>
                 <button className="btn btn-dark" onClick={() => { onControls('stop'); }}><i className="fa fa-stop"></i></button>
                 <button className="btn btn-dark" onClick={() => { onControls('volume'); }}><i className="fa fa-volume-up"></i></button>
