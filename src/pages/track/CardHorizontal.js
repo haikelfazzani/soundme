@@ -3,6 +3,7 @@ import { useStoreActions, useStoreState } from 'easy-peasy';
 
 import Img from '../../components/Img';
 import '../../styles/CardHorizontal.css';
+import { Link } from 'react-router-dom';
 
 export default function CardHorizontal ({ track, data }) {
 
@@ -42,11 +43,15 @@ export default function CardHorizontal ({ track, data }) {
             clx="img-fluid rounded-circle"
           />
         </div>
+
         <div className="col-md-10">
-          <div className="d-flex flex-column ml-3">
+          <div className="d-flex flex-column ml-2">
             <h5 className="card-title color-orange"><i className="fa fa-music"></i> {track.title}</h5>
             <p className="card-text">{track.description || 'No description..'}</p>
-            <p className="card-text"><small className="text-muted">@{track.user.username} ({track.genre})</small></p>
+            <p className="card-text">
+              <Link to={"/user/" + track.user.id} className="text-decoration-none">
+                <span className="stand-btn">@{track.user.username} ({track.genre})</span>
+              </Link></p>
 
             <div className="w-100 d-flex flex-wrap">
               {data.map(g => <span

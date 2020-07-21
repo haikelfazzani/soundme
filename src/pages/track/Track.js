@@ -12,19 +12,18 @@ import '../../styles/TrackDetails.css';
 
 function Track (props) {
 
-  const params = useParams();
+  const { userId, id } = useParams();
   const [details, setDetails] = useState({ track: {}, infos: [], comments: [] });
 
   useEffect(() => {
-    ScUserService.getTrackAndComments(params.userId, params.id)
+    ScUserService.getTrackAndComments(userId, id)
       .then(result => {
-        setDetails({ track: result.track, infos: result.infos, comments: result.comments.slice(0,100) });
+        setDetails({ track: result.track, infos: result.infos, comments: result.comments.slice(0, 100) });
       })
       .catch(e => {
         props.history.goBack();
       });
-  }, [params]);
-
+  }, [userId]);
 
   const onGoBack = () => {
     props.history.goBack();
@@ -36,7 +35,7 @@ function Track (props) {
       {details.track && Object.keys(details.track).length > 0
         ? <div className="position-relative">
 
-          <button onClick={onGoBack} className="btn position-absolute text-muted border-0"
+          <button onClick={onGoBack} className="btn btn-link text-muted position-absolute border-0"
             style={{ left: '3px', top: '3x', zIndex: 9 }}>
             <i className="fas fa-hand-point-left"></i>
           </button>

@@ -3,8 +3,6 @@ import React from 'react';
 // page user: left card -> user details and infos
 export default function CardUser ({ userInfos,userProfiles }) {
 
-  console.log(userProfiles)
-
   return (
     <div className="card card-user mb-3 box-none">
 

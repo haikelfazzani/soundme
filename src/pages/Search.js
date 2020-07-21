@@ -38,7 +38,7 @@ function Search (props) {
       <div className="btn btn-dark text-uppercase fs-12 lsp2 mr-0">
         <i className="fas fa-search fs-14"></i> Search results for
       </div>
-      <div className="btn btn-warning text-uppercase fs-12 lsp2 m-0">{searchQuery || 'Not found'}</div>
+      <div className="btn btn-warning text-uppercase fs-12 lsp2 m-0">{searchQuery || 'Not found'} ({tracks.length})</div>
     </div>
     <ListTracks tracks={tracks} />
   </>);

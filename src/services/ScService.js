@@ -28,7 +28,7 @@ export default class ScService {
     return tracks.data.collection;
   }
 
-  static async searchQuery (query, limit = 48) {
+  static async searchQuery (query, limit = 96) {
     await this.initSc();
     query = encodeURIComponent(query);
     const tracks = await window.SC.get('/tracks', { q: query, limit });

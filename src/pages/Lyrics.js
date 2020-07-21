@@ -3,12 +3,16 @@ import LyricsService from '../services/LyricsSercice';
 import SkeletonLyrics from '../components/SkeletonLyrics';
 
 import '../styles/Lyrics.css';
+import copyToClipboard from '../util/copyToClipboard';
 
 let audio = new Audio();
 
 export default function Lyrics () {
 
-  const [lyricState, setLyricState] = useState({ artist: '', songname: '', lyric: null, infos: {} });
+  const [lyricState, setLyricState] = useState({
+    artist: '', songname: '', lyric: null, infos: {}, isLyricCopied: false
+  });
+
   const [previewTime, setPreviewTime] = useState(30);
 
   useEffect(() => {
@@ -84,6 +88,15 @@ export default function Lyrics () {
     }
   }
 
+  const onCopyLyric = () => {
+    copyToClipboard(lyricState.lyric);
+    setLyricState({ ...lyricState, isLyricCopied: true });
+
+    setTimeout(() => {
+      setLyricState({ ...lyricState, isLyricCopied: false });
+    }, 1000);
+  }
+
   return (<>
     <div className="lyrics">
 
@@ -129,7 +142,17 @@ export default function Lyrics () {
 
         {Object.keys(lyricState.infos).length > 0
           && <div className="row">
-            <div className="col-md-9"><pre className="bg-dark">{lyricState.lyric}</pre></div>
+            <div className="col-md-9 position-relative">
+              <pre className="bg-dark">{lyricState.lyric}</pre>
+              <button
+                className="btn btn-dark position-absolute"
+                style={{ top: '10px', right: '20px' }}
+                onClick={onCopyLyric}
+              >
+                <i className={"fa fa-" + (lyricState.isLyricCopied ? 'paste text-warning' : 'copy')}></i>
+              </button>
+            </div>
+
             <div className="col-md-3">
               <img src={lyricState.infos.image} alt={lyricState.artist} className="w-100 img-thumbnail mb-3" />
               <button className="upper-text text-truncate btn btn-warning w-100">

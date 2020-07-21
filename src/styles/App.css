@@ -133,6 +133,14 @@ footer {
   background-color: inherit !important;
 }
 
+.stand-btn {
+  color: var(--secondary);
+}
+
+.stand-btn:hover {
+  color: var(--light);
+}
+
 .w-90 {
   width: 90% !important;
 }
