@@ -2,6 +2,9 @@ import React from 'react';
 
 // page user: left card -> user details and infos
 export default function CardUser ({ userInfos,userProfiles }) {
+
+  console.log(userProfiles)
+
   return (
     <div className="card card-user mb-3 box-none">
 
@@ -36,7 +39,7 @@ export default function CardUser ({ userInfos,userProfiles }) {
           {userProfiles.length > 0
             && userProfiles.map(up =>
               <li className="list-group-item pr-0 pl-0" key={up.id}>
-                <a href={up.service} target="_blank"
+                <a href={up.url} target="_blank"
                   className="text-uppercase ltsp d-flex justify-content-between align-items-center text-dark text-decoration-none"
                   rel="noopener noreferrer">
                   <span><i className="fas fa-globe mr-1"></i> _{up.service}</span>

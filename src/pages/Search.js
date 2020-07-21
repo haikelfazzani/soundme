@@ -7,18 +7,20 @@ import { withRouter } from 'react-router-dom';
 function Search (props) {
 
   const searchQuery = useStoreState(state => state.searchQuery);
-  const getTracksBySearch = useStoreActions(actions => actions.getTracksBySearch);
+  const { setSearchQuery, getTracksBySearch } = useStoreActions(actions => actions);
   const [tracks, setTracks] = useState([]);
 
   useEffect(() => {
     let userQuery = props.location.search.split("=");
 
     if (userQuery[1] && userQuery[1].length > 0) {
+
+      setSearchQuery(userQuery[1]);
+
       getTracksBySearch(userQuery[1])
         .then(result => {
           if (result && result.length > 0) {
-            setTracks([]);
-            setTimeout(() => { setTracks(result); }, 500);
+            setTracks(result);
           }
           else {
             props.history.goBack();
