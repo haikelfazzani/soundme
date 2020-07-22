@@ -9,7 +9,7 @@ export default function SkeletonLyrics () {
       <div className="w-100 row ml-0 pr-0">
 
         <div className="col-md-9 pl-0">
-          <div className="wrapper card pb-2">
+          <div className="wrapper card-skeleton w-100 pb-2">
             <div className="comment animate w-25"></div>
             <div className="comment animate w-25"></div>
             <div className="comment animate w-25"></div>
@@ -23,7 +23,7 @@ export default function SkeletonLyrics () {
         </div>
 
         <div className="col-md-3 pr-0">
-          <div className="wrapper card pb-2">
+          <div className="wrapper card-skeleton w-100 pb-2">
             <div className="picture animate"></div>
             <div className="comment animate"></div>
             <div className="comment animate"></div>
