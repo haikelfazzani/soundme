@@ -12,7 +12,7 @@ function FormSearch (props) {
     e.preventDefault();
     if (query && query.length > 0) {
       setSearchQuery(query);
-      props.history.push("/search?q=" + query);
+      props.history.push("/search?q=" + query.trim());
     }
   }
 

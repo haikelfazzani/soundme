@@ -1,5 +1,6 @@
 import axios from 'axios';
 
+const PROXY_SERVER = 'https://yacdn.org/proxy/';
 const BASE_URL = 'https://api.soundcloud.com/tracks?linked_partitioning=1';
 
 export default class ScService {
@@ -19,6 +20,16 @@ export default class ScService {
     let url = `${BASE_URL}&limit=${limit}&offset=0&client_id=${key}&tags=${genre}`;
     const tracks = await axios.get(url);
     return tracks.data.collection;
+  }
+
+  // top tracks by genre (beta)
+  static async topTracks () {
+    try {
+      let resp = await axios.get(PROXY_SERVER + 'https://api-v2.soundcloud.com/charts?kind=top&genre=soundcloud:genres:pop&client_id=08f79801a998c381762ec5b15e4914d5')
+      return resp.data.collection;
+    } catch (error) {
+      return null;
+    }
   }
 
   static async getTracksBetween (genre, limit = 48, from, to) {

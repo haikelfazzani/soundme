@@ -15,15 +15,12 @@ function Search (props) {
 
     if (userQuery[1] && userQuery[1].length > 0) {
 
-      setSearchQuery(userQuery[1]);
+      setSearchQuery(window.decodeURIComponent(userQuery[1]));
 
       getTracksBySearch(userQuery[1])
         .then(result => {
           if (result && result.length > 0) {
             setTracks(result);
-          }
-          else {
-            props.history.goBack();
           }
         })
         .catch(e => {

@@ -13,6 +13,7 @@
 - React/React router dom
 - Easy peasy (Redux)
 - SoundCloud API
+- Deezer API
 - Axios
 - HTML 5 Audio API
 - Bootstrap
