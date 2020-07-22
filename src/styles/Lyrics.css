@@ -32,6 +32,7 @@ pre {
   color: #ffffff;
   padding: 20px !important;
   box-shadow: 0 0.5em 2em 0 rgba(0, 0, 0, 0.25);
+    white-space: pre-wrap;
 }
 
 .upper-text {

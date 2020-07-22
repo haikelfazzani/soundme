@@ -5,6 +5,7 @@ import '../styles/ListGenres.css';
 import ListTracks from '../containers/ListTracks';
 import ListGenres from '../containers/ListGenres';
 import { withRouter } from 'react-router-dom';
+import debounce from '../util/debounce';
 
 function Home () {
 
@@ -29,13 +30,13 @@ function Home () {
       });
   }, [activeGenre]);
 
-  const onLoadMore = () => {
+  const onLoadMore = debounce(() => {
     getTracksByGenre({ activeGenre, limit: limit + 48 })
       .then(result => {
         if (result && result.length > 0) {
           setTracks([]);
           setTimeout(() => { setTracks(result); }, 200);
-          setLimit(limit + 48)
+          setLimit(limit + 48);
           localStorage.setItem('sc-tracks', JSON.stringify(result));
         }
       })
@@ -43,7 +44,7 @@ function Home () {
         let t = JSON.parse(localStorage.getItem('sc-tracks'));
         setTracks(t);
       });
-  }
+  });
 
   return (<>
     <ListGenres />
