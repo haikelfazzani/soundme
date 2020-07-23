@@ -34,8 +34,7 @@ function Home () {
     getTracksByGenre({ activeGenre, limit: limit + 48 })
       .then(result => {
         if (result && result.length > 0) {
-          setTracks([]);
-          setTimeout(() => { setTracks(result); }, 200);
+          setTracks(result);
           setLimit(limit + 48);
           localStorage.setItem('sc-tracks', JSON.stringify(result));
         }

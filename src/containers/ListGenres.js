@@ -18,7 +18,7 @@ function ListGenres (props) {
     }
   }
 
-  return <div className="list-genres">
+  return <div className="list-genres sticky-top">
     <div className="container">
       <ul className="overflow-auto">
 

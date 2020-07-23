@@ -145,6 +145,8 @@ footer {
   width: 90% !important;
 }
 
+.mx-h200 {max-height: 200px;}
+
 .w-10 {
   width: 10% !important;
 }

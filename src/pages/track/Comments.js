@@ -9,7 +9,7 @@ const Comment = ({ comment }) => (
     />
 
     <div className="w-100 fs-12 text-wrap">
-      <p className="m-0">{comment.body}</p>
+      <p className="m-0 text-break">{comment.body}</p>
       <div className="w-100 d-flex justify-content-between">
         <small className="text-muted">@{comment.user.username}</small>
         <small className="text-muted">{comment.created_at.slice(0,19)}</small>

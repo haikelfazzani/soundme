@@ -16,25 +16,23 @@ export default function Lyrics () {
   const [previewTime, setPreviewTime] = useState(30);
 
   useEffect(() => {
-    setTimeout(() => {
-      let local = localStorage.getItem('lyrics-search');
+    let local = localStorage.getItem('lyrics-search');
 
-      if (local) {
-        let v = JSON.parse(local);
-        setLyricState({ artist: v.artist, songname: v.songname, lyric: v.lyric, infos: v.infos });
-      }
-      else {
-        LyricsService.getLyric('linkin park', 'numb')
-          .then(data => {
-            setLyricState({
-              artist: '',
-              songname: '',
-              lyric: data.lyric,
-              infos: data.infos
-            });
-          })
-      }
-    }, 500);
+    if (local) {
+      let v = JSON.parse(local);
+      setLyricState({ artist: v.artist, songname: v.songname, lyric: v.lyric, infos: v.infos });
+    }
+    else {
+      LyricsService.getLyric('linkin park', 'numb')
+        .then(data => {
+          setLyricState({
+            artist: '',
+            songname: '',
+            lyric: data.lyric,
+            infos: data.infos
+          });
+        })
+    }
   }, []);
 
   const onChange = (e) => {
@@ -154,12 +152,9 @@ export default function Lyrics () {
             </div>
 
             <div className="col-md-3">
-              <img src={lyricState.infos.image} alt={lyricState.artist} className="w-100 img-thumbnail mb-3" />
-              <button className="upper-text text-truncate btn btn-warning w-100">
-                <i className="fa fa-music"></i> {lyricState.artist} - {lyricState.songname}
-              </button>
+              <img src={lyricState.infos.image} alt={lyricState.artist} className="w-100 img-thumbnail" />
 
-              <div className="w-100 btn-group py-3">
+              <div className="w-100 btn-group py-3 sticky-top">
                 <button className="btn btn-dark" onClick={() => { onControls('play'); }}><i className="fa fa-play"></i></button>
                 <button className="btn btn-dark" onClick={() => { onControls('stop'); }}><i className="fa fa-stop"></i></button>
                 <button className="btn btn-dark" onClick={() => { onControls('volume'); }}><i className="fa fa-volume-up"></i></button>

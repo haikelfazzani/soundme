@@ -1,4 +1,5 @@
 import React from 'react';
+import Expander from '../../components/Expander';
 
 // page user: left card -> user details and infos
 export default function CardUser ({ userInfos,userProfiles }) {
@@ -30,8 +31,7 @@ export default function CardUser ({ userInfos,userProfiles }) {
           </li>}
 
           {userInfos.description && <li className="list-group-item pr-0 pl-0">
-            <p className="card-text fs-14 m-0 text-dark">
-              <i className="fas fa-info-circle"></i> {userInfos.description}</p>
+            <Expander text={userInfos.description} />
           </li>}
 
           {userProfiles.length > 0

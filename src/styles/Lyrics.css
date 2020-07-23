@@ -16,6 +16,7 @@
   border: 0;
   border-left: 2px solid rgb(24, 24, 24);
   padding: 10px 15px;
+  font-family: consolas;
 }
 
 .lyrics button {

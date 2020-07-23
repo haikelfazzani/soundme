@@ -36,7 +36,7 @@ function Track (props) {
         ? <div className="position-relative">
 
           <button onClick={onGoBack} className="btn stand-btn position-absolute border-0"
-            style={{ left: 0, top: '3x', zIndex: 9 }}>
+            style={{ left: '-2px', top: '3px', zIndex: 9 }}>
             <i className="fas fa-hand-point-left"></i>
           </button>
 

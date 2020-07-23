@@ -46,8 +46,12 @@ export default function CardHorizontal ({ track, data }) {
 
         <div className="col-md-10">
           <div className="d-flex flex-column ml-2">
-            <h5 className="card-title color-orange"><i className="fa fa-music"></i> {track.title}</h5>
+            <h5 className="card-title color-orange">
+              <i className="fa fa-music"></i> {track.title}
+            </h5>
+            
             <p className="card-text">{track.description || 'No description..'}</p>
+
             <p className="card-text">
               <Link to={"/user/" + track.user.id} className="text-decoration-none">
                 <span className="stand-btn">@{track.user.username} ({track.genre})</span>

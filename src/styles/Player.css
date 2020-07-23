@@ -28,7 +28,7 @@
   color: #ffffff !important;
 }
 
-.player h5>a {letter-spacing: 1px; font-size: 16px !important; padding: 0 5px; color: #ffffff;}
+.player h5>a {letter-spacing: 1px; padding: 0 5px; color: #ffffff;}
 
 /* Controls */
 .player .controls {
@@ -56,12 +56,13 @@
   width: 100% !important;
   height: 55px !important;
   position: relative;
+  cursor: crosshair;
 }
 
 .wave_url>div {
   width: 0;
   height: 100%;
-  background-color: var(--dark);
+  background-color: #000000;
   position: absolute;
   left: 0;
   top: 0;

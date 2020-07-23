@@ -117,7 +117,7 @@ function Player () {
         </button>
 
         <div>
-          <h5 className="w-75 text-wrap text-center mx-auto">
+          <h5 className="w-75 fs-14 text-wrap text-center mx-auto">
             <Link to={'/user/' + currentTrackPlay.user.id}>{currentTrackPlay.title || '...'}</Link>
           </h5>
 

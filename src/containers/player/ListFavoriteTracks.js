@@ -40,7 +40,8 @@ function ListFavoriteTracks () {
 
         <div className="w-25 d-flex justify-content-end">
           <span className="fs-12 mr-2">{timeFormat(track.duration / 1000)}</span>
-          <span className="badge badge-light fs-12 mr-1" onClick={() => { removeTrackFromFavorite(track.id); }}>X</span>
+          <span className="badge badge-light fs-12 mr-1" 
+          onClick={() => { removeTrackFromFavorite(track.id); }}><i className="fa fa-times"></i></span>
         </div>
 
       </li>)}
