@@ -3,7 +3,7 @@ import timeFormat from '../util/timeFormat';
 import formatNum from '../util/formatNum';
 
 const BASE_URL = 'https://api.soundcloud.com';
-const API_KEY = '?client_id=08f79801a998c381762ec5b15e4914d5';
+const API_KEY = '?client_id='+process.env.REACT_APP_SOUNDCLOUD_API_KEY;
 
 export default class ScUserService {
 

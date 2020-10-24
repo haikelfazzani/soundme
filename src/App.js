@@ -2,6 +2,7 @@ import React from 'react';
 
 import { BrowserRouter as Router, Route, Redirect, Switch } from "react-router-dom";
 import Home from './pages/Home';
+import TopTracks from './pages/TopTracks';
 import User from './pages/user/User';
 import Search from './pages/Search';
 import Track from './pages/track/Track';
@@ -22,6 +23,7 @@ export default function App () {
       <Navbar />
       <Switch>
         <Route exact path="/" component={Home} />
+        <Route path="/top-tracks" component={TopTracks} />
         <Route path="/search" component={Search} />
         <Route path="/find-lyric" component={Lyrics} />
         

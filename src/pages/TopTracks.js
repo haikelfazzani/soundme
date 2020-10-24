@@ -1,37 +1,35 @@
 import React, { useEffect, useState } from 'react';
-import { useStoreState, useStoreActions } from 'easy-peasy';
-
-import '../styles/ListGenres.css';
-import ListTracks from '../containers/ListTracks';
-import ListGenres from '../containers/ListGenres';
-import { withRouter } from 'react-router-dom';
+import { useStoreActions, useStoreState } from 'easy-peasy';
 import debounce from '../util/debounce';
+import ListGenres from '../containers/ListGenres';
+import ListTracks from '../containers/ListTracks';
 
-function Home () {
+export default function TopTracks () {
 
   const activeGenre = useStoreState(state => state.activeGenre);
-  const getTracksByGenre = useStoreActions(actions => actions.getTracksByGenre);
+  const getTopTracksByGenre = useStoreActions(actions => actions.getTopTracksByGenre);
 
   const [tracks, setTracks] = useState([]);
   const [limit, setLimit] = useState(48);
 
   useEffect(() => {
-    getTracksByGenre({ activeGenre })
+    getTopTracksByGenre({ activeGenre })
       .then(result => {
         if (result && result.length > 0) {
           setTracks([]);
           setTracks(result);
-          localStorage.setItem('sc-tracks', JSON.stringify(result));
+          console.log(result);
+          localStorage.setItem('sc-top-tracks', JSON.stringify(result));
         }
       })
       .catch(e => {
-        let t = JSON.parse(localStorage.getItem('sc-tracks'));
+        let t = JSON.parse(localStorage.getItem('sc-top-tracks'));
         setTracks(t);
       });
   }, [activeGenre]);
 
   const onLoadMore = debounce(() => {
-    getTracksByGenre({ activeGenre, limit: limit + 48 })
+    getTopTracksByGenre({ activeGenre, limit: limit + 48 })
       .then(result => {
         if (result && result.length > 0) {
           setTracks(result);
@@ -53,5 +51,3 @@ function Home () {
     </div>
   </>);
 }
-
-export default withRouter(Home);

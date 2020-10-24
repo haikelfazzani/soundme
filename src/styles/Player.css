@@ -1,4 +1,5 @@
 .player {
+  box-sizing: border-box;
   width: 300px;  
   height: 70%;
   color: #ffffff;
@@ -10,8 +11,6 @@
   padding: 10px;
   background-size: cover;
   background-position: center;
-  overflow: auto;
-  overflow-x: hidden;
   z-index: 9999;
 }
 

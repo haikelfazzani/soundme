@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { useStoreActions, useStoreState } from 'easy-peasy';
 
 import Img from '../../components/Img';
 import '../../styles/CardHorizontal.css';
-import { Link } from 'react-router-dom';
 
 export default function CardHorizontal ({ track, data }) {
 
@@ -35,7 +35,7 @@ export default function CardHorizontal ({ track, data }) {
         </div>}
 
       <div className="row no-gutters">
-        <div className="col-md-2 disp-none img-track" onClick={() => { setCurrentTrackPlay(track); }}>
+        <div className="col-md-2 img-track" onClick={() => { setCurrentTrackPlay(track); }}>
           <span><i className={"fa fa-" + (isPlaying ? 'music' : 'play')}></i></span>
           <Img
             src={track.artwork_url ? track.artwork_url.replace('large.jpg', 't500x500.jpg') : null}

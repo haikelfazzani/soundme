@@ -25,36 +25,24 @@ function Track (props) {
       });
   }, [userId]);
 
-  const onGoBack = () => {
-    props.history.goBack();
-  }
+  if (details.track && Object.keys(details.track).length > 0) {
+    return (
+      <div className="container py-3 mb-5 min-vh-100">
 
-  return (
-    <div className="container py-3 mb-5 min-vh-100">
+        <CardHorizontal track={details.track} data={details.infos} bg="bg-orange" />
 
-      {details.track && Object.keys(details.track).length > 0
-        ? <div className="position-relative">
-
-          <button onClick={onGoBack} className="btn stand-btn position-absolute border-0"
-            style={{ left: '-2px', top: '3px', zIndex: 9 }}>
-            <i className="fas fa-hand-point-left"></i>
-          </button>
-
-          <div className="mb-3">
-            <CardHorizontal track={details.track} data={details.infos} bg="bg-orange" />
-          </div>
-
-          <div className="comments">
-            <Comments comments={details.comments} />
-          </div>
+        <div className="comments">
+          <Comments comments={details.comments} />
         </div>
-
-        : <>
-          <Skeleton />
-          <Spinner />
-        </>}
+      </div>
+    );
+  }
+  else {
+    return <div className="container py-3 mb-5 min-vh-100">
+      <Skeleton />
+      <Spinner />
     </div>
-  );
+  }
 }
 
 export default withRouter(Track);

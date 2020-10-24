@@ -26,6 +26,10 @@ export default function Navbar () {
             <li className="nav-item">
               <Link className="nav-link" to="/"><i className="fas fa-home"></i> Home</Link>
             </li>
+
+            <li className="nav-item">
+              <Link className="nav-link" to="/top-tracks"><i className="fas fa-fire"></i> top tracks</Link>
+            </li>
             
             <li className="nav-item">
               <Link className="nav-link" to="/find-lyric"><i className="fas fa-circle"></i> Find Lyric</Link>

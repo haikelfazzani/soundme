@@ -27,7 +27,7 @@ export default function Card ({ track, active = false }) {
       />
     </div>
 
-    <div className="card-body">
+    {track.user && <div className="card-body">
       <img src={track.user.avatar_url} alt={track.title} />
 
       <div className="card-details">
@@ -45,7 +45,7 @@ export default function Card ({ track, active = false }) {
         </div>
       </div>
 
-    </div>
+    </div>}
 
     {parseInt(track.playback_count, 10) > 0
       ? <div className="card-footer mt-1">

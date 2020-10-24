@@ -15,6 +15,16 @@ let genreActions = {
     }
     return tracks;
   }),
+  getTopTracksByGenre: thunk(async (actions, { activeGenre, limit }) => {
+    let tracks = [];
+    if (limit) {
+      tracks = await ScService.topTracks(activeGenre, limit);
+    }
+    else {
+      tracks = await ScService.topTracks(activeGenre);
+    }
+    return tracks;
+  }),
 }
 
 let searchQueryActions = {
@@ -35,6 +45,10 @@ let playerActions = {
     state.currentTrackIndex = currentTrackIndex;
   }),
   // add a track to list favorite
+  setFavoriteTracks: action((state, favoriteTracks) => {
+    state.favoriteTracks = favoriteTracks;
+  }),
+
   addTrackToFavorite: action((state, trackToBeAdded) => {
     let tracks = state.favoriteTracks;
     if (!tracks.some(t => t.id === trackToBeAdded.id)) {

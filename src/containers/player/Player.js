@@ -11,8 +11,6 @@ import placeImg from '../../img/1.png';
 import timeFormat from '../../util/timeFormat';
 
 const placeImgWave = 'https://wave.sndcdn.com/uUGj1BxQeo90_m.png';
-
-const API_KEY = '/stream?client_id=08f79801a998c381762ec5b15e4914d5';
 let scPlayer = new window.Audio();
 
 function Player () {
@@ -56,7 +54,7 @@ function Player () {
     }
 
     if (currentTrackPlay.id) {
-      scPlayer.src = currentTrackPlay.uri + API_KEY;
+      scPlayer.src = currentTrackPlay.uri + '/stream?client_id=' + process.env.REACT_APP_SOUNDCLOUD_API_KEY;
       scPlayer.addEventListener('loadedmetadata', playTrack, false);
       scPlayer.addEventListener('timeupdate', updateTime, false);
     }
@@ -68,7 +66,9 @@ function Player () {
   }, [currentTrackPlay.id]);
 
   useEffect(() => {
-    if (currentTrackPlay.id) {
+    let isMounted = true;
+
+    if (isMounted && currentTrackPlay.id) {
       let imgUrl = '';
 
       imgUrl = currentTrackPlay.artwork_url
@@ -77,10 +77,14 @@ function Player () {
 
       setTrackImg(`linear-gradient(rgba(23, 27, 29, 0.8), rgba(18, 19, 20, 0.92)),url(${imgUrl})`);
     }
+
+    return () => { isMounted = false; }
   }, [currentTrackPlay.id]);
 
   useEffect(() => {
-    if (favoriteTracks.length > 0) {
+    let isMounted = true;
+
+    if (isMounted && favoriteTracks.length > 0) {
       let cti = 0;
       if (settings.isEnded && !settings.loop) {
         if (currentTrackIndex < favoriteTracks.length - 1) {
@@ -95,6 +99,8 @@ function Player () {
         setSettings({ ...settings, isEnded: false });
       }
     }
+
+    return () => { isMounted = false; }
   }, [settings.isEnded]);
 
   const onShowPlayer = () => { setShowPlayer(!showPlayer); };
@@ -143,9 +149,8 @@ function Player () {
 
           <ListFavoriteTracks />
         </div>
-      </div>
 
-    }
+      </div>}
 
     <div className="headphones"
       style={{ display: showPlayer ? 'flex' : 'none' }}

@@ -5,7 +5,11 @@ import Img from '../../components/Img';
 
 function ListFavoriteTracks () {
 
-  const { currentTrackPlay, favoriteTracks } = useStoreState(state => state);
+  const {
+    currentTrackPlay,
+    favoriteTracks
+  } = useStoreState(state => state);
+
   const {
     setCurrentTrackPlay,
     setCurrentTrackPlayIndx,
@@ -18,7 +22,7 @@ function ListFavoriteTracks () {
   }
 
   return (
-    <ul className="list-group list-group-flush list-traks-fav">
+    <ul className="w-100 list-group list-group-flush list-traks-fav overflow-auto">
       {favoriteTracks.map((track, i) => <li key={track.id} className={
         currentTrackPlay.id !== track.id
           ? "list-group-item pr-2"
@@ -40,8 +44,8 @@ function ListFavoriteTracks () {
 
         <div className="w-25 d-flex justify-content-end">
           <span className="fs-12 mr-2">{timeFormat(track.duration / 1000)}</span>
-          <span className="badge badge-light fs-12 mr-1" 
-          onClick={() => { removeTrackFromFavorite(track.id); }}><i className="fa fa-times"></i></span>
+          <span className="badge badge-light fs-12 mr-1"
+            onClick={() => { removeTrackFromFavorite(track.id); }}><i className="fa fa-times"></i></span>
         </div>
 
       </li>)}

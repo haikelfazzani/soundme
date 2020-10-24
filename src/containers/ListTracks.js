@@ -12,7 +12,7 @@ export default function ListTracks ({ tracks }) {
     <div className="container py-4 min-vh-100">
       <div className="row">
         {tracks && tracks.length > 0
-          ? tracks.map(track => <div className="col-md-3 mb-3" key={track.id}>
+          ? tracks.map((track, i) => <div className="col-md-3 mb-3" key={'t' + track.id + i}>
             {(currentTrackPlay.id && currentTrackPlay.id === track.id)
               ? <Card track={track} />
               : <Card track={track} active={true} />}

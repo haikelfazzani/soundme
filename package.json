@@ -6,8 +6,8 @@
     "axios": "^0.19.2",
     "axios-jsonp-pro": "^1.1.7",
     "easy-peasy": "^3.3.0",
-    "react": "^16.13.0",
-    "react-dom": "^16.13.0",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.0"
   },
