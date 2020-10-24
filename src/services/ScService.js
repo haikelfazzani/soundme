@@ -23,7 +23,7 @@ export default class ScService {
   // top tracks by genre (beta)
   static async topTracks (genre="pop") {
     genre = genre.toLowerCase().trim();
-    const url = `https://yacdn.org/proxy/${VBASE_URL}?kind=top&genre=soundcloud:genres:${genre}&client_id=${process.env.REACT_APP_SOUNDCLOUD_API_KEY}&limit=18&offset=1`;
+    const url = `https://api.allorigins.win/get?url=${VBASE_URL}?kind=top&genre=soundcloud:genres:${genre}&client_id=${process.env.REACT_APP_SOUNDCLOUD_API_KEY}&limit=18&offset=1`;
     try {
       let resp = await axios.get(url);
       return resp.data.collection.map(r => r.track);

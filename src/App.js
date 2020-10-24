@@ -23,7 +23,7 @@ export default function App () {
       <Navbar />
       <Switch>
         <Route exact path="/" component={Home} />
-        <Route path="/top-tracks" component={TopTracks} />
+        {/* <Route path="/top-tracks" component={TopTracks} /> */}
         <Route path="/search" component={Search} />
         <Route path="/find-lyric" component={Lyrics} />
         
