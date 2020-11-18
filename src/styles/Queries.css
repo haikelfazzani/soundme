@@ -1,5 +1,5 @@
 @media screen and (max-width: 600px) {
   .navbar { padding: 10px;}
   .disp-none {display:none !important;}
-  .player {width: 95%;}
+.p-track-infos,.player .btn-dark {display:none !important;}
 }

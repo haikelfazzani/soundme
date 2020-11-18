@@ -22,7 +22,7 @@ function ListFavoriteTracks () {
   }
 
   return (
-    <ul className="w-100 list-group list-group-flush list-traks-fav overflow-auto">
+    <ul className="list-group list-group-flush list-traks-fav overflow-auto">
       {favoriteTracks.map((track, i) => <li key={track.id} className={
         currentTrackPlay.id !== track.id
           ? "list-group-item pr-2"

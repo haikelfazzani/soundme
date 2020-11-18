@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { Suspense, useEffect, useState } from 'react';
 import { useStoreState, useStoreActions } from 'easy-peasy';
-
-import '../styles/ListGenres.css';
-import ListTracks from '../containers/ListTracks';
-import ListGenres from '../containers/ListGenres';
 import { withRouter } from 'react-router-dom';
+
 import debounce from '../util/debounce';
+import '../styles/ListGenres.css';
+
+const ListGenres = React.lazy(() => import('../containers/ListGenres'));
+const ListTracks = React.lazy(() => import('../containers/ListTracks'));
 
 function Home () {
 
@@ -46,8 +47,10 @@ function Home () {
   });
 
   return (<>
-    <ListGenres />
-    <ListTracks tracks={tracks} />
+    <Suspense fallback="loading..">
+      <ListGenres />
+      <ListTracks tracks={tracks} />
+    </Suspense>
     <div className="w-100 d-flex justify-content-center">
       <button className="btn btn-dark w-25 fs-10 lsp2" onClick={onLoadMore}>LOAD MORE</button>
     </div>
