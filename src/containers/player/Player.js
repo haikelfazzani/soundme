@@ -5,11 +5,12 @@ import { useStoreState, useStoreActions } from 'easy-peasy';
 import ListFavoriteTracks from './ListFavoriteTracks';
 import PlayerControls from './PlayerControls';
 
-import '../../styles/Player.css';
 import timeFormat from '../../util/timeFormat';
+import BtnAddToFav from '../../components/BtnAddToFav';
 
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
+import '../../styles/Player.css';
 
 const placeImgWave = 'https://wave.sndcdn.com/uUGj1BxQeo90_m.png';
 let scPlayer = new window.Audio();
@@ -94,32 +95,33 @@ function Player () {
   const onShowFavorites = () => { setShowFavorites(!showFavorites); }
 
   if (Object.keys(currentTrackPlay).length > 2) {
-    //console.log(currentTrackPlay);
     return <>
-      <div className="player pulseUpOut" style={{ display: !showPlayer ? 'block' : 'none' }}>
+      <div className="player" style={{ display: !showPlayer ? 'block' : 'none' }}>
 
-        <button className="btn btn-warning" onClick={onShowPlayer} title="Close player">
-          <i className="fas fa-minus"></i>
-        </button>
-
-        <img
-          src={currentTrackPlay.waveform_url || placeImgWave}
-          alt={currentTrackPlay.title || '...'}
-          className="wave_url"
-        />
+        <div className="h-100 w-100 wave_url">
+          <div style={{ width: (currTrackTimeUpdate / currTrackDuration) * 100 + '%' }}></div>
+          <img
+            src={currentTrackPlay.waveform_url || placeImgWave}
+            alt={currentTrackPlay.title || '...'}
+          />
+        </div>
 
         {showFavorites && <ListFavoriteTracks />}
 
         <div className="w-100 row m-0 p-0">
-          <div className="col-md-3 d-flex align-items-center p-track-infos">
+          <div className="col-md-3 d-flex align-items-center p-track-infos disp-none-sm">
             <img
               src={currentTrackPlay.artwork_url}
               alt={currentTrackPlay.title}
               className="img-thumbnail mr-3"
             />
             <div className="d-flex flex-column">
-              <Link to={'/user/' + currentTrackPlay.user.id} className="text-truncate text-white fs-14">{currentTrackPlay.title}</Link>
-              <div className="fs-12 text-muted">{currentTrackPlay.user.username}</div>
+              <Link to={'/track/' + currentTrackPlay.user.id + '/' + currentTrackPlay.id} className="text-truncate text-white fs-14">
+                {currentTrackPlay.title}
+              </Link>
+              <Link to={"/user/" + currentTrackPlay.user.id} className="fs-12 text-muted">
+                @{currentTrackPlay.user.username}
+              </Link>
             </div>
           </div>
 
@@ -137,13 +139,14 @@ function Player () {
             </div>
           </div>
 
-          <div className="col-md-3 d-flex justify-content-end align-items-center">
-            <button className="btn btn-dark" onClick={onShowFavorites}><i className="fa fa-list"></i></button>
+          <div className="col-md-3 d-flex justify-content-end align-items-center disp-none-sm">
+            <button className="btn btn-outline-secondary btn-sm rounded-circle mr-3" title="Add To List Favorites"><BtnAddToFav clickedTrack={currentTrackPlay} /></button>
+            <button className="btn btn-outline-secondary btn-sm rounded-circle mr-3" onClick={onShowFavorites} title="Open List Favorites"><i className="fa fa-list"></i></button>
+            <button className="btn btn-outline-secondary btn-sm rounded-circle" onClick={onShowPlayer} title="Minimize Player"><i className="fas fa-minus"></i></button>
           </div>
 
         </div>
       </div>
-
 
 
       <div className="headphones"

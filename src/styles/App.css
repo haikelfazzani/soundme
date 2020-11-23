@@ -1,3 +1,8 @@
+*, ::after, ::before {
+  box-sizing: border-box;
+  scrollbar-width: thin;
+}
+
 :root {
   --bg-main: #121314;
   --bg-light: #222326;
@@ -185,7 +190,7 @@ footer {
   letter-spacing: 2px;
 }
 
-
+input,button {outline: none !important;}
 /**************************/
 
 .top-form-search {

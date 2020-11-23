@@ -65,7 +65,9 @@ function PlayerControls ({ scPlayer, settings, setSettings }) {
     <ul className="controls">
 
       <li onClick={() => { onControls('loop'); }}>
-        <i className="fas fa-sync" style={{ color: settings.loop ? '#ddd' : '#fff' }}></i>
+        {settings.loop
+          ? <i title="Repeat One" className="fas fa-sync"></i>
+          : <i title="Repeat All" className="fas fa-long-arrow-alt-right"></i>}
       </li>
 
       <li onClick={() => { onControls('previous'); }}>

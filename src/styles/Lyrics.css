@@ -24,11 +24,6 @@
   border: 0;
 }
 
-.lyrics input:last-child,
-.lyrics button {
-  border-right: 2px solid rgb(24, 24, 24);
-}
-
 pre {
   color: #ffffff;
   padding: 20px !important;

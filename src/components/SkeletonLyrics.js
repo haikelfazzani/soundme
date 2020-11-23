@@ -4,7 +4,7 @@ const data = ['', '', '', '', '', '', '', '', '', '', '', ''];
 
 export default function SkeletonLyrics () {
   return (
-    <div className="skeleton-container">
+    <div className="skeleton-container mt-3">
 
       <div className="w-100 row ml-0 pr-0">
 

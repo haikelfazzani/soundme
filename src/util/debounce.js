@@ -1,4 +1,4 @@
-export default function debounce (callback, wait = 2000) {
+export default function debounce (callback, wait = 1000) {
   let timeout;
   return (...args) => {
     const context = this;

@@ -5,14 +5,21 @@ import { useStoreState, useStoreActions } from 'easy-peasy';
 export default function BtnAddToFav ({ clickedTrack, clx }) {
 
   const favoriteTracks = useStoreState(state => state.favoriteTracks);
-  const addTrackToFavorite = useStoreActions(actions => actions.addTrackToFavorite);
+  const { addTrackToFavorite, removeTrackFromFavorite } = useStoreActions(actions => actions);
 
-  return (
-    <span onClick={() => { addTrackToFavorite(clickedTrack); }} className={clx}>
-      <i className={favoriteTracks.find(t => t.id === clickedTrack.id)
-        ? "fas fa-heart color-orange"
-        : "fas fa-heart text-muted"}>
-      </i>
-    </span>
+  const addOrRemove = (clickedTrack) => {
+    if (favoriteTracks.find(t => t.id === clickedTrack.id)) {
+      removeTrackFromFavorite(clickedTrack.id);
+    }
+    else {
+      addTrackToFavorite(clickedTrack);
+    }
+  }
+
+  return (<span onClick={() => { addOrRemove(clickedTrack); }} className={clx}>
+    <i className={favoriteTracks.find(t => t.id === clickedTrack.id)
+      ? "fas fa-heart color-orange"
+      : "fas fa-heart text-muted"}>
+    </i></span>
   );
 }

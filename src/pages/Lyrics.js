@@ -121,7 +121,7 @@ export default function Lyrics () {
           </div>
 
           <div className="col-md-1 p-0">
-            <button type="submit" className="btn btn-dark btn-block"><i className="fa fa-search"></i></button>
+            <button type="submit" className="btn btn-outline-warning btn-block"><i className="fa fa-search"></i></button>
           </div>
         </form>
       </div>
