@@ -96,47 +96,36 @@ export default function Lyrics () {
   }
 
   return (<>
-    <div className="lyrics">
-
-      <div className="container">
-        <form onSubmit={onSearchLyric} className="w-100 row">
-          <div className="col-md-11 p-0">
-            <input type="text"
-              name="artist"
-              onChange={onChange}
-              value={lyricState.artist}
-              placeholder="linkin park"
-              className="w-50"
-              required
-            />
-
-            <input type="text"
-              name="songname"
-              onChange={onChange}
-              value={lyricState.songname}
-              placeholder="numb"
-              className="w-50"
-              required
-            />
-          </div>
-
-          <div className="col-md-1 p-0">
-            <button type="submit" className="btn btn-outline-warning btn-block"><i className="fa fa-search"></i></button>
-          </div>
-        </form>
-      </div>
+    <div className="container">
+      <form onSubmit={onSearchLyric} className="w-100 form-inline">
+        <div className="form-group flex-grow-1 mb-0">
+          <input type="text" className="w-100 form-control bg-dark border-0 text-white" name="artist"
+            onChange={onChange}
+            value={lyricState.artist}
+            placeholder="linkin park"
+            required />
+        </div>
+        <div className="form-group flex-grow-1 mb-0">
+          <input type="text"
+            className="w-100 form-control bg-dark border-0 text-white"
+            name="songname"
+            onChange={onChange}
+            value={lyricState.songname}
+            placeholder="numb"
+            required
+          />
+        </div>
+        <button type="submit" className="btn btn-primary"><i className="fa fa-search"></i></button>
+      </form>
     </div>
 
     {lyricState.lyric
       ? <div className="container py-3">
 
-        <div className="mb-3">
-          <div className="btn btn-dark text-uppercase fs-12 lsp2 mr-0">
-            <i className="fas fa-search fs-14"></i> Search results for
-        </div>
-
-          <div className="btn btn-warning text-uppercase fs-12 lsp2 m-0">{lyricState.artist} - {lyricState.songname}</div>
-        </div>
+        {lyricState.artist && <div className="mb-3">
+          <div className="btn btn-dark"><i className="fas fa-search fs-14"></i></div>
+          <div className="btn btn-warning text-uppercase lsp2">{lyricState.artist} - {lyricState.songname}</div>
+        </div>}
 
         {Object.keys(lyricState.infos).length > 0
           && <div className="row">

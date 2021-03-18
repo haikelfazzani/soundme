@@ -35,7 +35,7 @@ export default function CardHorizontal ({ track, data }) {
         </div>}
 
       <div className="row no-gutters">
-        <div className="col-md-2 img-track" onClick={() => { setCurrentTrackPlay(track); }}>
+        <div className="col-md-2 img-track disp-none-sm" onClick={() => { setCurrentTrackPlay(track); }}>
           <span><i className={"fa fa-" + (isPlaying ? 'music' : 'play')}></i></span>
           <Img
             src={track.artwork_url ? track.artwork_url.replace('large.jpg', 't500x500.jpg') : null}

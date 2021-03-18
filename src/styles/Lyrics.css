@@ -1,29 +1,3 @@
-.lyrics {
-  width: 100%;
-  background-color: #222326;
-  box-shadow: 0 0 10px #000000;
-  overflow: auto;
-}
-
-.lyrics .row {
-  margin-right: 0;
-  margin-left: 0;
-}
-
-.lyrics input {
-  background-color: inherit;
-  color: inherit;
-  border: 0;
-  border-left: 2px solid rgb(24, 24, 24);
-  padding: 10px 15px;
-  font-family: consolas;
-}
-
-.lyrics button {
-  height: 100%;
-  border: 0;
-}
-
 pre {
   color: #ffffff;
   padding: 20px !important;
@@ -31,8 +5,3 @@ pre {
     white-space: pre-wrap;
 }
 
-.upper-text {
-  font-size: 12px;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-}
